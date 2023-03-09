@@ -4,12 +4,13 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_options.dart';
 
- void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
-  runApp(const WasteLess());} 
+  );
+  runApp(const WasteLess());
+}
 
 class WasteLess extends StatelessWidget {
   const WasteLess({super.key});
@@ -19,8 +20,17 @@ class WasteLess extends StatelessWidget {
     return MaterialApp(
       theme: appTheme,
       title: 'WasteLess',
-      home: Scaffold(appBar: AppBar(title:const Text('WasteLess'),),body: Center(child: ElevatedButton(onPressed: (){}, child: const Text('LOGIN') ,),),),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('WasteLess'),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text('LOGIN'),
+          ),
+        ),
+      ),
     );
   }
 }
- 
