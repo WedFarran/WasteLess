@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 
- void main() => runApp(const WasteLess());
+import 'firebase_options.dart';
+
+ void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
+  runApp(const WasteLess());} 
 
 class WasteLess extends StatelessWidget {
   const WasteLess({super.key});
@@ -15,3 +23,4 @@ class WasteLess extends StatelessWidget {
     );
   }
 }
+ 
