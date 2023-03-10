@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -24,10 +25,9 @@ class WasteLess extends StatelessWidget {
         appBar: AppBar(
           title: const Text('WasteLess'),
         ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('LOGIN'),
+        body: const GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: LatLng(25.1193, 55.3773),
           ),
         ),
       ),
