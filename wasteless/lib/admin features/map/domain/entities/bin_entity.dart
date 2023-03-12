@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Bin extends Equatable {
+class MapBin extends Equatable {
   final int id;
   final double status;
   final double lat;
@@ -8,7 +8,7 @@ class Bin extends Equatable {
   final double wasteLevel;
   final String fullnesTime;
 
-  const Bin(
+  const MapBin(
       {required this.id,
       required this.status,
       required this.lat,

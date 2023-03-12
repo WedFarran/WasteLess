@@ -1,7 +1,7 @@
 import '../../domain/entities/bin_entity.dart';
 
-class BinModel extends Bin {
-  const BinModel(
+class MapBinModel extends MapBin {
+  const MapBinModel(
       {required super.id,
       required super.status,
       required super.lat,
@@ -9,8 +9,8 @@ class BinModel extends Bin {
       required super.wasteLevel,
       required super.fullnesTime});
 
-  factory BinModel.fromJson(Map<String, dynamic> json) {
-    return BinModel(
+  factory MapBinModel.fromJson(Map<String, dynamic> json) {
+    return MapBinModel(
         id: json['id'],
         status: json['status'],
         lat: json['lat'],

@@ -17,7 +17,7 @@ dependencies:
   equatable: ^2.0.5
   internet_connection_checker: ^1.0.0+1
   http: ^0.13.5
-  #shared_preferences: ^2.0.18
+  shared_preferences: ^2.0.18
   get_it: ^7.2.0
   dartz: ^0.10.1
   firebase_core: ^2.7.1

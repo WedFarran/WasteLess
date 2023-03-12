@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:wasteless/admin%20features/map/domain/repos/map_repo.dart';
-
 import '../../../../core/errors/failure.dart';
 
-class GetAllMapItemsUsecase {
+class GetAllMapBinsUsecase {
   final MapRepo mapRepo;
 
-  GetAllMapItemsUsecase(this.mapRepo);
+  GetAllMapBinsUsecase(this.mapRepo);
 
   Future<Either<Failure, List>> call() async {
-    return await mapRepo.getAllMapItems();
+    return await mapRepo.getAllMapBins();
   }
 }
