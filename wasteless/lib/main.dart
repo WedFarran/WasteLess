@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'admin features/map/presentation/screens/admin_map_screen.dart';
+import 'injection_container.dart' as di;
+import 'admin features/map/presentation/bloc/bloc/map_itemss_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -10,6 +12,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await di.init();
+
   runApp(const WasteLess());
 }
 
@@ -18,16 +22,14 @@ class WasteLess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: appTheme,
-      title: 'WasteLess',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('WasteLess'),
-        ),
-        body: const GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: LatLng(25.1193, 55.3773), zoom: 14),
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => di.sl<MapItemssBloc>())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: appTheme,
+        title: 'WasteLess',
+        home: Scaffold(
+          body: const AdminMapScreen(),
         ),
       ),
     );

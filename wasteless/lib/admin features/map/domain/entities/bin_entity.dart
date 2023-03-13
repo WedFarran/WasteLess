@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class MapBin extends Equatable {
   final int id;
-  final double status;
+  final bool status;
   final double lat;
   final double lng;
   final double wasteLevel;
