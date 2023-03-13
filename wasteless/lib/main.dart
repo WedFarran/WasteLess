@@ -27,7 +27,7 @@ class WasteLess extends StatelessWidget {
         ),
         body: const GoogleMap(
           initialCameraPosition:
-              CameraPosition(target: LatLng(25.1193, 55.3773), zoom: 14),
+              CameraPosition(target: LatLng(25.1195, 55.3773), zoom: 14),
         ),
       ),
     );
