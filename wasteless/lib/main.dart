@@ -28,8 +28,8 @@ class WasteLess extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         title: 'WasteLess',
-        home: Scaffold(
-          body: const AdminMapScreen(),
+        home: const Scaffold(
+          body: AdminMapScreen(),
         ),
       ),
     );
