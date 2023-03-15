@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '17109062365',
     projectId: 'wasteless-36ce0',
     storageBucket: 'wasteless-36ce0.appspot.com',
-    iosClientId: '17109062365-jie5qeenfbld2hafe3v0iu914veob8gj.apps.googleusercontent.com',
+    iosClientId:
+        '17109062365-jie5qeenfbld2hafe3v0iu914veob8gj.apps.googleusercontent.com',
     iosBundleId: 'com.example.wasteless',
   );
 }

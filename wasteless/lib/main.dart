@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -27,7 +28,7 @@ class WasteLess extends StatelessWidget {
         ),
         body: const GoogleMap(
           initialCameraPosition:
-              CameraPosition(target: LatLng(24.1195, 55.3773), zoom: 14),
+              CameraPosition(target: LatLng(25.1195, 55.3773), zoom: 14),
         ),
       ),
     );
