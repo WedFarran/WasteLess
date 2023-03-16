@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-const  PRIMARY_BLUE = Color(0xFF00668A);
-const  WHITE = Colors.white;
+const PRIMARY_BLUE = Color(0xFF00668A);
+const WHITE = Colors.white;
 const PRIMARY_GREEN = Color(0xFF539F35);
 const LIGHT_GREEN = Color(0xFFDDECD7);
 const LIGHT_BLUE = Color(0xFFCBDFE7);
