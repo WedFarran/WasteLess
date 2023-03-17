@@ -10,6 +10,7 @@ const LIGHT_BLUE = Color(0xFFCBDFE7);
 const LIGHT_RED = Color(0xFFB16C6D);
 const GREEN = Color(0xFF2A835F);
 const GREY = Color(0xFFA4AE9E);
+const SHADOW = Color(0xFFC0C0C0);
 const LIGHT_GREY = Color(0xFF939192);
 const YELLOW = Color(0xFF9F8E35);
 const RED = Color(0xFF9F3535);
