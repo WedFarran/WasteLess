@@ -17,16 +17,17 @@ class AdminWasteNavigationBar extends StatefulWidget {
 }
 
 class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
+  int selectedIndex = 0;
+  List<Widget> screens = const [
+    DriversScreen(),
+    AdminMapScreen(),
+    AdminTasksScreen(),
+    AdminSettingsScreen()
+  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    int selectedIndex = 0;
-    List<Widget> screens = const [
-      DriversScreen(),
-      AdminMapScreen(),
-      AdminTasksScreen(),
-      AdminSettingsScreen()
-    ];
+
     List iconsName = [WEB_DRIVER_ICON, MAP_ICON, TASKS_ICON, SETTINGS_ICON];
     List iconsSize = [0.08, 0.09, 0.07, 0.07];
 
@@ -64,14 +65,14 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
                 separatorBuilder: (context, index) => SizedBox(
                   width: size.width * 0.04,
                 ),
-                itemBuilder: (context, i) => InkWell(
+                itemBuilder: (context, i) => GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedIndex = i;
                     });
                     print(selectedIndex);
                   },
-                  child: AdminBottomNavigationBar(
+                  child: BottomNavigationBarWidget(
                       selected: selectedIndex == i ? true : false,
                       iconsName: iconsName[i],
                       size: size,

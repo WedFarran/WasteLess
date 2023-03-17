@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/colors.dart';
-import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
-import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_tasks_screen.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/widgets/bottom_navigation_bar.dart';
-import 'home/presentation/screens/driver_home_screen.dart';
-import 'map/presentation/screens/driver_map_screen.dart';
+import '../../features/admin features/driver/presentation/screens/all_drivers_screen.dart';
+import '../../features/admin features/map/presentation/screens/admin_map_screen.dart';
+import '../../features/admin features/settings/presentation/screens/admin_tasks_screen.dart';
+import '../../features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
 
-class DriverWasteNavigationBar extends StatefulWidget {
-  static const String id = 'driver_nabigation_bar_screen';
-  const DriverWasteNavigationBar({super.key});
+class AdminWasteNavigationBar extends StatefulWidget {
+  static const String id = 'nabigation_bar_screen';
+  const AdminWasteNavigationBar({super.key});
 
   @override
-  State<DriverWasteNavigationBar> createState() =>
+  State<AdminWasteNavigationBar> createState() =>
       _AdminWasteNavigationBarState();
 }
 
-class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
+class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
   int selectedIndex = 0;
   List<Widget> screens = const [
-    DriverHomeScreen(),
-    DriverTasksScreen(),
-    DriverDriverScreen(),
-    DriverSettingsScreen(),
+    DriversScreen(),
+    AdminMapScreen(),
+    AdminTasksScreen(),
+    AdminSettingsScreen()
   ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    List iconsName = [HOME_ICON, TASKS_ICON, MAP_ICON, SETTINGS_ICON];
-    List iconsSize = [0.08, 0.07, 0.09, 0.07];
+    List iconsName = [
+      WEB_DRIVER_ICON,
+      WEB_DRIVER_ICON,
+      TASKS_ICON,
+      WEB_SETTINGS_ICON
+    ];
+    List iconsSize = [0.08, 0.09, 0.07, 0.07];
 
     Widget changeScreen(int selectedIndex) {
       Widget currentScreen = screens[0];

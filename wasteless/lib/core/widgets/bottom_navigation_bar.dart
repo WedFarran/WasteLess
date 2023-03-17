@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 
-class AdminBottomNavigationBar extends StatelessWidget {
-  const AdminBottomNavigationBar({
+class BottomNavigationBarWidget extends StatelessWidget {
+  const BottomNavigationBarWidget({
     super.key,
     required this.selected,
     required this.iconsName,
@@ -20,6 +20,7 @@ class AdminBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInQuad,
       child: CircleAvatar(
         radius: 30,
         backgroundColor: selected == true ? PRIMARY_GREEN : Colors.transparent,
