@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 
-class BottomNavigationBarWidget extends StatelessWidget {
-  const BottomNavigationBarWidget({
+class NavigationBarIconsWidget extends StatelessWidget {
+  const NavigationBarIconsWidget({
     super.key,
     required this.selected,
     required this.iconsName,
@@ -22,7 +22,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeInQuad,
       child: CircleAvatar(
-        radius: 30,
+        radius: 35,
         backgroundColor: selected == true ? PRIMARY_GREEN : Colors.transparent,
         child: Padding(
           padding: selected == true
@@ -31,7 +31,6 @@ class BottomNavigationBarWidget extends StatelessWidget {
           child: Image.asset(
             iconsName,
             width: size.width * iconsSize,
-            height: size.height * 0.1,
           ),
         ),
       ),
