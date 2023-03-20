@@ -28,7 +28,7 @@ class AdminWasteNavigationBar extends StatelessWidget {
     ];
     return Scaffold(
       bottomNavigationBar: WasteLessBottomNavigationBar(
-        iconsName: iconsName,
+        widget: Center(),
       ),
       body: Center(
         child: screens.elementAt(WasteLess.screenSelectedIndex),

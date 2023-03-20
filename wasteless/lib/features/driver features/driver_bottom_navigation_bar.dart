@@ -3,7 +3,9 @@ import 'package:wasteless/features/driver%20features/settings/presentation/scree
 import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_tasks_screen.dart';
 import 'package:wasteless/main.dart';
 import '../../core/utils/assets_path.dart';
+import '../../core/utils/responsive.dart';
 import '../../core/widgets/bottom_navigation_bar_widget.dart';
+import '../../core/widgets/bottom_navigation_icon.dart';
 import 'home/presentation/screens/driver_home_screen.dart';
 import 'map/presentation/screens/driver_map_screen.dart';
 
@@ -28,12 +30,40 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
   Widget build(BuildContext context) {
     List iconsName = [HOME_ICON, TASKS_ICON, MAP_ICON, SETTINGS_ICON];
 
+    List iconsSize = [0.08, 0.09, 0.07, 0.07];
+    List tabletIconSize = [0.06, 0.05, 0.07, 0.05];
+    int selectedIndex = 0;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: WasteLessBottomNavigationBar(
-        iconsName: iconsName,
+        widget: ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(left: 35.0),
+          itemCount: iconsName.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => SizedBox(
+            width: size.width * 0.04,
+          ),
+          itemBuilder: (context, i) => GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedIndex = i;
+              });
+            },
+            child: NavigationBarIconsWidget(
+                selected: selectedIndex == i ? true : false,
+                iconsName: iconsName[i],
+                size: size,
+                iconsSize: isTablet(context) == true
+                    ? tabletIconSize[i]
+                    : isDesktop(context) == true
+                        ? 0.009
+                        : iconsSize[i]),
+          ),
+        ),
       ),
       body: Center(
-        child: screens.elementAt(WasteLess.screenSelectedIndex),
+        child: screens.elementAt(selectedIndex),
       ),
     );
   }
