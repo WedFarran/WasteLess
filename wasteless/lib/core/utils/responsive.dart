@@ -8,3 +8,6 @@ const DESKTOP = 'desktop';
 bool isTablet(BuildContext context) => MediaQuery.of(context).size.width >= 660;
 bool isDesktop(BuildContext context) =>
     MediaQuery.of(context).size.width >= 940;
+
+bool desktopHight(BuildContext context) =>
+    MediaQuery.of(context).size.height <= 1700;
