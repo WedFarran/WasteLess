@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:wasteless/admin%20features/map/domain/entities/driver_entity.dart';
-import '../../../../core/errors/failure.dart';
+import '../../../../../core/errors/failure.dart';
+import '../entities/driver_entity.dart';
 import '../repos/map_repo.dart';
 
 class GetAllMapDriversUsecase {

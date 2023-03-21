@@ -3,8 +3,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import '../../../../../core/errors/failure.dart';
-import '../../../../../core/strings/errors.dart';
+import '../../../../../../core/errors/failure.dart';
+import '../../../../../../core/strings/errors.dart';
 import '../../../domain/entities/bin_entity.dart';
 import '../../../domain/entities/driver_entity.dart';
 import '../../../domain/usecases/get_all_map_bins.dart';

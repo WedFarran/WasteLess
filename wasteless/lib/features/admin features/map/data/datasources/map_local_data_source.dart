@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wasteless/core/errors/exception.dart';
-import '../../../../core/utils/database.dart';
+import '../../../../../core/utils/database.dart';
 import '../models/bin_model.dart';
 import '../models/driver_model.dart';
 

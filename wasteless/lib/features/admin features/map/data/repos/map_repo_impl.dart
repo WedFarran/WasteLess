@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:wasteless/admin%20features/map/domain/entities/driver_entity.dart';
-import 'package:wasteless/admin%20features/map/domain/entities/bin_entity.dart';
-import 'package:wasteless/admin%20features/map/domain/repos/map_repo.dart';
 import 'package:wasteless/core/errors/exception.dart';
 import 'package:wasteless/core/errors/failure.dart';
 import 'package:wasteless/core/network/network_info.dart';
 
+import '../../domain/entities/bin_entity.dart';
+import '../../domain/entities/driver_entity.dart';
+import '../../domain/repos/map_repo.dart';
 import '../datasources/map_local_data_source.dart';
 import '../datasources/map_remote_data_source.dart';
 

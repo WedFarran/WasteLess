@@ -2,15 +2,15 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wasteless/admin%20features/map/domain/usecases/get_all_map_bins.dart';
-import 'package:wasteless/admin%20features/map/domain/usecases/get_all_map_drivers.dart';
 import 'package:wasteless/core/network/network_info.dart';
 
-import 'admin features/map/data/datasources/map_local_data_source.dart';
-import 'admin features/map/data/datasources/map_remote_data_source.dart';
-import 'admin features/map/data/repos/map_repo_impl.dart';
-import 'admin features/map/domain/repos/map_repo.dart';
-import 'admin features/map/presentation/bloc/bloc/map_itemss_bloc.dart';
+import 'features/admin features/map/data/datasources/map_local_data_source.dart';
+import 'features/admin features/map/data/datasources/map_remote_data_source.dart';
+import 'features/admin features/map/data/repos/map_repo_impl.dart';
+import 'features/admin features/map/domain/repos/map_repo.dart';
+import 'features/admin features/map/domain/usecases/get_all_map_bins.dart';
+import 'features/admin features/map/domain/usecases/get_all_map_drivers.dart';
+import 'features/admin features/map/presentation/bloc/bloc/map_itemss_bloc.dart';
 
 final sl = GetIt.instance;
 
