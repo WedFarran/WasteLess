@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/main.dart';
 import '../../core/utils/assets_path.dart';
-import '../../core/widgets/bottom_navigation_bar.dart';
+import '../../core/utils/responsive.dart';
+import '../../core/widgets/bottom_navigation_bar_widget.dart';
+import '../../core/widgets/bottom_navigation_icon.dart';
 import '../../features/admin features/driver/presentation/screens/all_drivers_screen.dart';
 import '../../features/admin features/map/presentation/screens/admin_map_screen.dart';
 import '../../features/admin features/settings/presentation/screens/admin_tasks_screen.dart';
@@ -9,6 +11,7 @@ import '../../features/admin features/tasks/presentation/screens/admin_tasks_scr
 
 class AdminWasteNavigationBar extends StatefulWidget {
   static const String id = 'nabigation_bar_screen';
+
   const AdminWasteNavigationBar({super.key});
 
   @override
@@ -17,7 +20,6 @@ class AdminWasteNavigationBar extends StatefulWidget {
 }
 
 class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
-  int selectedIndex = 0;
   List<Widget> screens = const [
     DriversScreen(),
     AdminMapScreen(),
@@ -26,63 +28,41 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     List iconsName = [WEB_DRIVER_ICON, MAP_ICON, TASKS_ICON, SETTINGS_ICON];
+    Size size = MediaQuery.of(context).size;
+    int selectedIndex = 0;
     List iconsSize = [0.08, 0.09, 0.07, 0.07];
-
-    Widget changeScreen(int selectedIndex) {
-      Widget currentScreen = screens[0];
-      setState(() {
-        currentScreen = screens[selectedIndex];
-      });
-      return currentScreen;
-    }
-
+    List tabletIconSize = [0.06, 0.05, 0.07, 0.05];
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-          height: size.height * 0.15,
-          child: Stack(
-            children: [
-              Container(
-                height: size.height * 0.08,
-                margin: const EdgeInsets.only(
-                    top: 40, right: 20, left: 20, bottom: 20),
-                decoration: BoxDecoration(
-                  color: PRIMARY_BLUE,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: SHADOW, offset: Offset(0, 4), blurRadius: 4)
-                  ],
-                ),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 35.0),
-                itemCount: iconsName.length,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: size.width * 0.04,
-                ),
-                itemBuilder: (context, i) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = i;
-                    });
-                    print(selectedIndex);
-                  },
-                  child: BottomNavigationBarWidget(
-                      selected: selectedIndex == i ? true : false,
-                      iconsName: iconsName[i],
-                      size: size,
-                      iconsSize: iconsSize[i]),
-                ),
-              ),
-            ],
-          )),
+      bottomNavigationBar: WasteLessBottomNavigationBar(
+        widget: ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(left: 35.0),
+          itemCount: iconsName.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => SizedBox(
+            width: size.width * 0.04,
+          ),
+          itemBuilder: (context, i) => GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedIndex = i;
+              });
+            },
+            child: NavigationBarIconsWidget(
+                selected: selectedIndex == i ? true : false,
+                iconsName: iconsName[i],
+                size: size,
+                iconsSize: isTablet(context) == true
+                    ? tabletIconSize[i]
+                    : isDesktop(context) == true
+                        ? 0.009
+                        : iconsSize[i]),
+          ),
+        ),
+      ),
       body: Center(
-        child: changeScreen(selectedIndex),
+        child: screens.elementAt(selectedIndex),
       ),
     );
   }

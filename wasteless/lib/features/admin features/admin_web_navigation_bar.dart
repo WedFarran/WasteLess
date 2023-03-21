@@ -45,47 +45,6 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
     }
 
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-          height: size.height * 0.15,
-          child: Stack(
-            children: [
-              Container(
-                height: size.height * 0.08,
-                margin: const EdgeInsets.only(
-                    top: 40, right: 20, left: 20, bottom: 20),
-                decoration: BoxDecoration(
-                  color: PRIMARY_BLUE,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: SHADOW, offset: Offset(0, 4), blurRadius: 4)
-                  ],
-                ),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 35.0),
-                itemCount: iconsName.length,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: size.width * 0.04,
-                ),
-                itemBuilder: (context, i) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = i;
-                    });
-                    print(selectedIndex);
-                  },
-                  child: BottomNavigationBarWidget(
-                      selected: selectedIndex == i ? true : false,
-                      iconsName: iconsName[i],
-                      size: size,
-                      iconsSize: iconsSize[i]),
-                ),
-              ),
-            ],
-          )),
       body: Center(
         child: changeScreen(selectedIndex),
       ),
