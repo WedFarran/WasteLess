@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wasteless/main.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/utils/responsive.dart';
-import '../../core/widgets/bottom_navigation_bar_widget.dart';
+import '../../core/widgets/bottom_navigation_bar.dart';
 import '../../core/widgets/bottom_navigation_icon.dart';
 import '../../features/admin features/driver/presentation/screens/all_drivers_screen.dart';
 import '../../features/admin features/map/presentation/screens/admin_map_screen.dart';

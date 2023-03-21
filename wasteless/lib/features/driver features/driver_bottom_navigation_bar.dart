@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
 import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_tasks_screen.dart';
-import 'package:wasteless/main.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/utils/responsive.dart';
-import '../../core/widgets/bottom_navigation_bar_widget.dart';
+import '../../core/widgets/bottom_navigation_bar.dart';
 import '../../core/widgets/bottom_navigation_icon.dart';
 import 'home/presentation/screens/driver_home_screen.dart';
 import 'map/presentation/screens/driver_map_screen.dart';
