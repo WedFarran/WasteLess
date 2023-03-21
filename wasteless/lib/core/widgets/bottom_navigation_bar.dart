@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
+import '../utils/responsive.dart';
 
 class WasteLessBottomNavigationBar extends StatefulWidget {
   final Widget widget;
@@ -18,10 +19,13 @@ class _WasteLessBottomNavigationBarState
     return SizedBox(
         height: size.height * 0.15,
         child: Stack(
+          // i used a stack cause i wanted the avatar circle top raduis to apear out side the navigation rectangle
           children: [
             Center(
               child: Container(
-                height: size.height * 0.08,
+                height: isTablet(context) == true
+                    ? size.height * 0.09
+                    : size.height * 0.08,
                 margin: const EdgeInsets.only(
                     top: 40, right: 20, left: 20, bottom: 20),
                 decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
+import '../utils/responsive.dart';
 
 class NavigationBarIconsWidget extends StatelessWidget {
   const NavigationBarIconsWidget({
@@ -22,12 +23,12 @@ class NavigationBarIconsWidget extends StatelessWidget {
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeInQuad,
       child: CircleAvatar(
-        radius: 35,
+        radius: isTablet(context) == true ? 35 : 30,
         backgroundColor: selected == true ? PRIMARY_GREEN : Colors.transparent,
         child: Padding(
           padding: selected == true
-              ? const EdgeInsets.only(left: 0.0, right: 0)
-              : const EdgeInsets.only(top: 20, left: 18.0, right: 0),
+              ? const EdgeInsets.only(top: 0.0)
+              : const EdgeInsets.only(top: 20),
           child: Image.asset(
             iconsName,
             width: size.width * iconsSize,
