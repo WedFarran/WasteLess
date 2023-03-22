@@ -1,40 +1,38 @@
 import 'package:flutter/material.dart';
-
+import 'package:wasteless/core/utils/media_query.dart';
 import '../utils/colors.dart';
+import '../utils/responsive.dart';
+import '../utils/styles.dart';
 
-class BottomNavigationBarWidget extends StatelessWidget {
-  const BottomNavigationBarWidget({
-    super.key,
-    required this.selected,
-    required this.iconsName,
-    required this.size,
-    required this.iconsSize,
-  });
-
-  final bool selected;
-  final String iconsName;
-  final Size size;
-  final double iconsSize;
+class WasteLessBottomNavigationBar extends StatefulWidget {
+  final Widget widget;
+  const WasteLessBottomNavigationBar({super.key, required this.widget});
 
   @override
+  State<WasteLessBottomNavigationBar> createState() =>
+      _WasteLessBottomNavigationBarState();
+}
+
+class _WasteLessBottomNavigationBarState
+    extends State<WasteLessBottomNavigationBar> {
+  @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeInQuad,
-      child: CircleAvatar(
-        radius: 30,
-        backgroundColor: selected == true ? PRIMARY_GREEN : Colors.transparent,
-        child: Padding(
-          padding: selected == true
-              ? const EdgeInsets.only(left: 0.0, right: 0)
-              : const EdgeInsets.only(top: 20, left: 18.0, right: 0),
-          child: Image.asset(
-            iconsName,
-            width: size.width * iconsSize,
-            height: size.height * 0.1,
-          ),
-        ),
-      ),
-    );
+    return SizedBox(
+        height: context.height * 0.15,
+        child: Stack(
+          // i used a stack cause i wanted the avatar circle top raduis to apear out side the navigation rectangle
+          children: [
+            Center(
+              child: Container(
+                  height: isTablet(context) == true
+                      ? context.height * 0.09
+                      : context.height * 0.08,
+                  margin: const EdgeInsets.only(
+                      top: 40, right: 20, left: 20, bottom: 20),
+                  decoration: NAVIGATION_BAR_DECORATIONS),
+            ),
+            Center(child: widget.widget),
+          ],
+        ));
   }
 }
