@@ -1,8 +1,7 @@
 import '../../domain/entities/driver_entity.dart';
 
-class MapDriverModel extends MapDriver {
-  const MapDriverModel({
-    required super.id,
+class AdminMapDriverModel extends AdminMapDriver {
+  const AdminMapDriverModel({
     required super.fullName,
     required super.image,
     required super.lat,
@@ -10,9 +9,8 @@ class MapDriverModel extends MapDriver {
     required super.area,
   });
 
-  factory MapDriverModel.fromJson(Map<String, dynamic> json) {
-    return MapDriverModel(
-      id: json['id'],
+  factory AdminMapDriverModel.fromJson(Map<String, dynamic> json) {
+    return AdminMapDriverModel(
       fullName: json['fullName'],
       image: json['image'],
       lat: json['lat'],
@@ -23,7 +21,6 @@ class MapDriverModel extends MapDriver {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'fullName': fullName,
       'image': image,
       'lat': lat,

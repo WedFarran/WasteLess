@@ -28,7 +28,7 @@ Future<void> init() async {
 
   //repos
 
-  sl.registerLazySingleton<MapRepo>(() => MapRepoImpl(
+  sl.registerLazySingleton<MapRepo>(() => AdminMapRepoImpl(
       localDataSource: sl(), networkInfo: sl(), remoteDataSource: sl()));
 
   //datasources

@@ -7,8 +7,7 @@ import '../models/bin_model.dart';
 import '../models/driver_model.dart';
 
 abstract class MapRemoteDataSource {
-  Future<List<MapDriverModel>> getAllMapDrivers();
-  Future<List<MapBinModel>> getAllMapBins();
+  Future<Map<String, dynamic>> getAllAdminMapItems();
 }
 
 class MapRemoteDataSourceImpl implements MapRemoteDataSource {
@@ -17,7 +16,19 @@ class MapRemoteDataSourceImpl implements MapRemoteDataSource {
   MapRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<MapBinModel>> getAllMapBins() async {
+  Future<Map<String, dynamic>> getAllAdminMapItems() async {
+    Future<List<AdminMapBinModel>> binsList =
+        (await getAllMapBins()) as Future<List<AdminMapBinModel>>;
+    Future<List<AdminMapDriverModel>> driversList =
+        (await getAllMapDrivers()) as Future<List<AdminMapDriverModel>>;
+    Map<String, dynamic> adminMapItems = {
+      'bins': binsList,
+      'drivers': driversList
+    };
+    return adminMapItems;
+  }
+
+  Future<List<AdminMapBinModel>> getAllMapBins() async {
     final response = await client.get(
       Uri.parse(DB_URL + BIN),
       headers: {"Content-Type": "application/json"},
@@ -25,9 +36,9 @@ class MapRemoteDataSourceImpl implements MapRemoteDataSource {
 
     if (response.statusCode == 200) {
       final List decodeJson = json.decode(response.body) as List;
-      final List<MapBinModel> mapBinsModel = decodeJson
-          .map<MapBinModel>(
-              (jsonMapBinModel) => MapBinModel.fromJson(jsonMapBinModel))
+      final List<AdminMapBinModel> mapBinsModel = decodeJson
+          .map<AdminMapBinModel>(
+              (jsonMapBinModel) => AdminMapBinModel.fromJson(jsonMapBinModel))
           .toList();
       return mapBinsModel;
     } else {
@@ -35,8 +46,7 @@ class MapRemoteDataSourceImpl implements MapRemoteDataSource {
     }
   }
 
-  @override
-  Future<List<MapDriverModel>> getAllMapDrivers() async {
+  Future<List<AdminMapDriverModel>> getAllMapDrivers() async {
     final response = await client.get(
       Uri.parse(DB_URL + DRIVER),
       headers: {"Content-Type": "application/json"},
@@ -44,9 +54,9 @@ class MapRemoteDataSourceImpl implements MapRemoteDataSource {
 
     if (response.statusCode == 200) {
       final List decodeJson = json.decode(response.body) as List;
-      final List<MapDriverModel> mapDriverModel = decodeJson
-          .map<MapDriverModel>((jsonMapDriverModel) =>
-              MapDriverModel.fromJson(jsonMapDriverModel))
+      final List<AdminMapDriverModel> mapDriverModel = decodeJson
+          .map<AdminMapDriverModel>((jsonMapDriverModel) =>
+              AdminMapDriverModel.fromJson(jsonMapDriverModel))
           .toList();
       return mapDriverModel;
     } else {
