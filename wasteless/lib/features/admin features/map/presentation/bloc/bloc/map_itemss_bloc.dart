@@ -14,7 +14,7 @@ part 'map_itemss_event.dart';
 part 'map_itemss_state.dart';
 
 class MapItemssBloc extends Bloc<MapItemssEvent, MapItemssState> {
-  final GetAllMapBinsUsecase getAllMapBinsUsecase;
+  final GetAllAdminMapItemsUsecase getAllMapBinsUsecase;
   final GetAllMapDriversUsecase getAllMapDriversUsecase;
   MapItemssBloc(
       {required this.getAllMapBinsUsecase,

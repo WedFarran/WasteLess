@@ -23,7 +23,7 @@ Future<void> init() async {
 
   //usecases
 
-  sl.registerLazySingleton(() => GetAllMapBinsUsecase(sl()));
+  sl.registerLazySingleton(() => GetAllAdminMapItemsUsecase(sl()));
   sl.registerLazySingleton(() => GetAllMapDriversUsecase(sl()));
 
   //repos
