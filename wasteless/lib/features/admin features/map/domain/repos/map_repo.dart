@@ -4,6 +4,6 @@ import '../entities/bin_entity.dart';
 import '../entities/driver_entity.dart';
 
 abstract class MapRepo {
-  Future<Either<Failure, List<MapBin>>> getAllMapBins();
-  Future<Either<Failure, List<MapDriver>>> getAllMapDrivers();
+  Future<Either<Failure, List<AdminMapBin>>> getAllMapBins();
+  Future<Either<Failure, List<AdminMapDriver>>> getAllMapDrivers();
 }
