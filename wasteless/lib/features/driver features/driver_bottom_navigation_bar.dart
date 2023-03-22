@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
 import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_tasks_screen.dart';
 import '../../core/utils/assets_path.dart';
@@ -32,7 +33,6 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
     List iconsSize = [0.08, 0.06, 0.07, 0.07];
     List tabletIconSize = [0.055, 0.04, 0.05, 0.05];
 
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: WasteLessBottomNavigationBar(
         widget: ListView.separated(
@@ -40,7 +40,7 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
           itemCount: iconsName.length,
           scrollDirection: Axis.horizontal,
           separatorBuilder: (context, index) => SizedBox(
-            width: size.width * 0.04,
+            width: context.width * 0.04,
           ),
           itemBuilder: (context, i) => GestureDetector(
             onTap: () {
@@ -51,7 +51,6 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
             child: NavigationBarIconsWidget(
                 selected: selectedIndex == i ? true : false,
                 iconsName: iconsName[i],
-                size: size,
                 iconsSize: isTablet(context) == true
                     ? tabletIconSize[i]
                     : iconsSize[i]),

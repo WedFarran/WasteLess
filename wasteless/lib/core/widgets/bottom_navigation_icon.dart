@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/core/utils/media_query.dart';
 
 import '../utils/colors.dart';
 import '../utils/responsive.dart';
@@ -8,13 +9,11 @@ class NavigationBarIconsWidget extends StatelessWidget {
     super.key,
     required this.selected,
     required this.iconsName,
-    required this.size,
     required this.iconsSize,
   });
 
   final bool selected;
   final String iconsName;
-  final Size size;
   final double iconsSize;
 
   @override
@@ -31,7 +30,7 @@ class NavigationBarIconsWidget extends StatelessWidget {
               : const EdgeInsets.only(top: 20),
           child: Image.asset(
             iconsName,
-            width: size.width * iconsSize,
+            width: context.width * iconsSize,
           ),
         ),
       ),

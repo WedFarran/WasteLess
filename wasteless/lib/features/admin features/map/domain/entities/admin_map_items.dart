@@ -1,5 +1,4 @@
-import 'package:wasteless/features/admin%20features/map/domain/entities/bin_entity.dart';
-import 'package:wasteless/features/admin%20features/map/domain/entities/driver_entity.dart';
+
 
 /*class AdminMapItems implements AdminMapDriver implements AdminMapBin{
   @override
