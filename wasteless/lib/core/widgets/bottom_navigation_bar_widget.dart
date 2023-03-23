@@ -15,8 +15,9 @@ class _WasteLessBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
+    return Container(
         height: size.height * 0.15,
+        color: Colors.transparent,
         child: Stack(
           children: [
             Center(

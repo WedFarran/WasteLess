@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-
-bool isTablet(BuildContext context) => MediaQuery.of(context).size.width >= 660;
-bool isDesktop(BuildContext context) =>
-    MediaQuery.of(context).size.width >= 940;
-=======
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
@@ -18,4 +11,3 @@ bool isDesktop(BuildContext context) =>
 
 bool desktopHight(BuildContext context) =>
     MediaQuery.of(context).size.height <= 1700;
->>>>>>> master

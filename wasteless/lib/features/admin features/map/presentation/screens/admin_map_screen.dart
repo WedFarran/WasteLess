@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/error_message_display_widget.dart';
 import '../../../../../core/widgets/loading_widget.dart';
@@ -36,55 +37,11 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
         scale: 10.0,
       )
     ];
-    return Scaffold(
-        body: _buildBody(),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Material(
-            elevation: 10,
-            borderRadius: BorderRadius.circular(20),
-            color: PRIMARY_BLUE,
-            child: SizedBox(
-              height: 70,
-              width: double.infinity,
-              child: ListView.builder(
-                  itemCount: data.length,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  itemBuilder: (context, i) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = i;
-                            });
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 250),
-                            padding: const EdgeInsets.only(bottom: 10),
-                            width: 20,
-                            decoration: BoxDecoration(
-                              color: i == selectedIndex ? PRIMARY_GREEN : null,
-                              boxShadow: i == selectedIndex
-                                  ? [
-                                      const BoxShadow(
-                                          color: SHADOW_GREY,
-                                          spreadRadius: 0,
-                                          blurRadius: 4,
-                                          offset: Offset(0, 4))
-                                    ]
-                                  : null,
-                            ),
-                            child: SizedBox(
-                              child: data[i],
-
-                              //size: 35,
-                            ),
-                          ),
-                        ),
-                      )),
-            ),
-          ),
-        ));
+    return const Scaffold(
+        body: GoogleMap(
+      initialCameraPosition:
+          CameraPosition(target: LatLng(25.1193, 55.3773), zoom: 14),
+    ));
   }
 }
 
@@ -97,7 +54,7 @@ Widget _buildBody() {
         is LoadedMapItemsState /* && state is LoadedMapDriversState*/) {
       print('loaded');
       return const MapItemsListWidget();
-    } else if (state is ErrorMapItemsState && state is ErrorMapItemsState) {
+    } else if (state is ErrorMapItemsState) {
       print('error');
       return ErrorMessageDisplayWidget(message: state.message);
     }
