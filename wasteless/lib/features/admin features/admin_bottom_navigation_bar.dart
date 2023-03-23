@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/settings/presentation/screens/admin_tasks_screen.dart';
 import 'package:wasteless/features/admin%20features/tasks/presentation/screens/admin_tasks_screen.dart';
@@ -44,67 +43,68 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
     List tabletIconSize = [0.05, 0.05, 0.04, 0.05];
     List webIconSize = [0.017, 0.018, 0.016, 0.017];
     return Scaffold(
-      bottomNavigationBar: isDesktop(context)
-          ? null
-          : WasteLessBottomNavigationBar(
-              widget: ListView.separated(
-                shrinkWrap: true,
-                itemCount: iconsName.length,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: context.width * 0.04,
-                ),
-                itemBuilder: (context, i) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = i;
-                    });
-                  },
-                  child: NavigationBarIconsWidget(
-                      selected: selectedIndex == i ? true : false,
-                      iconsName: iconsName[i],
-                      iconsSize: isTablet(context) == true
-                          ? tabletIconSize[i]
-                          : iconsSize[i]),
-                ),
-              ),
-            ),
-      body: isDesktop(
-              context) //if the width is larger than display the web UI if not display the app UI
-          ? Row(
-              children: [
-                Container(
-                  width: context.width * 0.04,
-                  alignment: Alignment.center,
-                  decoration: WEB_NAVIGATION_BAR_DECORATIONS,
-                  child: Padding(
-                    padding: desktopHight(context) == true
-                        ? const EdgeInsets.symmetric(vertical: 200)
-                        : const EdgeInsets.symmetric(vertical: 300),
-                    child: ListView.separated(
-                      itemCount: webIcons.length,
-                      separatorBuilder: (context, index) => SizedBox(
-                        height: context.width * 0.07,
+        body: isDesktop(
+                context) //if the width is larger than display the web UI if not display the app UI
+            ? Row(
+                children: [
+                  Container(
+                    width: context.width * 0.04,
+                    alignment: Alignment.center,
+                    decoration: WEB_NAVIGATION_BAR_DECORATIONS,
+                    child: Padding(
+                      padding: desktopHight(context) == true
+                          ? const EdgeInsets.symmetric(vertical: 200)
+                          : const EdgeInsets.symmetric(vertical: 300),
+                      child: ListView.separated(
+                        itemCount: webIcons.length,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: context.width * 0.07,
+                        ),
+                        itemBuilder: (context, i) => GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = i;
+                              });
+                            },
+                            child: WebNavigationBarIcons(
+                                selectedIndex:
+                                    selectedIndex == i ? true : false,
+                                webIcons: webIcons[i],
+                                webIconSize: webIconSize[i])),
                       ),
-                      itemBuilder: (context, i) => GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = i;
-                            });
-                          },
-                          child: WebNavigationBarIcons(
-                              selectedIndex: selectedIndex == i ? true : false,
-                              webIcons: webIcons[i],
-                              webIconSize: webIconSize[i])),
                     ),
                   ),
-                ),
-                screens.elementAt(selectedIndex)
-              ],
-            )
-          : Center(
-              child: screens.elementAt(selectedIndex),
-            ),
-    );
+                  screens.elementAt(selectedIndex)
+                ],
+              )
+            : Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Center(child: screens.elementAt(selectedIndex)),
+                  WasteLessBottomNavigationBar(
+                    widget: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: iconsName.length,
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: context.width * 0.04,
+                      ),
+                      itemBuilder: (context, i) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = i;
+                          });
+                        },
+                        child: NavigationBarIconsWidget(
+                            selected: selectedIndex == i ? true : false,
+                            iconsName: iconsName[i],
+                            iconsSize: isTablet(context) == true
+                                ? tabletIconSize[i]
+                                : iconsSize[i]),
+                      ),
+                    ),
+                  ),
+                ],
+              ));
   }
 }
