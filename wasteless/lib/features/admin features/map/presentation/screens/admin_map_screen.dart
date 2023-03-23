@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/error_message_display_widget.dart';
 import '../../../../../core/widgets/loading_widget.dart';
-import '../../domain/entities/bin_entity.dart';
 import '../bloc/bloc/map_itemss_bloc.dart';
 import '../widgets/map_items_list_widget.dart';
 
@@ -92,33 +91,17 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 Widget _buildBody() {
   return BlocBuilder<MapItemssBloc, MapItemssState>(builder: (context, state) {
     if (state is LoadingMapItemsState) {
+      print('loading');
       return const LoadingWidget();
     } else if (state
-        is LoadedMapBinsState /* && state is LoadedMapDriversState*/) {
-      return MapItemsListWidget(bins: state.mapBins, drivers: state.mapBins);
-    } else if (state is ErrorMapBinsState && state is ErrorMapDriversState) {
+        is LoadedMapItemsState /* && state is LoadedMapDriversState*/) {
+      print('loaded');
+      return const MapItemsListWidget();
+    } else if (state is ErrorMapItemsState && state is ErrorMapItemsState) {
+      print('error');
       return ErrorMessageDisplayWidget(message: state.message);
     }
-
-    return MapItemsListWidget(
-      bins: const [
-        MapBin(
-            id: 1,
-            status: true,
-            lat: 25.1193,
-            lng: 25.1193,
-            wasteLevel: 50,
-            fullnesTime: "1h")
-      ],
-      drivers: const [
-        MapBin(
-            id: 1,
-            status: true,
-            lat: 25.1193,
-            lng: 25.1193,
-            wasteLevel: 50,
-            fullnesTime: "1h")
-      ],
-    );
+    print('last return');
+    return const MapItemsListWidget();
   });
 }

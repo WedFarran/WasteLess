@@ -1,16 +1,16 @@
 part of 'map_itemss_bloc.dart';
 
 @immutable
-abstract class MapItemssEvent extends Equatable {
-  const MapItemssEvent();
+abstract class MapItemsEvent extends Equatable {
+  const MapItemsEvent();
 }
 
-class GetAllMapBinsEvent extends MapItemssEvent {
+class GetAllMapItemsEvent extends MapItemsEvent {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetAllMapDriversEvent extends MapItemssEvent {
+/*class GetAllMapDriversEvent extends MapItemssEvent {
   @override
   List<Object?> get props => throw UnimplementedError();
-}
+}*/

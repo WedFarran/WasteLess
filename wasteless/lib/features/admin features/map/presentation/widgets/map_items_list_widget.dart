@@ -5,9 +5,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../domain/entities/bin_entity.dart';
 
 class MapItemsListWidget extends StatelessWidget {
-  final List<MapBin> bins;
-  List< /*MapDriver*/ MapBin> drivers;
-  MapItemsListWidget({required this.bins, required this.drivers, super.key});
+  const MapItemsListWidget({super.key});
+
+  //final List<MapBin> bins;
+  //List< /*MapDriver*/ MapBin> drivers;
+  //MapItemsListWidget({required this.bins, required this.drivers, super.key});
 
   @override
   Widget build(BuildContext context) {

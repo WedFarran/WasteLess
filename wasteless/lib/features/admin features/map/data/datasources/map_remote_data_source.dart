@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:wasteless/core/errors/exception.dart';
 import 'package:wasteless/core/utils/database.dart';
+import 'package:wasteless/features/admin%20features/map/domain/entities/bin_entity.dart';
+import 'package:wasteless/features/admin%20features/map/domain/entities/driver_entity.dart';
 import '../models/bin_model.dart';
 import '../models/driver_model.dart';
 
 abstract class MapRemoteDataSource {
-  Future<Map<String, dynamic>> getAllAdminMapItems();
+  Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>
+      getAllAdminMapItems();
 }
 
 class MapRemoteDataSourceImpl implements MapRemoteDataSource {
@@ -16,15 +20,15 @@ class MapRemoteDataSourceImpl implements MapRemoteDataSource {
   MapRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<Map<String, dynamic>> getAllAdminMapItems() async {
+  Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>
+      getAllAdminMapItems() async {
     Future<List<AdminMapBinModel>> binsList =
         (await getAllMapBins()) as Future<List<AdminMapBinModel>>;
     Future<List<AdminMapDriverModel>> driversList =
         (await getAllMapDrivers()) as Future<List<AdminMapDriverModel>>;
-    Map<String, dynamic> adminMapItems = {
-      'bins': binsList,
-      'drivers': driversList
-    };
+    Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>
+        adminMapItems = {'bins': binsList, 'drivers': driversList}
+            as Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>;
     return adminMapItems;
   }
 

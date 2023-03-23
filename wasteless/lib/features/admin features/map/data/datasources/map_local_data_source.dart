@@ -3,13 +3,15 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wasteless/core/errors/exception.dart';
+import 'package:wasteless/features/admin%20features/map/domain/entities/bin_entity.dart';
+import 'package:wasteless/features/admin%20features/map/domain/entities/driver_entity.dart';
 import '../../../../../core/utils/database.dart';
 
 abstract class MapLocalDataSource {
-  Future<Map<String, dynamic>> getCachedAdminMapItems();
-  //Future<List<AdminMapDriverModel>> getCachedMapDrivers();
-  Future<Unit> cacheAdminMapItems(Map<String, dynamic> mapItems);
-  //Future<Unit> cacheMapDrivers(List<AdminMapDriverModel> mapDrivers);
+  Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>
+      getCachedAdminMapItems();
+  Future<Unit> cacheAdminMapItems(
+      Map<String, List<Either<AdminMapBin, AdminMapDriver>>> mapItems);
 }
 
 class MapLocalDataSourceImpl implements MapLocalDataSource {
@@ -27,10 +29,12 @@ class MapLocalDataSourceImpl implements MapLocalDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> getCachedAdminMapItems() {
+  Future<Map<String, List<Either<AdminMapBin, AdminMapDriver>>>>
+      getCachedAdminMapItems() {
     final jsonString = sharedPrefrences.getString(CACHED_MAP_ITEMS);
     if (jsonString != null) {
-      Map<String, dynamic> decodeJsonData = json.decode(jsonString);
+      Map<String, List<Either<AdminMapBin, AdminMapDriver>>> decodeJsonData =
+          json.decode(jsonString);
       /*List<AdminMapBinModel> jsonToMapBins = decodeJsonData
           .map((jsonMapBins) => AdminMapBinModel.fromJson(jsonMapBins))
           .toList();*/
@@ -39,52 +43,4 @@ class MapLocalDataSourceImpl implements MapLocalDataSource {
       throw EmptyCacheException();
     }
   }
-
-  /* @override
-  Future<Unit> cacheMapBins(List<AdminMapBinModel> mapBins) {
-    List mapBinsModelsToJson = mapBins
-        .map<Map<String, dynamic>>((mapBins) => mapBins.toJson())
-        .toList();
-    sharedPrefrences.setString(
-        CACHED_MAP_BINS, json.encode(mapBinsModelsToJson));
-    return Future.value(unit);
-  }
-
-  @override
-  Future<Unit> cacheMapDrivers(List<AdminMapDriverModel> mapDrivers) {
-    List mapItemsModelsToJson = mapDrivers
-        .map<Map<String, dynamic>>((mapDrivers) => mapDrivers.toJson())
-        .toList();
-    sharedPrefrences.setString(
-        CACHED_MAP_DRIVERS, json.encode(mapItemsModelsToJson));
-    return Future.value(unit);
-  }
-
-  @override
-  Future<List<AdminMapBinModel>> getCachedMapBins() {
-    final jsonString = sharedPrefrences.getString(CACHED_MAP_BINS);
-    if (jsonString != null) {
-      List decodeJsonData = json.decode(jsonString);
-      List<AdminMapBinModel> jsonToMapBins = decodeJsonData
-          .map((jsonMapBins) => AdminMapBinModel.fromJson(jsonMapBins))
-          .toList();
-      return Future.value(jsonToMapBins);
-    } else {
-      throw EmptyCacheException();
-    }
-  }
-
-  @override
-  Future<List<AdminMapDriverModel>> getCachedMapDrivers() {
-    final jsonString = sharedPrefrences.getString(CACHED_MAP_DRIVERS);
-    if (jsonString != null) {
-      List decodeJsonData = json.decode(jsonString);
-      List<AdminMapDriverModel> jsonToMapDrivers = decodeJsonData
-          .map((jsonMapDrivers) => AdminMapDriverModel.fromJson(jsonMapDrivers))
-          .toList();
-      return Future.value(jsonToMapDrivers);
-    } else {
-      throw EmptyCacheException();
-    }
-  }*/
 }

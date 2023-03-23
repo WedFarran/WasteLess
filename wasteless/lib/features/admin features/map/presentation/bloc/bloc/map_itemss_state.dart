@@ -12,49 +12,41 @@ class MapItemssInitial extends MapItemssState {
   List<Object?> get props => throw UnimplementedError();
 }
 
-/*class MapDriversInitial extends MapItemsState {
-  
-}*/
-
 class LoadingMapItemsState extends MapItemssState {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
 
-/*class LoadingMapDriversState extends MapItemsState {
-  
-}*/
+class LoadedMapItemsState extends MapItemssState {
+  final Map<String, List<Either<AdminMapBin, AdminMapDriver>>> mapBins;
 
-class LoadedMapBinsState extends MapItemssState {
-  final List<MapBin> mapBins;
-
-  const LoadedMapBinsState({required this.mapBins});
+  const LoadedMapItemsState({required this.mapBins});
 
   @override
   List<Object> get props => [props];
 }
 
-class LoadedMapDriversState extends MapItemssState {
-  final List<MapDriver> mapDriverss;
+/*class LoadedMapDriversState extends MapItemssState {
+  final List<AdminMapDriver> mapDriverss;
 
   const LoadedMapDriversState({required this.mapDriverss});
 
   @override
   List<Object> get props => [props];
-}
+}*/
 
-class ErrorMapBinsState extends MapItemssState {
+class ErrorMapItemsState extends MapItemssState {
   final String message;
-  const ErrorMapBinsState({required this.message});
+  const ErrorMapItemsState({required this.message});
 
   @override
   List<Object> get props => [props];
 }
 
-class ErrorMapDriversState extends MapItemssState {
+/*class ErrorMapDriversState extends MapItemssState {
   final String message;
   const ErrorMapDriversState({required this.message});
 
   @override
   List<Object> get props => [props];
-}
+}*/
