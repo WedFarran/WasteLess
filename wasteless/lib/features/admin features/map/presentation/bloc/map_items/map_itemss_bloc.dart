@@ -13,21 +13,18 @@ part 'map_itemss_event.dart';
 part 'map_itemss_state.dart';
 
 class MapItemssBloc extends Bloc<MapItemsEvent, MapItemssState> {
-  final GetAllAdminMapItemsUsecase getAllMapBinsUsecase;
+  final GetAllAdminMapItemsUsecase getAllMapItemsUsecase;
   //final GetAllMapDriversUsecase getAllMapDriversUsecase;
-  MapItemssBloc({
-    required this.getAllMapBinsUsecase,
-  }) : super(MapItemssInitial()) {
+  MapItemssBloc({required this.getAllMapItemsUsecase})
+      : super(MapItemssInitial()) {
     on<MapItemsEvent>((event, emit) async {
       if (event is GetAllMapItemsEvent) {
         emit(LoadingMapItemsState());
-        final failureOrMapBins = await getAllMapBinsUsecase();
+        final failureOrMapBins = await getAllMapItemsUsecase();
         failureOrMapBins.fold((failure) {
           emit(ErrorMapItemsState(message: _mapFailureToMessage(failure)));
-        }, (
-          mapBins,
-        ) {
-          emit(LoadedMapItemsState(mapBins: mapBins));
+        }, (mapItems) {
+          emit(LoadedMapItemsState(mapItems: mapItems));
         });
       }
     });

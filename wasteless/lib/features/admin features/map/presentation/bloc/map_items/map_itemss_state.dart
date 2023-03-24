@@ -18,35 +18,18 @@ class LoadingMapItemsState extends MapItemssState {
 }
 
 class LoadedMapItemsState extends MapItemssState {
-  final Map<String, List<Either<AdminMapBin, AdminMapDriver>>> mapBins;
+  final Map<String, List<Either<AdminMapBin, AdminMapDriver>>> mapItems;
 
-  const LoadedMapItemsState({required this.mapBins});
+  const LoadedMapItemsState({required this.mapItems});
 
   @override
-  List<Object> get props => [props];
+  List<Object> get props => [mapItems];
 }
-
-/*class LoadedMapDriversState extends MapItemssState {
-  final List<AdminMapDriver> mapDriverss;
-
-  const LoadedMapDriversState({required this.mapDriverss});
-
-  @override
-  List<Object> get props => [props];
-}*/
 
 class ErrorMapItemsState extends MapItemssState {
   final String message;
   const ErrorMapItemsState({required this.message});
 
   @override
-  List<Object> get props => [props];
+  List<Object> get props => [message];
 }
-
-/*class ErrorMapDriversState extends MapItemssState {
-  final String message;
-  const ErrorMapDriversState({required this.message});
-
-  @override
-  List<Object> get props => [props];
-}*/
