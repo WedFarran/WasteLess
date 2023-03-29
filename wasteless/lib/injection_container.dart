@@ -8,6 +8,7 @@ import 'features/admin features/map/data/datasources/map_remote_data_source.dart
 import 'features/admin features/map/data/repos/map_repo_impl.dart';
 import 'features/admin features/map/domain/repos/map_repo.dart';
 import 'features/admin features/map/domain/usecases/get_all_map_bins.dart';
+import 'features/admin features/map/presentation/bloc/map_items/map_itemss_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -15,6 +16,8 @@ Future<void> init() async {
   // features - admin map
 
   // bloc
+
+  sl.registerFactory(() => MapItemssBloc(getAllMapItemsUsecase: sl()));
 
   //usecases
 
