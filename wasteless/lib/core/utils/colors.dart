@@ -14,3 +14,5 @@ const Color LIGHT_GREY = Color(0xFF939192);
 const Color SHADOW_GREY = Color(0xFFB9BCBE);
 const Color YELLOW = Color(0xFF9F8E35);
 const Color RED = Color(0xFF9F3535);
+const Color FONT_GRAY = Color(0xFF687363);
+const Color CIRCLE = Color(0xFFCEE2EA);

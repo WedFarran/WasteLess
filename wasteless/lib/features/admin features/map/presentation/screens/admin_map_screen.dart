@@ -16,6 +16,7 @@ class AdminMapScreen extends StatefulWidget {
 
 class _AdminMapScreenState extends State<AdminMapScreen> {
   late GoogleMapController mapController;
+
   Map<String, Marker> markers = {};
   mapThings() async {
     var markerIcon = await BitmapDescriptor.fromAssetImage(
@@ -30,9 +31,8 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
             context: context,
             builder: (context) => BinDetailsWidget());
       },
-      markerId: MarkerId('value'),
-      infoWindow: InfoWindow(title: "hhh"),
-      position: LatLng(25.1193, 55.3773),
+      markerId: const MarkerId('value'),
+      position: const LatLng(25.1193, 55.3773),
       icon: markerIcon,
     );
     markers['1'] = marker;
@@ -48,6 +48,8 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
       onTap: (argument) {},
       onMapCreated: (controller) {
         mapController = controller;
+        mapController.setMapStyle(
+            '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
         mapThings();
       },
       initialCameraPosition:

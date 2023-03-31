@@ -41,8 +41,9 @@ flutter:
   fonts:
     - family: Nunito
       fonts:
-        - asset: fonts/Nunito-VariableFont_wght.ttf
-        # - asset: fonts/
+        - asset: fonts/Nunito-Regular.ttf
+        - asset: fonts/Nunito-Bold.ttf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
