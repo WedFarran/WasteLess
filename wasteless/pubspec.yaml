@@ -43,9 +43,9 @@ flutter:
         - asset: fonts/Nunito-VariableFont_wght.ttf
         # - asset: fonts/
   # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+    - family: norwester
+      fonts:
+        - asset: fonts/norwester.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
