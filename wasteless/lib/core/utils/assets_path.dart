@@ -9,3 +9,6 @@ const WEB_DRIVER_ICON = 'assets/icons/web-drivers.png';
 const WEB_MAP_ICON = 'assets/icons/web-map.png';
 const WEB_SETTINGS_ICON = 'assets/icons/web-settings.png';
 const MOVING_PIN = 'assets/images/Moving_Pin.gif';
+const EMPTY_BIN_PIN = 'assets/icons/empty_bin.png';
+const HALF_FULL_BIN_PIN = 'assets/icons/half_full_bin.png';
+const FULL_BIN_PIN = 'assets/icons/full_bin.png';

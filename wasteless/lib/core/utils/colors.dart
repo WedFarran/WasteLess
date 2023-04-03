@@ -2,16 +2,18 @@
 
 import 'package:flutter/material.dart';
 
-const PRIMARY_BLUE = Color(0xFF00668A);
-const WHITE = Colors.white;
-const PRIMARY_GREEN = Color(0xFF539F35);
-const LIGHT_GREEN = Color(0xFFDDECD7);
-const LIGHT_BLUE = Color(0xFFCBDFE7);
-const LIGHT_RED = Color(0xFFB16C6D);
-const GREEN = Color(0xFF2A835F);
-const GREY = Color(0xFFA4AE9E);
-const SHADOW = Color(0xFFC0C0C0);
-const LIGHT_GREY = Color(0xFF939192);
-const YELLOW = Color(0xFF9F8E35);
-const RED = Color(0xFF9F3535);
-const BLACK = Color(0xFF000000);
+const Color PRIMARY_BLUE = Color(0xFF00668A);
+const Color WHITE = Colors.white;
+const Color PRIMARY_GREEN = Color(0xFF539F35);
+const Color LIGHT_GREEN = Color(0xFFDDECD7);
+const Color LIGHT_BLUE = Color(0xFFCBDFE7);
+const Color LIGHT_RED = Color(0xFFB16C6D);
+const Color GREEN = Color(0xFF2A835F);
+const Color GREY = Color(0xFFA4AE9E);
+const Color LIGHT_GREY = Color(0xFF939192);
+const Color SHADOW_GREY = Color(0xFFB9BCBE);
+const Color YELLOW = Color(0xFF9F8E35);
+const Color RED = Color(0xFF9F3535);
+const Color FONT_GRAY = Color(0xFF687363);
+const Color CIRCLE = Color(0xFFCEE2EA);
+const Color BLACK = Color(0xFF000000);

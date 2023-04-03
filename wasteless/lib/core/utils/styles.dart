@@ -21,3 +21,21 @@ TextStyle WASTE_SPLASH =
     const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 84);
 TextStyle WASTE_SPLASH_GREEN = const TextStyle(
     color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 84);
+
+TextStyle BIN_STATUS = const TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    color: FONT_GRAY);
+
+TextStyle DETAILS_BLUE = const TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: PRIMARY_BLUE);
+
+TextStyle DETAILS_GRAY = const TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: FONT_GRAY);
