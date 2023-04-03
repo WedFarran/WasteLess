@@ -4,9 +4,9 @@ import 'package:wasteless/features/admin%20features/settings/presentation/screen
 import 'package:wasteless/features/admin%20features/tasks/presentation/screens/admin_tasks_screen.dart';
 import '../../../../core/utils/assets_path.dart';
 import '../../../../core/utils/responsive.dart';
-import '../../../../core/widgets/bottom_navigation_bar.dart';
 import '../../../../core/widgets/bottom_navigation_icon.dart';
 import '../../core/utils/styles.dart';
+import '../../core/widgets/bottom_navigation_bar_widget.dart';
 import '../../core/widgets/web_navigation_bar_icons.dart';
 import 'driver/presentation/screens/all_drivers_screen.dart';
 import 'map/presentation/screens/admin_map_screen.dart';
