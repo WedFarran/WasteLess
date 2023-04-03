@@ -11,6 +11,7 @@ import 'features/driver features/home/presentation/screens/driver_home_screen.da
 import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
 import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
+import 'features/general features/splash_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -30,7 +31,7 @@ class WasteLess extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       title: 'WasteLess',
-      initialRoute: AdminWasteNavigationBar.id,
+      initialRoute: SplashScreen.id,
       routes: {
         AdminWasteNavigationBar.id: (context) =>
             const AdminWasteNavigationBar(),
@@ -44,6 +45,7 @@ class WasteLess extends StatelessWidget {
         DriverDriverScreen.id: (context) => const DriverDriverScreen(),
         DriverSettingsScreen.id: (context) => const DriverSettingsScreen(),
         DriverTasksScreen.id: (context) => const DriverTasksScreen(),
+        SplashScreen.id :(context) => const SplashScreen(),
       },
     );
   }

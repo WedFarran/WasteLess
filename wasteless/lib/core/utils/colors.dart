@@ -14,3 +14,4 @@ const SHADOW = Color(0xFFC0C0C0);
 const LIGHT_GREY = Color(0xFF939192);
 const YELLOW = Color(0xFF9F8E35);
 const RED = Color(0xFF9F3535);
+const BLACK = Color(0xFF000000);
