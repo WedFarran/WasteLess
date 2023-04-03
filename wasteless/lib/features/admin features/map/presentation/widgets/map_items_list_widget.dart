@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../domain/entities/bin_entity.dart';
 
 class MapItemsListWidget extends StatelessWidget {
   const MapItemsListWidget({super.key});

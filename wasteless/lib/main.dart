@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasteless/core/utils/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items/map_itemss_bloc.dart';
 import 'features/admin features/admin_bottom_navigation_bar.dart';
 import 'features/admin features/driver/presentation/screens/all_drivers_screen.dart';
 import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
@@ -31,11 +30,7 @@ class WasteLess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (_) =>
-                  di.sl<MapItemssBloc>()..add(GetAllMapItemsEvent())),
-        ],
+        providers: [],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: appTheme,
