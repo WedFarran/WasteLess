@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Visibility(
                 visible: visibility,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 80),
+                  padding: const EdgeInsets.only(left: 70),
                   child: SplashTextAnimation(
                     textStyle: WASTE_SPLASH_GREEN,
                     title: 'LESS',
