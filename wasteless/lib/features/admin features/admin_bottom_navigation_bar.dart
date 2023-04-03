@@ -105,9 +105,6 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
                     ),
                   ),
                 ],
-              ) /*Center(
-              child: screens.elementAt(selectedIndex),
-            ),*/
-        );
+              ));
   }
 }
