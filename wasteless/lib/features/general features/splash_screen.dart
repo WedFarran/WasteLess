@@ -51,12 +51,14 @@ class _SplashScreenState extends State<SplashScreen> {
             Visibility(
                 visible: visibility,
                 child: Padding(
-                  padding: EdgeInsets.only(left: isDesktop(context) ? 170 : 80),
+                  padding: EdgeInsets.only(left: isDesktop(context) ? 150 : 50),
                   child: SplashTextAnimation(
                     textStyle: responsiveWasteSplash(context, PRIMARY_GREEN),
                     title: 'LESS',
-                    widget:
-                        Image.asset(MOVING_PIN, height: context.height * 0.15),
+                    widget: Image.asset(MOVING_PIN,
+                        height: isDesktop(context)
+                            ? context.height * 0.22
+                            : context.height * 0.12),
                   ),
                 )),
           ],
