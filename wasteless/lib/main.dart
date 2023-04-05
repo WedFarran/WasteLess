@@ -26,7 +26,6 @@ void main() async {
 
 class WasteLess extends StatelessWidget {
   const WasteLess({super.key});
-  static int screenSelectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
