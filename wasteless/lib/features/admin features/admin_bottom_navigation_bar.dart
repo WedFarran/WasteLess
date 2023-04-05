@@ -41,24 +41,30 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
 
     List iconsSize = [0.08, 0.09, 0.07, 0.07];
     List tabletIconSize = [0.05, 0.05, 0.04, 0.05];
-    List webIconSize = [0.017, 0.018, 0.016, 0.017];
+    List webIconSize = [0.017, 0.017, 0.016, 0.017];
     return Scaffold(
-        body: isDesktop(
+        body: Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Center(child: screens.elementAt(selectedIndex)),
+        isDesktop(
                 context) //if the width is larger than display the web UI if not display the app UI
-            ? Row(
-                children: [
-                  Container(
-                    width: context.width * 0.04,
-                    alignment: Alignment.center,
-                    decoration: WEB_NAVIGATION_BAR_DECORATIONS,
+            ? Positioned(
+                left: context.width * 0.0,
+                child: Container(
+                  width: context.width * 0.04,
+                  height: context.height,
+                  decoration: WEB_NAVIGATION_BAR_DECORATIONS,
+                  child: Center(
                     child: Padding(
                       padding: desktopHight(context) == true
                           ? const EdgeInsets.symmetric(vertical: 200)
                           : const EdgeInsets.symmetric(vertical: 300),
                       child: ListView.separated(
+                        shrinkWrap: true,
                         itemCount: webIcons.length,
                         separatorBuilder: (context, index) => SizedBox(
-                          height: context.width * 0.07,
+                          height: context.height * 0.12,
                         ),
                         itemBuilder: (context, i) => GestureDetector(
                             onTap: () {
@@ -74,37 +80,32 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
                       ),
                     ),
                   ),
-                  screens.elementAt(selectedIndex)
-                ],
+                ),
               )
-            : Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Center(child: screens.elementAt(selectedIndex)),
-                  WasteLessBottomNavigationBar(
-                    widget: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: iconsName.length,
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) => SizedBox(
-                        width: context.width * 0.04,
-                      ),
-                      itemBuilder: (context, i) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = i;
-                          });
-                        },
-                        child: NavigationBarIconsWidget(
-                            selected: selectedIndex == i ? true : false,
-                            iconsName: iconsName[i],
-                            iconsSize: isTablet(context) == true
-                                ? tabletIconSize[i]
-                                : iconsSize[i]),
-                      ),
-                    ),
+            : WasteLessBottomNavigationBar(
+                widget: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: iconsName.length,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: context.width * 0.04,
                   ),
-                ],
-              ));
+                  itemBuilder: (context, i) => GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = i;
+                      });
+                    },
+                    child: NavigationBarIconsWidget(
+                        selected: selectedIndex == i ? true : false,
+                        iconsName: iconsName[i],
+                        iconsSize: isTablet(context) == true
+                            ? tabletIconSize[i]
+                            : iconsSize[i]),
+                  ),
+                ),
+              ),
+      ],
+    ));
   }
 }

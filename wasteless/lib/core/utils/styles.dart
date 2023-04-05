@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:wasteless/core/utils/responsive.dart';
 import 'colors.dart';
 
 const WEB_NAVIGATION_BAR_DECORATIONS = BoxDecoration(
@@ -17,10 +18,18 @@ BoxDecoration NAVIGATION_BAR_DECORATIONS = BoxDecoration(
         blurRadius: 4)
   ],
 );
+TextStyle responsiveWasteSplash(BuildContext context, Color color) {
+  if (isDesktop(context)) {
+    return TextStyle(color: color, fontFamily: 'norwester', fontSize: 200);
+  } else {
+    return TextStyle(color: color, fontFamily: 'norwester', fontSize: 70);
+  }
+}
+
 TextStyle WASTE_SPLASH =
-    const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 84);
+    const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 70);
 TextStyle WASTE_SPLASH_GREEN = const TextStyle(
-    color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 84);
+    color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 70);
 
 TextStyle BIN_STATUS = const TextStyle(
     fontFamily: 'Nunito',
