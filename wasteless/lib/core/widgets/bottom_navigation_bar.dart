@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import '../utils/colors.dart';
 import '../utils/responsive.dart';
 import '../utils/styles.dart';
 

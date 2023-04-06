@@ -6,3 +6,4 @@ const BIN = 'bin';
 const DRIVER = 'driver';
 const CACHED_MAP_BINS = 'CACHED_MAP_BINS';
 const CACHED_MAP_DRIVERS = 'CACHED_MAP_DRIVERS';
+const CACHED_MAP_ITEMS = 'CACHED_MAP_ITEMS';

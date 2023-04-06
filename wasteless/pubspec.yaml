@@ -18,11 +18,14 @@ dependencies:
   equatable: ^2.0.5
   internet_connection_checker: ^1.0.0+1
   http: ^0.13.5
-  #shared_preferences: ^2.0.18
+  shared_preferences: ^2.0.18
   get_it: ^7.2.0
   dartz: ^0.10.1
   firebase_core: ^2.7.1
   google_maps_flutter: ^2.2.5
+  flutter_bloc: ^8.1.2
+  percent_indicator: ^4.2.3
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -41,12 +44,13 @@ flutter:
   fonts:
     - family: Nunito
       fonts:
-        - asset: fonts/Nunito-VariableFont_wght.ttf
-        # - asset: fonts/
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+        - asset: fonts/Nunito-Regular.ttf
+        - asset: fonts/Nunito-Bold.ttf
+          weight: 700
+    # fonts:
+    - family: norwester
+      fonts:
+        - asset: fonts/norwester.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
