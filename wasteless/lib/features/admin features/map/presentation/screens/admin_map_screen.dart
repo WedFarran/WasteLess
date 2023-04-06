@@ -49,18 +49,19 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GoogleMap(
-      mapType: MapType.normal,
-      markers: markers.values.toSet(),
-      onTap: (argument) {},
-      onMapCreated: (controller) {
-        mapController = controller;
-        mapController.setMapStyle(
-            '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-        mapThings(0.9);
-      },
-      initialCameraPosition:
-          const CameraPosition(target: LatLng(25.1193, 55.3773), zoom: 14),
-    ));
+      body: GoogleMap(
+        zoomControlsEnabled: false,
+        markers: markers.values.toSet(),
+        onTap: (argument) {},
+        onMapCreated: (controller) {
+          mapController = controller;
+          mapController.setMapStyle(
+              '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
+          mapThings(0.9);
+        },
+        initialCameraPosition: const CameraPosition(
+            target: LatLng(21.42295333304387, 39.82565605949743), zoom: 14),
+      ),
+    );
   }
 }

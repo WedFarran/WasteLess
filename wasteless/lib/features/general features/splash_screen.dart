@@ -11,7 +11,7 @@ import '../../core/widgets/splash_text_animation.dart';
 import 'account_type_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static String id = 'Splash_Screen';
+  static const String id = 'Splash_Screen';
   const SplashScreen({super.key});
 
   @override
