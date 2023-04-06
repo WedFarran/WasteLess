@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.19.3 <3.0.0"
 
 dependencies:
+  easy_localization: ^3.0.1
   flutter:
     sdk: flutter
 

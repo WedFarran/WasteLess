@@ -13,3 +13,4 @@ const EMPTY_BIN_PIN = 'assets/icons/empty_bin.png';
 const HALF_FULL_BIN_PIN = 'assets/icons/half_full_bin.png';
 const FULL_BIN_PIN = 'assets/icons/full_bin.png';
 const VEHICLE = 'assets/icons/vehicle.png';
+const WASTELESS_LOGO = 'assets/images/logo_WB.png';
