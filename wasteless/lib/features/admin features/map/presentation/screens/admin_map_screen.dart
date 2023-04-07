@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
 import '../widgets/driver_details_widget.dart';
 import '../widgets/filtering_options_widget.dart';
+import 'package:http/http.dart' as http;
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
@@ -21,7 +25,6 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
   @override
   void initState() {
-    setCustomeMarkerIcon();
     super.initState();
   }
 
@@ -32,6 +35,15 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, VEHICLE_ICON)
         .then((icon) => {driverIcon = icon});
     setState(() {});
+  }
+
+  Future getData() async {
+    Response response = await http.get(Uri.parse(
+        'https://wasteless-36ce0-default-rtdb.asia-southeast1.firebasedatabase.app/bin'));
+
+    print('wed wed wed wed wed wed wed wed wed wed wed ');
+    var extractedData = json.decode(response.body) as Map<String, dynamic>;
+    print(extractedData);
   }
 
   final LatLng _initialPosition =
@@ -45,6 +57,8 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    setCustomeMarkerIcon();
+    getData();
     return Scaffold(
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 80.0),
