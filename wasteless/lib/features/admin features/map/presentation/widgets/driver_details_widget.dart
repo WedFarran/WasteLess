@@ -3,22 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 
-import '../../utils/styles.dart';
-import 'circle_indicator.dart';
+import '../../../../../core/utils/assets_path.dart';
+import '../../../../../core/utils/styles.dart';
 
-class BinDetailsWidget extends StatelessWidget {
-  final double percent;
+class DriverDetailsWidget extends StatelessWidget {
+  final String name;
   final String location;
-  final String fullnesTime;
-  const BinDetailsWidget(
-      {required this.percent,
-      super.key,
-      required this.fullnesTime,
-      required this.location});
+  const DriverDetailsWidget(
+      {super.key, required this.name, required this.location});
 
   @override
   Widget build(BuildContext context) {
-    double percent = 1;
     return Container(
       height: context.height * 0.30,
       margin: const EdgeInsets.all(15),
@@ -28,16 +23,11 @@ class BinDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircleIndicator(
-                percent: percent,
+              const CircleAvatar(
+                backgroundImage: AssetImage(ANWAR_IMAGE),
+                radius: 50,
               ),
-              Text(
-                  percent < 0.4
-                      ? 'Empty'
-                      : percent >= 0.8
-                          ? 'Full'
-                          : 'Half',
-                  style: BIN_STATUS),
+              Text(name, style: BIN_STATUS),
               SizedBox(
                 width: context.width * 0.01,
               )
@@ -48,13 +38,6 @@ class BinDetailsWidget extends StatelessWidget {
             children: [
               Text('location:', style: DETAILS_GRAY),
               Text(location, style: DETAILS_BLUE),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text('full expected time:', style: DETAILS_GRAY),
-              Text(fullnesTime, style: DETAILS_BLUE)
             ],
           ),
         ],

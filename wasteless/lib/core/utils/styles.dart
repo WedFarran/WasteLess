@@ -48,3 +48,9 @@ TextStyle DETAILS_GRAY = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w700,
     color: FONT_GRAY);
+
+TextStyle RESET_BLACK = const TextStyle(
+    fontFamily: 'Nunito',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: BLACK);
