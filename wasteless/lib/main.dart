@@ -43,7 +43,7 @@ class WasteLess extends StatelessWidget {
         DriverWasteNavigationBar.id: (context) =>
             const DriverWasteNavigationBar(),
         DriverHomeScreen.id: (context) => const DriverHomeScreen(),
-        DriverDriverScreen.id: (context) => const DriverDriverScreen(),
+        DriverMapScreen.id: (context) => const DriverMapScreen(),
         DriverSettingsScreen.id: (context) => const DriverSettingsScreen(),
         DriverTasksScreen.id: (context) => const DriverTasksScreen(),
       },

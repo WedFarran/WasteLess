@@ -56,6 +56,7 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
                           ? const EdgeInsets.symmetric(vertical: 200)
                           : const EdgeInsets.symmetric(vertical: 300),
                       child: ListView.separated(
+                        shrinkWrap: true,
                         itemCount: webIcons.length,
                         separatorBuilder: (context, index) => SizedBox(
                           height: context.width * 0.07,

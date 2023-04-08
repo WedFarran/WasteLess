@@ -22,7 +22,7 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
   List<Widget> screens = const [
     DriverHomeScreen(),
     DriverTasksScreen(),
-    DriverDriverScreen(),
+    DriverMapScreen(),
     DriverSettingsScreen(),
   ];
   int selectedIndex = 0;
