@@ -1,9 +1,15 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/core/widgets/map_widgets/circle_indicator.dart';
+import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
@@ -37,13 +43,9 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     setState(() {});
   }
 
-  Future getData() async {
-    Response response = await http.get(Uri.parse(
-        'https://wasteless-36ce0-default-rtdb.asia-southeast1.firebasedatabase.app/bin'));
-
-    print('wed wed wed wed wed wed wed wed wed wed wed ');
-    var extractedData = json.decode(response.body) as Map<String, dynamic>;
-    print(extractedData);
+  final ref = FirebaseDatabase.instance.ref().child('bin');
+  Future init() async {
+    final values = await ref.get();
   }
 
   final LatLng _initialPosition =
@@ -58,7 +60,6 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     setCustomeMarkerIcon();
-    getData();
     return Scaffold(
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 80.0),
@@ -79,7 +80,30 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
                     )),
           ),
         ),
-        body: GoogleMap(
+        body: BlocBuilder<MapItemsBloc, MapItemsState>(
+            builder: ((context, state) {
+          if (state is LoadingMapItemsState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is LoadedMapItemsState) {
+            return FirebaseAnimatedList(
+              query: ref,
+              itemBuilder: (context, snapshot, animation, index) {
+                return ListTile(
+                  title: Text(snapshot.child('wasteLevel').toString()),
+                );
+              },
+            );
+          } else if (state is ErrorMapItemsState) {
+            return Container(
+              alignment: Alignment.center,
+              child: const Text('error'),
+            );
+          }
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('another'),
+          );
+        })) /*GoogleMap(
           zoomControlsEnabled: false,
           onTap: (argument) {},
           onMapCreated: (controller) {
@@ -123,6 +147,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
                       )),
             )
           },
-        ));
+        )*/
+        );
   }
 }

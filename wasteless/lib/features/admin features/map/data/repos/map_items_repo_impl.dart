@@ -49,15 +49,16 @@ class MapItemsRepoImpl implements MapItemsRepo {
         final remoteMapBins = await getAllMapBins();
         final remoteMapDrivers = await getAllMapDrivers();
         Map<String, dynamic> mapItems = {};
-        if (remoteMapBins == ServerFailure) {
-          return Left(ServerFailure());
-        } else if (remoteMapDrivers == ServerFailure) {
-          return Left(ServerFailure());
-        } else {
-          mapItems = {'bins': remoteMapBins, 'drivers': remoteMapDrivers};
-          localDataSource.cacheMapItems(mapItems);
-        }
+        remoteMapBins.fold(
+            (failure) => Left(ServerFailure()),
+            (mapBins) => remoteMapDrivers.fold(
+                (failure) => Left(ServerFailure()),
+                (mapDrivers) => mapItems = {
+                      'bins': remoteMapBins,
+                      'drivers': remoteMapDrivers
+                    }));
 
+        localDataSource.cacheMapItems(mapItems);
         return Right(mapItems);
       } on ServerException {
         return Left(ServerFailure());

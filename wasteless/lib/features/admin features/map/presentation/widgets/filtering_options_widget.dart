@@ -25,7 +25,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * 0.45,
+      height: context.height * 0.33,
       margin: const EdgeInsets.only(top: 15, right: 20, bottom: 5, left: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

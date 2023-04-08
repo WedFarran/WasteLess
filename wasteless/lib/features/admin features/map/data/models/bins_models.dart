@@ -1,7 +1,7 @@
 import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity.dart';
 
 class BinsModel extends BinEntity {
-  BinsModel(
+  const BinsModel(
       {required String id,
       required String fullnesTime,
       required double lat,
