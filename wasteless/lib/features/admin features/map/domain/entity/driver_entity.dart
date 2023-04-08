@@ -24,5 +24,6 @@ class DriverEntity extends Equatable {
       required this.nationality,
       required this.qR});
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props =>
+      [id, area, email, fullName, idNumber, image, lat, lng, nationality, qR];
 }
