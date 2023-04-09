@@ -44,7 +44,7 @@ class WasteLess extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         title: 'WasteLess',
-        initialRoute: AdminWasteNavigationBar.id,
+        initialRoute: AdminLogIn.id,
         routes: {
           AdminWasteNavigationBar.id: (context) =>
               const AdminWasteNavigationBar(),
