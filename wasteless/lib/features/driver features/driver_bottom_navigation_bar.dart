@@ -34,7 +34,6 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
     List tabletIconSize = [0.055, 0.04, 0.05, 0.05];
 
     int selectedIndex = 0;
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: WasteLessBottomNavigationBar(
         widget: ListView.separated(

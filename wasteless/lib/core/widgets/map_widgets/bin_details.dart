@@ -8,7 +8,13 @@ import 'circle_indicator.dart';
 
 class BinDetailsWidget extends StatelessWidget {
   final double percent;
-  const BinDetailsWidget({required this.percent, super.key});
+  final String location;
+  final String fullnesTime;
+  const BinDetailsWidget(
+      {required this.percent,
+      super.key,
+      required this.fullnesTime,
+      required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +47,14 @@ class BinDetailsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text('location:', style: DETAILS_GRAY),
-              Text('Abdullah Arif st', style: DETAILS_BLUE),
+              Text(location, style: DETAILS_BLUE),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('full expected time:', style: DETAILS_GRAY),
-              Text('100% in 1 Hour', style: DETAILS_BLUE)
+              Text(fullnesTime, style: DETAILS_BLUE)
             ],
           ),
         ],
