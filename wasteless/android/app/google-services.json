@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "17109062365",
+    "firebase_url": "https://wasteless-36ce0-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "wasteless-36ce0",
     "storage_bucket": "wasteless-36ce0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:17109062365:android:5ef26a9834b496136a0134",
+        "mobilesdk_app_id": "1:17109062365:android:69c12c6b4ae77e4f6a0134",
         "android_client_info": {
           "package_name": "com.example.wasteless"
         }
@@ -29,6 +30,13 @@
             {
               "client_id": "17109062365-tqrv30hsidal9stekjleim61f41n83v0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "17109062365-jie5qeenfbld2hafe3v0iu914veob8gj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wasteless"
+              }
             }
           ]
         }
