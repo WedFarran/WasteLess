@@ -12,8 +12,21 @@ class DriversModel extends DriverEntity {
       required super.lng,
       required super.nationality,
       required super.qR});
-
-  factory DriversModel.fromJson(Map<String, dynamic> json) {
+  factory DriversModel.fromMap(Map<dynamic, dynamic> map) {
+    return DriversModel(
+      id: map['id'] ?? '',
+      area: map['area'] ?? '',
+      email: map['email'] ?? '',
+      fullName: map['fullName'] ?? '',
+      idNumber: map['idNumber'] ?? '',
+      image: map['image'] ?? '',
+      lat: map['lat'] ?? '',
+      lng: map['lng'] ?? '',
+      nationality: map['nationality'] ?? '',
+      qR: map['qR'] ?? '',
+    );
+  }
+  /*factory DriversModel.fromJson(Map<String, dynamic> json) {
     return DriversModel(
         id: json['id'],
         area: json['area'],
@@ -25,7 +38,7 @@ class DriversModel extends DriverEntity {
         lng: json['lng'],
         nationality: json['nationality'],
         qR: json['qR']);
-  }
+  }*/
 
   Map<String, dynamic> toJson() {
     return {

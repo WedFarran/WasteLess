@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/core/errors/exception.dart';
+import 'package:wasteless/core/errors/failure.dart';
 import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
 import 'package:wasteless/features/admin%20features/map/data/models/driver_models.dart';
 import 'package:http/http.dart' as http;
@@ -23,8 +24,23 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
   MapItemsRemoteSourceImp({required this.client});
   @override
   Future<List<BinsModel>> getAllMapBins() async {
-    final ref = FirebaseDatabase.instance.ref('bin');
-    final response = await client
+    final List<BinsModel> list = [];
+    final snapshot = await FirebaseDatabase.instance.ref('bin').get();
+
+    final map = snapshot.value as Map<dynamic, dynamic>;
+
+    map.forEach((key, value) {
+      final bin = BinsModel.fromMap(value);
+
+      list.add(bin);
+    });
+    try {
+      return list;
+    } on ServerException {
+      ServerFailure();
+    }
+    return list;
+    /* final response = await client
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
       final List decodedJson = json.decode(response.body) as List;
@@ -35,12 +51,41 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
       return binsModel;
     } else {
       throw ServerException();
-    }
+    }*/
   }
 
   @override
   Future<List<DriversModel>> getAllMapDrivers() async {
-    final response = await client
+    final List<DriversModel> list = [];
+    final snapshot = await FirebaseDatabase.instance.ref('driver').get();
+
+    final map = snapshot.value as Map<dynamic, dynamic>;
+    map.forEach((key, value) {
+      list.add(DriversModel(
+          id: key,
+          area: value['area'],
+          email: value['email'],
+          fullName: value['fullName'],
+          idNumber: value['idNumber'],
+          image: value['image'],
+          lat: value['lat'],
+          lng: value['lng'],
+          nationality: value['nationality'],
+          qR: value['qR']));
+    });
+
+    /* map.forEach((key, value) {
+      final driver = DriversModel.fromMap(value);
+
+      list.add(driver);
+    });*/
+    try {
+      return list;
+    } on ServerException {
+      ServerFailure();
+    }
+    return list;
+    /*  final response = await client
         .get(Uri.parse(url1), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
       final List decodedJson = json.decode(response.body) as List;
@@ -52,6 +97,6 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
       return driversModel;
     } else {
       throw ServerException();
-    }
+    }*/
   }
 }

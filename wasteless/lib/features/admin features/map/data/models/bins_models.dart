@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity.dart';
 
 class BinsModel extends BinEntity {
@@ -16,7 +17,18 @@ class BinsModel extends BinEntity {
             statues: statues,
             wasteLevel: wasteLevel);
 
-  factory BinsModel.fromJson(Map<String, dynamic> json) {
+  factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
+    return BinsModel(
+      id: map['id'] ?? '',
+      fullnesTime: map['fullnesTime'] ?? '',
+      lat: map['lat'] ?? '',
+      lng: map['lng'] ?? '',
+      statues: map['statues'] ?? false,
+      wasteLevel: map['wasteLevel'] ?? '',
+    );
+  }
+
+  /*factory BinsModel.fromJson(Map<String, dynamic> json) {
     return BinsModel(
         id: json['id'],
         fullnesTime: json['fullnesTime'],
@@ -24,7 +36,7 @@ class BinsModel extends BinEntity {
         lng: json['lng'],
         statues: json['statues'],
         wasteLevel: json['wasteLevel']);
-  }
+  }*/
 
   Map<String, dynamic> toJson() {
     return {
