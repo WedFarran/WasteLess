@@ -12,13 +12,12 @@ class BinDetailsWidget extends StatelessWidget {
   final String fullnesTime;
   const BinDetailsWidget(
       {required this.percent,
-      super.key,
-      required this.fullnesTime,
-      required this.location});
+        super.key,
+        required this.fullnesTime,
+        required this.location});
 
   @override
   Widget build(BuildContext context) {
-    double percent = 1;
     return Container(
       height: context.height * 0.30,
       margin: const EdgeInsets.all(15),
@@ -35,8 +34,8 @@ class BinDetailsWidget extends StatelessWidget {
                   percent < 0.4
                       ? 'Empty'
                       : percent >= 0.8
-                          ? 'Full'
-                          : 'Half',
+                      ? 'Full'
+                      : 'Half',
                   style: BIN_STATUS),
               SizedBox(
                 width: context.width * 0.01,
@@ -51,7 +50,7 @@ class BinDetailsWidget extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text('full expected time:', style: DETAILS_GRAY),
               Text(fullnesTime, style: DETAILS_BLUE)

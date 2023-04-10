@@ -10,63 +10,45 @@ class DriverMapScreen extends StatefulWidget {
   const DriverMapScreen({super.key});
 
   @override
-  State<DriverMapScreen> createState() => _DriverMapScreenState();
+  State<DriverMapScreen> createState() =>_DriverMapScreenState();
 }
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox(child: Text('map screen'));
-  }
-
   class _DriverMapScreenState extends State<DriverMapScreen> {
   late GoogleMapController mapController;
+  BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
   double percent = 0.3;
-  Map<String, Marker> markers = {};
-  mapThings(double percent) async {
-  setState(() async {
-  var markerIcon = await BitmapDescriptor.fromAssetImage(
-  const ImageConfiguration(),
-  percent < 0.4
-  ? EMPTY_BIN_PIN
-      : percent >= 0.8
-  ? FULL_BIN_PIN
-      : HALF_FULL_BIN_PIN,
-  );
-  Marker marker = Marker(
-  onTap: () {
-  showModalBottomSheet(
-  shape: const RoundedRectangleBorder(
-  borderRadius:
-  BorderRadius.vertical(top: Radius.circular(40))),
-  backgroundColor: WHITE,
-  context: context,
-  builder: (context) => BinDetailsWidget(
-  percent: percent,
-  ));
-  },
-  markerId: const MarkerId('value'),
-  position: const LatLng(25.1193, 55.3773),
-  icon: markerIcon,
-  );
-  markers['1'] = marker;
-  });
+
+  @override
+  void initState() {
+  super.initState();
+  setCustomerMarkerIcon();
+  }
+  
+  setCustomerMarkerIcon(){
+    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN).then((icon) => {fullBinMarker = icon});
+    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, HALF_FULL_BIN_PIN).then((icon) => {halfFullBinMarker = icon});
+    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, EMPTY_BIN_PIN).then((icon) => {emptyBinMarker = icon});
+    //BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, BROKEN_BIN_PIN).then((icon) => {brokenBinMarker = icon});
+    
+    
+    
+    
   }
 
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-  body: GoogleMap(
-  mapType: MapType.normal,
-  markers: markers.values.toSet(),
-  onTap: (argument) {},
-  onMapCreated: (controller) {
-  mapController = controller;
-  mapController.setMapStyle(
-  '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-  mapThings(0.3);
-  },
-  initialCameraPosition:
-  const CameraPosition(target: LatLng(25.1193, 55.3773), zoom: 14),
-  ));
+    // TODO: implement build
+    throw UnimplementedError();
   }
+
+
+
+
   }
+
+
+
 
