@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../features/admin features/map/presentation/widgets/filtering_options_widget.dart';
-import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
   final Function()? onTap;
   final String image;
-  const FilteringButton({
+  late bool fullSelected;
+  late bool halfFullSelected;
+  late bool emptySelected;
+  late bool driversSelected;
+  FilteringButton({
     required this.onTap,
     required this.image,
+    required this.driversSelected,
+    required this.emptySelected,
+    required this.fullSelected,
+    required this.halfFullSelected,
     super.key,
   });
 
@@ -31,8 +38,11 @@ class FilteringButton extends StatelessWidget {
             backgroundColor: WHITE,
             context: context,
             builder: (context) => FilteringOptionsWidget(
-                  selected: true,
                   ontap: onTap,
+                  fullSelected: fullSelected,
+                  halfFullSelected: halfFullSelected,
+                  emptySelected: emptySelected,
+                  driversSelected: driversSelected,
                 )),
       ),
     );

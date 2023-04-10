@@ -22,16 +22,14 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
   MapItemsRemoteSourceImp({required this.client});
   @override
   Future<List<BinsModel>> getAllMapBins() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("bin");
+    Stream<DatabaseEvent> stream = ref.onValue;
     final List<BinsModel> list = [];
-    final snapshot = await FirebaseDatabase.instance.ref('bin').get();
-
-    final map = snapshot.value as Map<dynamic, dynamic>;
-
-    map.forEach((key, value) {
-      final bin = BinsModel.fromMap(value);
-
-      list.add(bin);
+    stream.listen((DatabaseEvent event) {
+      print('Event Type: ${event.type}'); // DatabaseEventType.value;
+      print('Snapshot: ${event.snapshot}'); // DataSnapshot
     });
+
     try {
       return list;
     } on ServerException {

@@ -10,6 +10,11 @@ BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
 
+List markerList = [];
+
+/*filtermarkers(){
+
+} */
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
       .then((icon) => {fullBinMarker = icon});
@@ -51,6 +56,7 @@ getGeoCords(list, BuildContext context, emptyBinMarker, fullBinMarker,
             position: LatLng(e['lat'], e['lng']),
           ))
       .toList();
+  markerList = markersList;
 
   return markersList;
 }

@@ -8,20 +8,24 @@ import '../../../../../core/utils/styles.dart';
 import 'filtering_button_widget.dart';
 
 class FilteringOptionsWidget extends StatefulWidget {
-  final bool selected;
   final void Function()? ontap;
-  const FilteringOptionsWidget(
-      {super.key, required this.selected, required this.ontap});
+  late bool fullSelected;
+  late bool halfFullSelected;
+  late bool emptySelected;
+  late bool driversSelected;
+  FilteringOptionsWidget(
+      {super.key,
+      required this.ontap,
+      required this.driversSelected,
+      required this.emptySelected,
+      required this.fullSelected,
+      required this.halfFullSelected});
 
   @override
   State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
 }
 
 class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
-  bool fullSelected = false;
-  bool halfFullSelected = false;
-  bool emptySelected = false;
-  bool driversSelected = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,10 +52,10 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
               InkWell(
                 child: Text('Reset', style: RESET_BLACK),
                 onTap: () => setState(() {
-                  fullSelected = false;
-                  halfFullSelected = false;
-                  emptySelected = false;
-                  driversSelected = false;
+                  widget.fullSelected = false;
+                  widget.halfFullSelected = false;
+                  widget.emptySelected = false;
+                  widget.driversSelected = false;
                 }),
               ),
             ],
@@ -59,30 +63,30 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
           FilteringButtonWidget(
             onTap: () {
               setState(() {
-                fullSelected = !fullSelected;
+                widget.fullSelected = !widget.fullSelected;
               });
             },
-            selected: fullSelected,
+            selected: widget.fullSelected,
             icon: Full_BIN_ICON,
             status: 'Full',
           ),
           FilteringButtonWidget(
             onTap: () {
               setState(() {
-                halfFullSelected = !halfFullSelected;
+                widget.halfFullSelected = !widget.halfFullSelected;
               });
             },
-            selected: halfFullSelected,
+            selected: widget.halfFullSelected,
             icon: HALF_FULL_BIN_ICON,
             status: 'Half Full',
           ),
           FilteringButtonWidget(
             onTap: () {
               setState(() {
-                emptySelected = !emptySelected;
+                widget.emptySelected = !widget.emptySelected;
               });
             },
-            selected: emptySelected,
+            selected: widget.emptySelected,
             icon: EMPTY_BIN_ICON,
             status: 'Empty',
           ),
@@ -93,10 +97,10 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
           FilteringButtonWidget(
             onTap: () {
               setState(() {
-                driversSelected = !driversSelected;
+                widget.driversSelected = !widget.driversSelected;
               });
             },
-            selected: driversSelected,
+            selected: widget.driversSelected,
             icon: VEHICLE_ICON,
             status: 'Drivers',
           ),

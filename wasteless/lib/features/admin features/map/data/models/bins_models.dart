@@ -16,7 +16,7 @@ class BinsModel extends BinEntity {
             statues: statues,
             wasteLevel: wasteLevel);
 
-  factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
+  /* factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
     return BinsModel(
       id: map['id'] ?? '',
       fullnesTime: map['fullnesTime'] ?? '',
@@ -25,9 +25,9 @@ class BinsModel extends BinEntity {
       statues: map['statues'] ?? false,
       wasteLevel: map['wasteLevel'] ?? '',
     );
-  }
+  }*/
 
-  /*factory BinsModel.fromJson(Map<String, dynamic> json) {
+  factory BinsModel.fromJson(Map<String, dynamic> json) {
     return BinsModel(
         id: json['id'],
         fullnesTime: json['fullnesTime'],
@@ -35,7 +35,7 @@ class BinsModel extends BinEntity {
         lng: json['lng'],
         statues: json['statues'],
         wasteLevel: json['wasteLevel']);
-  }*/
+  }
 
   Map<String, dynamic> toJson() {
     return {
