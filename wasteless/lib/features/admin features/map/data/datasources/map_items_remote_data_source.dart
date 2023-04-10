@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/core/errors/exception.dart';
 import 'package:wasteless/core/errors/failure.dart';

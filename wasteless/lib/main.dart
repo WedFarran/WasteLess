@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:wasteless/core/utils/language.dart';
+import 'package:wasteless/features/admin%20features/admin_bottom_navigation_bar.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'custom_routes.dart';
-import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'injection_container.dart' as di;
@@ -55,7 +55,7 @@ class _WasteLessState extends State<WasteLess> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: _locale,
-        initialRoute: DriverSettingsScreen.id,
+        initialRoute: AdminWasteNavigationBar.id,
         routes: customRoutes,
       ),
     );

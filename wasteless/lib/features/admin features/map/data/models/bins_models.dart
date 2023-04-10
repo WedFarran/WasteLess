@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity.dart';
 
 class BinsModel extends BinEntity {
