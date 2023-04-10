@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/core/errors/exception.dart';
 import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
 import 'package:wasteless/features/admin%20features/map/data/models/driver_models.dart';
@@ -23,7 +22,7 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
   MapItemsRemoteSourceImp({required this.client});
   @override
   Future<List<BinsModel>> getAllMapBins() async {
-    final ref = FirebaseDatabase.instance.ref('bin');
+    //final ref = FirebaseDatabase.instance.ref('bin');
     final response = await client
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
@@ -31,7 +30,7 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
       final List<BinsModel> binsModel = decodedJson
           .map<BinsModel>((jsonBinModel) => BinsModel.fromJson(jsonBinModel))
           .toList();
-      print('wed wed wed wed wed wedw  $binsModel');
+      //  print('wed wed wed wed wed wedw  $binsModel');
       return binsModel;
     } else {
       throw ServerException();
@@ -48,7 +47,7 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
           .map<DriversModel>(
               (jsondriverModel) => DriversModel.fromJson(jsondriverModel))
           .toList();
-      print('wed wed wed wed wed wedw  $driversModel');
+      //print('wed wed wed wed wed wedw  $driversModel');
       return driversModel;
     } else {
       throw ServerException();
