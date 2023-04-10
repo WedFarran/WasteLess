@@ -20,4 +20,4 @@ const HALF_FULL_BIN_ICON = 'assets/icons/half_full.png';
 const EMPTY_BIN_ICON = 'assets/icons/empty.png';
 const CHECK_ICON = 'assets/icons/check.png';
 const WASTELESS_LOGO = 'assets/images/logo_WB.png';
-//const BROKEN_BIN_PIN = 'assets/images/'
+const BROKEN_BIN_ICON = 'assets/icons/broken_bin.png';
