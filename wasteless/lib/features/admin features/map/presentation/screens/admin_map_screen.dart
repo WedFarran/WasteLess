@@ -86,7 +86,6 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    setCustomeMarkerIcon();
     return Scaffold(
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 80.0),

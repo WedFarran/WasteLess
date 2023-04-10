@@ -47,7 +47,7 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
       final List<BinsModel> binsModel = decodedJson
           .map<BinsModel>((jsonBinModel) => BinsModel.fromJson(jsonBinModel))
           .toList();
-      print('wed wed wed wed wed wedw  $binsModel');
+      //  print('wed wed wed wed wed wedw  $binsModel');
       return binsModel;
     } else {
       throw ServerException();
@@ -93,7 +93,7 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
           .map<DriversModel>(
               (jsondriverModel) => DriversModel.fromJson(jsondriverModel))
           .toList();
-      print('wed wed wed wed wed wedw  $driversModel');
+      //print('wed wed wed wed wed wedw  $driversModel');
       return driversModel;
     } else {
       throw ServerException();
