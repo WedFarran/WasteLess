@@ -37,20 +37,19 @@ TextStyle BIN_STATUS = const TextStyle(
     fontWeight: FontWeight.w700,
     color: FONT_GRAY);
 
-TextStyle DETAILS_BLUE = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: PRIMARY_BLUE);
+TextStyle anyColorSize16(Color color) {
+  return TextStyle(
+      fontFamily: 'Nunito',
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
+      color: color);
+}
 
-TextStyle DETAILS_GRAY = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: FONT_GRAY);
+//boxdecorations
 
-TextStyle RESET_BLACK = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: BLACK);
+BoxDecoration gradient(Color color) {
+  return BoxDecoration(
+      color: color,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)));
+}
