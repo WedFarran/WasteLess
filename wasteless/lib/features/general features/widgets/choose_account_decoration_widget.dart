@@ -13,10 +13,12 @@ class ChooseAccountDecorationWidget extends StatelessWidget {
   final double borderRadius;
   final double height;
   final double width;
+  final double primaryHeight;
 
   const ChooseAccountDecorationWidget({
     super.key,
     required this.primaryColor,
+    required this.primaryHeight,
     this.top,
     this.right,
     this.bottom,
@@ -32,7 +34,7 @@ class ChooseAccountDecorationWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: context.height * 0.12,
+          height: primaryHeight,
           width: context.width,
           alignment: Alignment.topRight,
           decoration: BoxDecoration(color: primaryColor, boxShadow: [

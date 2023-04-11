@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:wasteless/core/utils/assets_path.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/core/utils/responsive.dart';
+import 'package:wasteless/features/driver%20features/home/presentation/screens/driver_home_screen.dart';
 import '../../core/utils/styles.dart';
 import '../../core/widgets/splash_text_animation.dart';
 import 'account_type_screen.dart';
@@ -28,8 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Timer(const Duration(milliseconds: 6000), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => const AccountType()));
+      FirebaseAuth.instance.currentUser == null
+          ? Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => const AccountType()))
+          : Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => const DriverHomeScreen()));
     });
   }
 
