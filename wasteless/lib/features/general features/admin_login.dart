@@ -11,7 +11,7 @@ import '../../../core/utils/assets_path.dart';
 import 'account_type_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const String id = 'AdminLogin';
+  static const String id = 'LoginScreen';
   const LoginScreen({super.key});
 
   @override
