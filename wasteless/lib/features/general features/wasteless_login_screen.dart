@@ -1,8 +1,7 @@
-// ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:wasteless/core/strings/consts.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
@@ -13,7 +12,9 @@ import 'package:wasteless/features/general%20features/widgets/choose_account_dec
 import 'package:wasteless/features/general%20features/widgets/login_button.dart';
 import 'package:wasteless/features/general%20features/widgets/text_field.dart';
 import '../../../core/utils/assets_path.dart';
+import '../../main.dart';
 import 'account_type_screen.dart';
+import 'widgets/login_utils.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
@@ -26,10 +27,34 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   String arguments = '';
-
+  final FirebaseAuth auth = FirebaseAuth.instance;
   Future signIn() async {
-    final index = _emailController.text.trim().indexOf('.');
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+      arguments == ADMIN
+          // ignore: use_build_context_synchronously
+          ? Navigator.pushNamed(context, AdminWasteNavigationBar.id)
+          // ignore: use_build_context_synchronously
+          : Navigator.pushNamed(context, DriverWasteNavigationBar.id);
+      ;
+    } on FirebaseAuthException catch (e) {
+      LoginUtils.showSnackBar(e.message);
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
+  /*final index = _emailController.text.trim().indexOf('.');
     final i = _emailController.text.trim().substring(index + 1);
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -57,8 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         print("Erro Message ");
       }
-    }
-  }
+    }*/
 
   @override
   void dispose() {
@@ -134,6 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: false,
                           hintColor:
                               arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
+                          formKey: formKey,
                         ),
                         SizedBox(height: context.height * 0.02),
 
@@ -146,6 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: secure,
                           hintColor:
                               arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
+                          formKey: formKey,
                           widget: GestureDetector(
                             onTap: () {
                               setState(() {

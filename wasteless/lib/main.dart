@@ -6,6 +6,7 @@ import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/general%20features/account_type_screen.dart';
 import 'custom_routes.dart';
+import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'injection_container.dart' as di;
@@ -30,6 +31,8 @@ class WasteLess extends StatefulWidget {
   State<WasteLess> createState() => _WasteLessState();
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class _WasteLessState extends State<WasteLess> {
   Locale? _locale;
   setLocale(Locale locale) {
@@ -52,6 +55,8 @@ class _WasteLessState extends State<WasteLess> {
             create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
       ],
       child: MaterialApp(
+        scaffoldMessengerKey: LoginUtils.massengerKey,
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: WHITE),
         localizationsDelegates: AppLocalizations.localizationsDelegates,

@@ -6,7 +6,7 @@ import 'package:wasteless/features/general%20features/widgets/choose_account_but
 import 'package:wasteless/features/general%20features/widgets/choose_account_decoration_widget.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/utils/language.dart';
-import 'Login_screen.dart';
+import 'wasteless_login_screen.dart';
 
 class AccountType extends StatelessWidget {
   static const String id = 'AccountType';
