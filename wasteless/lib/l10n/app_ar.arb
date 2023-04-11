@@ -1,2 +1,9 @@
-{"hello":"اهلاً",
-"change_language":"Change to english language"}
+{
+"change_language":"Change to english language",
+"logIn":"تسجيل الدخول",
+"password":"كلمة السر",
+"email":"الإيميل",
+"administrator":"إداري",
+"driver":"سائق"
+
+}

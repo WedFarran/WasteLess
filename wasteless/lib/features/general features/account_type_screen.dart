@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wasteless/core/strings/consts.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/general%20features/widgets/choose_account_button_widget.dart';
 import 'package:wasteless/features/general%20features/widgets/choose_account_decoration_widget.dart';
 import '../../core/utils/assets_path.dart';
-import 'admin_login.dart';
+import '../../core/utils/language.dart';
+import 'Login_screen.dart';
 
 class AccountType extends StatelessWidget {
   static const String id = 'AccountType';
@@ -12,7 +14,6 @@ class AccountType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String accountType = "";
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -34,11 +35,9 @@ class AccountType extends StatelessWidget {
             ),
             ChooseAccountButtonWidget(
               onTap: () async {
-                accountType = "Admin";
-                Navigator.pushNamed(context, LoginScreen.id,
-                    arguments: {"accountType": accountType});
+                Navigator.pushNamed(context, LoginScreen.id, arguments: ADMIN);
               },
-              title: 'Aaministrator',
+              title: translations(context).administrator,
               color: PRIMARY_BLUE,
             ),
             SizedBox(
@@ -46,11 +45,9 @@ class AccountType extends StatelessWidget {
             ),
             ChooseAccountButtonWidget(
               onTap: () async {
-                accountType = "Driver";
-                Navigator.pushNamed(context, LoginScreen.id,
-                    arguments: {"accountType": accountType});
+                Navigator.pushNamed(context, LoginScreen.id, arguments: DRIVER);
               },
-              title: 'Driver',
+              title: translations(context).driver,
               color: PRIMARY_GREEN,
             ),
             SizedBox(

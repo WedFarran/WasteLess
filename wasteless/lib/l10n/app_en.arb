@@ -1,2 +1,7 @@
-{"hello": "Hello World!",
-"change_language":"تغيير اللغة إلى العربية"}
+{
+"change_language":"تغيير اللغة إلى العربية",
+"logIn":"LOGIN",
+"password":"Password",
+"email":"Email",
+"administrator":"Aaministrator",
+"driver":"Driver"}

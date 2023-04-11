@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../../core/utils/colors.dart';
 
-class LoginButton extends StatelessWidget {
-  final VoidCallback signIn;
+class Button extends StatelessWidget {
+  final Function()? onTap;
   final Color color;
-  const LoginButton({super.key, required this.color, required this.signIn});
+  final String title;
+  const Button(
+      {super.key,
+      required this.color,
+      required this.onTap,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: GestureDetector(
-        onTap: signIn,
+        onTap: onTap,
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -22,16 +26,16 @@ class LoginButton extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                     blurRadius: 4,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                     color: BLACK.withOpacity(0.25))
               ]),
-          child: const Center(
+          child: Center(
               child: Text(
-            'LOGIN',
-            style: TextStyle(
+            title,
+            style: const TextStyle(
                 fontFamily: 'Nunito',
                 color: WHITE,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
                 fontSize: 17),
           )),
         ),

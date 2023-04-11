@@ -15,7 +15,6 @@ class DriverSettingsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(translations(context).hello),
             Center(
               child: SettingsButton(
                   onTap: () async {
