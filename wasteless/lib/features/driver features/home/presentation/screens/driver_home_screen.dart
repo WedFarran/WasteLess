@@ -19,53 +19,54 @@ class DriverHomeScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: PRIMARY_BLUE,
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  height: context.height * 0.75,
-                  width: context.width,
-                  decoration: const BoxDecoration(
-                      color: WHITE,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))),
-                  child: Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Image.asset(
-                        WASTELESS_LOGO,
-                        height: context.height * 0.4,
-                      ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: context.height * 0.90,
+                width: context.width,
+                decoration: const BoxDecoration(
+                    color: WHITE,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))),
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Image.asset(
+                      WASTELESS_LOGO,
+                      height: context.height * 0.4,
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        height: context.height * 0.17,
-                        width: context.width * 0.75,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: PRIMARY_GREEN),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 18.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(''),
-                              CircleAvatar(
-                                backgroundImage: AssetImage(WASTELESS_LOGO),
-                                radius: 55,
-                              )
-                            ],
-                          ),
+                  ),
+                  SizedBox(
+                    height: context.height * 0.06,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: context.height * 0.19,
+                      width: context.width * 0.78,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: PRIMARY_GREEN),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 18.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(''),
+                            CircleAvatar(
+                              backgroundImage: AssetImage(WASTELESS_LOGO),
+                              radius: 55,
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  ]),
-                ),
-              ],
-            ),
+                  ),
+                ]),
+              ),
+            ],
           ),
         ));
   }
