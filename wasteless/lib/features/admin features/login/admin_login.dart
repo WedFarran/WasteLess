@@ -1,7 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/features/admin%20features/admin_bottom_navigation_bar.dart';
+import 'package:wasteless/features/admin%20features/driver/presentation/screens/all_drivers_screen.dart';
+import 'package:wasteless/features/driver%20features/driver_bottom_navigation_bar.dart';
 import '../../../core/utils/assets_path.dart';
+import '../../general features/account_type_screen.dart';
+import '../../general features/widgets/choose_account_decoration_widget.dart';
 
 class AdminLogin extends StatefulWidget {
   static const String id = 'AdminLogin';
@@ -14,11 +21,40 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  var arguments;
 
   Future signIn() async {
-    await FirbaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
+    final startIndex = '.';
+    final index = _emailController.text.trim().indexOf(startIndex);
+    final i = _emailController.text.trim().substring(index + 1);
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    print(i);
+    print(index);
+
+    if (arguments["accountType"] == "Driver") {
+      if (i.contains('driver.com')) {
+        await auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim());
+        Navigator.pushNamed(context, DriverWasteNavigationBar.id);
+      } else if (i.contains('admin.com')) {
+        print("Sigin in with Admin ");
+      } else {
+        print("Erro Message ");
+      }
+    } else if (arguments["accountType"] == "Admin") {
+      if (i.contains('admin.com')) {
+        await auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim());
+        Navigator.pushNamed(context, AdminWasteNavigationBar.id);
+      } else if (i.contains('driver.com')) {
+        print("Sigin in with Driver ");
+      } else {
+        print("Erro Message ");
+      }
+    }
   }
 
   @override
@@ -30,109 +66,173 @@ class _AdminLoginState extends State<AdminLogin> {
 
   @override
   Widget build(BuildContext context) {
+    arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
-      backgroundColor: WHITE,
+      backgroundColor:
+          arguments['accountType'] == "Admin" ? PRIMARY_BLUE : PRIMARY_GREEN,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  WASTELESS_LOGO,
-                  height: 150,
+                ChooseAccountDecorationWidget(
+                  primaryColor: arguments['accountType'] == "Admin"
+                      ? PRIMARY_BLUE
+                      : PRIMARY_GREEN,
+                  primaryHeight: context.height * 0.16,
+                  right: -10,
+                  bottom: 10,
+                  rotation: 150,
+                  borderRadius: 180,
+                  height: 0.70,
+                  width: 1,
                 ),
-                //subititle
-
-                //Email TextField
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: LIGHT_GREEN,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                          hintStyle: TextStyle(
-                              fontFamily: 'Nunito',
-                              color: PRIMARY_GREEN,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                Container(
+                  height: context.height * 0.78,
+                  decoration: BoxDecoration(
+                      color: WHITE,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50))),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, AccountType.id);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: PRIMARY_GREEN,
+                                ),
+                              )
+                            ]),
+                        Image.asset(
+                          WASTELESS_LOGO,
+                          height: context.height * 0.22,
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
+                        //subititle
 
-                //Password TextField
+                        const SizedBox(height: 40),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: LIGHT_GREEN,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          hintStyle: TextStyle(
-                              fontFamily: 'Nunito',
-                              color: PRIMARY_GREEN,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                        //Email TextField
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: arguments['accountType'] == "Admin"
+                                  ? LIGHT_GREEN
+                                  : LIGHT_BLUE,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    color: BLACK.withOpacity(0.25))
+                              ],
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: TextField(
+                                controller: _emailController,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Email',
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      color: PRIMARY_GREEN,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
+                        const SizedBox(height: 15),
 
-                const SizedBox(
-                  height: 50,
-                ),
+                        //Password TextField
 
-                // LOGIN Button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: GestureDetector(
-                    onTap: signIn,
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: PRIMARY_GREEN,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [BoxShadow(blurRadius: 20)]),
-                      child: const Center(
-                          child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            fontFamily: 'Nunito',
-                            color: WHITE,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17),
-                      )),
-                    ),
-                  ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: arguments['accountType'] == "Admin"
+                                  ? LIGHT_GREEN
+                                  : LIGHT_BLUE,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                    color: BLACK.withOpacity(0.25))
+                              ],
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: TextField(
+                                controller: _passwordController,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      color: PRIMARY_GREEN,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(
+                          height: 100,
+                        ),
+
+                        // LOGIN Button
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: GestureDetector(
+                            onTap: signIn,
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                  color: arguments['accountType'] == "Admin"
+                                      ? PRIMARY_GREEN
+                                      : PRIMARY_BLUE,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 4,
+                                        offset: Offset(0, 4),
+                                        color: BLACK.withOpacity(0.25))
+                                  ]),
+                              child: const Center(
+                                  child: Text(
+                                'LOGIN',
+                                style: TextStyle(
+                                    fontFamily: 'Nunito',
+                                    color: WHITE,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17),
+                              )),
+                            ),
+                          ),
+                        ),
+                      ]),
                 )
-              ],
-            ),
-          ),
+              ]),
         ),
       ),
     );
   }
-}
-
-class FirbaseAuth {
-  static var instance;
 }

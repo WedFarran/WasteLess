@@ -5,9 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'features/admin features/admin_bottom_navigation_bar.dart';
 import 'features/admin features/driver/presentation/screens/all_drivers_screen.dart';
-import 'features/admin features/login/Auth.dart';
 import 'features/admin features/login/admin_login.dart';
-import 'features/admin features/login/presentation/screens/admin_login.dart';
 import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
 import 'features/admin features/settings/presentation/screens/admin_tasks_screen.dart';
 import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
@@ -44,7 +42,7 @@ class WasteLess extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         title: 'WasteLess',
-        initialRoute: AdminLogIn.id,
+        initialRoute: AccountType.id,
         routes: {
           AdminWasteNavigationBar.id: (context) =>
               const AdminWasteNavigationBar(),
@@ -60,7 +58,7 @@ class WasteLess extends StatelessWidget {
           DriverTasksScreen.id: (context) => const DriverTasksScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
           AccountType.id: (context) => const AccountType(),
-          AdminLogIn.id: (context) => const AdminLogIn(),
+          AdminLogin.id: (context) => const AdminLogin(),
           DriverLogIn.id: (context) => const DriverLogIn(),
         },
       ),
