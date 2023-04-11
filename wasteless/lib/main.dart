@@ -5,8 +5,6 @@ import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/driver%20features/driver_bottom_navigation_bar.dart';
 import 'custom_routes.dart';
-import 'features/driver features/home/presentation/screens/driver_home_screen.dart';
-import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'injection_container.dart' as di;
