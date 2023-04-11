@@ -1,8 +1,13 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
-import '../../../../../core/widgets/map_widgets/bin_details.dart';
+import '../widgets/filtering_options_widget.dart';
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
@@ -15,53 +20,54 @@ class AdminMapScreen extends StatefulWidget {
 class _AdminMapScreenState extends State<AdminMapScreen> {
   late GoogleMapController mapController;
   double percent = 0.3;
-  Map<String, Marker> markers = {};
-  mapThings(double percent) async {
-    setState(() async {
-      var markerIcon = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
-        percent < 0.4
-            ? EMPTY_BIN_PIN
-            : percent >= 0.8
-                ? FULL_BIN_PIN
-                : HALF_FULL_BIN_PIN,
-      );
-      Marker marker = Marker(
-        onTap: () {
-          showModalBottomSheet(
-              shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(40))),
-              backgroundColor: WHITE,
-              context: context,
-              builder: (context) => BinDetailsWidget(
-                    percent: percent,
-                  ));
-        },
-        markerId: const MarkerId('value'),
-        position: const LatLng(25.1193, 55.3773),
-        icon: markerIcon,
-      );
-      markers['1'] = marker;
-    });
-  }
+
+  final ref = FirebaseDatabase.instance.ref().child('bin');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        zoomControlsEnabled: false,
-        markers: markers.values.toSet(),
-        onTap: (argument) {},
-        onMapCreated: (controller) {
-          mapController = controller;
-          mapController.setMapStyle(
-              '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-          mapThings(0.9);
-        },
-        initialCameraPosition: const CameraPosition(
-            target: LatLng(21.42295333304387, 39.82565605949743), zoom: 14),
-      ),
-    );
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 80.0),
+          child: FloatingActionButton(
+            child: Image.asset(
+              FILTRING_ICON,
+              height: context.height * 0.04,
+            ),
+            onPressed: () => showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40))),
+                backgroundColor: WHITE,
+                context: context,
+                builder: (context) => FilteringOptionsWidget(
+                      selected: true,
+                      ontap: () {},
+                    )),
+          ),
+        ),
+        body: BlocBuilder<MapItemsBloc, MapItemsState>(
+            builder: ((context, state) {
+          if (state is LoadingMapItemsState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is LoadedMapItemsState) {
+            return FirebaseAnimatedList(
+              query: ref,
+              itemBuilder: (context, snapshot, animation, index) {
+                return ListTile(
+                  title: Text(snapshot.child('wasteLevel').toString()),
+                );
+              },
+            );
+          } else if (state is ErrorMapItemsState) {
+            return Container(
+              alignment: Alignment.center,
+              child: const Text('error'),
+            );
+          }
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('another'),
+          );
+        })));
   }
 }
