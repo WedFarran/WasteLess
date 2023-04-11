@@ -40,7 +40,7 @@ class DriverHomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'skjfgnhrgjnj \n \n iprjfgrgti',
+                    'Ahmed Kamal \n \n 439016210',
                     style: anyColorSize16(WHITE),
                   ),
                   SizedBox(
