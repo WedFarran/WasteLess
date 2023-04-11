@@ -7,9 +7,10 @@ import 'package:wasteless/core/utils/assets_path.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/core/utils/responsive.dart';
-import 'package:wasteless/features/driver%20features/home/presentation/screens/driver_home_screen.dart';
+import 'package:wasteless/features/admin%20features/admin_bottom_navigation_bar.dart';
 import '../../core/utils/styles.dart';
 import '../../core/widgets/splash_text_animation.dart';
+import '../driver features/driver_bottom_navigation_bar.dart';
 import 'account_type_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -30,11 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Timer(const Duration(milliseconds: 6000), () {
-      FirebaseAuth.instance.currentUser == null
-          ? Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => const AccountType()))
-          : Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => const DriverHomeScreen()));
+      var user = FirebaseAuth.instance.currentUser;
+      user == null
+          ? Navigator.of(context).pushNamed(AccountType.id)
+          : user.email!.contains('@wasteless.admin.com')
+              ? Navigator.of(context).pushNamed(AdminWasteNavigationBar.id)
+              : Navigator.of(context).pushNamed(DriverWasteNavigationBar.id);
     });
   }
 

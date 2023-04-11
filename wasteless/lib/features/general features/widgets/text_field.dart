@@ -12,6 +12,7 @@ class WasteLessTextField extends StatelessWidget {
   final Color hintColor;
   final Widget? widget;
   final Key? formKey;
+  final String? Function(String?)? validator;
   const WasteLessTextField(
       {super.key,
       required this.textController,
@@ -20,7 +21,8 @@ class WasteLessTextField extends StatelessWidget {
       required this.obscureText,
       required this.hintColor,
       this.widget,
-      required this.formKey});
+      required this.formKey,
+      required this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,8 @@ class WasteLessTextField extends StatelessWidget {
             child: TextFormField(
               controller: textController,
               obscureText: obscureText,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: validator,
               decoration: InputDecoration(
                 suffixIcon: widget,
                 border: InputBorder.none,

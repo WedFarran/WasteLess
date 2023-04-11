@@ -4,4 +4,9 @@
 "password":"Password",
 "email":"Email",
 "administrator":"Aaministrator",
-"driver":"Driver"}
+"driver":"Driver",
+"password_error_message":"Password field is empty!",
+"wrong_driver_account_type":"Please login from the driver login screen",
+"wrong_admin_account_type":"Please login from the admin login screen",
+"wrong_email_format":"Email format is wrong"
+}

@@ -25,14 +25,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final emailFormKey = GlobalKey<FormState>();
+  final passwordFormKey = GlobalKey<FormState>();
   String arguments = '';
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  bool secure = true;
+
   Future signIn() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
+    final emailIsValid = emailFormKey.currentState!.validate();
+    final passwordIsValid = passwordFormKey.currentState!.validate();
+    if (!emailIsValid && !passwordIsValid) return;
     showDialog(
         context: context,
         builder: (context) => const Center(
@@ -42,47 +46,31 @@ class _LoginScreenState extends State<LoginScreen> {
       await auth.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
-      arguments == ADMIN
-          // ignore: use_build_context_synchronously
-          ? Navigator.pushNamed(context, AdminWasteNavigationBar.id)
-          // ignore: use_build_context_synchronously
-          : Navigator.pushNamed(context, DriverWasteNavigationBar.id);
-      ;
     } on FirebaseAuthException catch (e) {
       LoginUtils.showSnackBar(e.message);
     }
+
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    if (arguments == ADMIN) {
+      if (!mounted) return;
+      Navigator.pushNamed(context, AdminWasteNavigationBar.id);
+    } else {
+      if (!mounted) return;
+      Navigator.pushNamed(context, DriverWasteNavigationBar.id);
+    }
   }
 
-  /*final index = _emailController.text.trim().indexOf('.');
-    final i = _emailController.text.trim().substring(index + 1);
-    final FirebaseAuth auth = FirebaseAuth.instance;
-
-    if (arguments == DRIVER) {
-      if (i.contains('driver.com')) {
-        await auth.signInWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim());
-        if (!mounted) return;
-        Navigator.pushNamed(context, DriverWasteNavigationBar.id);
-      } else if (i.contains('admin.com')) {
-        print("Sigin in with Admin ");
-      } else {
-        print("Erro Message ");
-      }
-    } else if (arguments == ADMIN) {
-      if (i.contains('admin.com')) {
-        await auth.signInWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim());
-        if (!mounted) return;
-        Navigator.pushNamed(context, AdminWasteNavigationBar.id);
-      } else if (i.contains('driver.com')) {
-        print("Sigin in with Driver ");
-      } else {
-        print("Erro Message ");
-      }
-    }*/
+  validateEmail(value) {
+    if (value!.contains('@wasteless.driver.com') && arguments == ADMIN) {
+      return translations(context).wrong_driver_account_type;
+    } else if (value.contains('@wasteless.admin.com') && arguments == DRIVER) {
+      return translations(context).wrong_admin_account_type;
+    } else if (!value.contains('@wasteless.admin.com') &&
+        !value.contains('@wasteless.driver.com')) {
+      return translations(context).wrong_email_format;
+    }
+    return null;
+  }
 
   @override
   void dispose() {
@@ -91,7 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
   }
 
-  bool secure = true;
   @override
   Widget build(BuildContext context) {
     arguments = ModalRoute.of(context)!.settings.arguments as String;
@@ -158,7 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: false,
                           hintColor:
                               arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
-                          formKey: formKey,
+                          formKey: emailFormKey,
+                          validator: (value) {
+                            return validateEmail(value);
+                          },
                         ),
                         SizedBox(height: context.height * 0.02),
 
@@ -167,11 +157,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         WasteLessTextField(
                           textController: _passwordController,
                           title: translations(context).password,
+                          validator: (value) => value != null
+                              ? null
+                              : translations(context).password_error_message,
                           color: arguments == ADMIN ? LIGHT_GREEN : LIGHT_BLUE,
                           obscureText: secure,
                           hintColor:
                               arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
-                          formKey: formKey,
+                          formKey: passwordFormKey,
                           widget: GestureDetector(
                             onTap: () {
                               setState(() {
