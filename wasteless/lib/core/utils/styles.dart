@@ -57,3 +57,4 @@ TextStyle RESET_BLACK = const TextStyle(
 
 TextStyle BOLD_24 = const TextStyle(
     fontSize: 24, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
+TextStyle NORMAL_20 = const TextStyle(fontSize: 20, fontFamily: 'Nunito');

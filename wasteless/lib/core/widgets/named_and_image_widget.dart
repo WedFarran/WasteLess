@@ -9,9 +9,13 @@ import '../utils/styles.dart';
 class NameAndImageWidget extends StatelessWidget {
   final String title;
   final String image;
+  final bool backArrowVisible;
+  final Function()? onPressed;
   const NameAndImageWidget({
     required this.title,
     required this.image,
+    required this.backArrowVisible,
+    this.onPressed,
     super.key,
   });
 
@@ -64,7 +68,20 @@ class NameAndImageWidget extends StatelessWidget {
             backgroundImage: AssetImage(image),
             radius: 65,
           ),
-        )
+        ),
+        Visibility(
+          visible: backArrowVisible,
+          child: Positioned(
+            top: 20,
+            left: 10,
+            child: IconButton(
+                onPressed: onPressed,
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: WHITE,
+                )),
+          ),
+        ),
       ],
     );
   }

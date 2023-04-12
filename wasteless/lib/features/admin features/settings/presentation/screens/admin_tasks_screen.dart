@@ -24,6 +24,7 @@ class AdminSettingsScreen extends StatelessWidget {
             const NameAndImageWidget(
               title: 'Ahmed Kamal',
               image: WASTELESS_LOGO,
+              backArrowVisible: false,
             ),
             SizedBox(height: context.height * 0.05),
             SettingsButton(

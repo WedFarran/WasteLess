@@ -13,6 +13,10 @@
 "logout":"تسجيل خروج",
 "logout_confirmation_message":"هل تريد تسجيل الخروج من حيابك ؟",
 "yes":"نعم",
-"cancle":"إلغاء"
+"cancle":"إلغاء",
+"your_information":"معلوماتك",
+"first_name":"الإسم الأول",
+"last_name":"اللقب",
+"qr":"رمز الدخول للشركة"
 
 }

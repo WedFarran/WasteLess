@@ -9,7 +9,7 @@ import '../../../../../core/widgets/settings_widgets/settings_button.dart';
 import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../main.dart';
 import '../../../../general features/account_type_screen.dart';
-import '../../../home/presentation/screens/profile_screen.dart';
+import 'profile_screen.dart';
 
 class DriverSettingsScreen extends StatelessWidget {
   static const String id = 'driver_settings_screen';
@@ -25,6 +25,7 @@ class DriverSettingsScreen extends StatelessWidget {
             const NameAndImageWidget(
               title: 'Ahmed Kamal',
               image: WASTELESS_LOGO,
+              backArrowVisible: false,
             ),
             SizedBox(height: context.height * 0.05),
             SettingsButton(
