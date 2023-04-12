@@ -10,5 +10,9 @@
 "wrong_admin_account_type":"Please login from the admin login screen",
 "wrong_email_format":"Email format is wrong",
 "profile":"Profile",
-"logout":"Logout"
+"logout":"Logout",
+"logout_confirmation_message":"Are you sure you want to logout ?",
+"yes":"Yes",
+"cancle":"Cancle"
+
 }

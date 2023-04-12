@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 
 import '../utils/colors.dart';
+import '../utils/styles.dart';
 
 class NameAndImageWidget extends StatelessWidget {
   final String title;
@@ -52,10 +53,7 @@ class NameAndImageWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Text(
                 title,
-                style: const TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w700),
+                style: BOLD_24,
               ),
             ),
           ),

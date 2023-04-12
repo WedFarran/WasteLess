@@ -6,6 +6,7 @@ import 'features/admin features/settings/presentation/screens/admin_tasks_screen
 import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
 import 'features/driver features/driver_bottom_navigation_bar.dart';
 import 'features/driver features/home/presentation/screens/driver_home_screen.dart';
+import 'features/driver features/home/presentation/screens/profile_screen.dart';
 import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
 import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
@@ -27,4 +28,5 @@ var customRoutes = <String, WidgetBuilder>{
   SplashScreen.id: (context) => const SplashScreen(),
   AccountType.id: (context) => const AccountType(),
   LoginScreen.id: (context) => const LoginScreen(),
+  ProfileScreen.id: (context) => const ProfileScreen(),
 };

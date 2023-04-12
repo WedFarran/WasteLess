@@ -1,12 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/strings/localization.dart';
 import 'package:wasteless/core/utils/assets_path.dart';
-import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
 import '../../../../../core/widgets/settings_widgets/settings_button.dart';
+import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../main.dart';
+import '../../../../general features/account_type_screen.dart';
+import '../../../home/presentation/screens/profile_screen.dart';
 
 class DriverSettingsScreen extends StatelessWidget {
   static const String id = 'driver_settings_screen';
@@ -25,7 +28,7 @@ class DriverSettingsScreen extends StatelessWidget {
             ),
             SizedBox(height: context.height * 0.05),
             SettingsButton(
-                onTap: () {},
+                onTap: () => Navigator.of(context).pushNamed(ProfileScreen.id),
                 icon: Icons.person_3_outlined,
                 text: translations(context).profile),
             SettingsButton(
@@ -42,7 +45,20 @@ class DriverSettingsScreen extends StatelessWidget {
                 icon: Icons.language,
                 text: translations(context).change_language),
             SettingsButton(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => WarningDialog(
+                        title:
+                            translations(context).logout_confirmation_message,
+                        yesOnTap: () {
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              AccountType.id, (Route<dynamic> route) => false);
+                        },
+                        cancleOnTap: () {}),
+                  );
+                },
                 icon: Icons.logout_outlined,
                 text: translations(context).logout),
           ],
