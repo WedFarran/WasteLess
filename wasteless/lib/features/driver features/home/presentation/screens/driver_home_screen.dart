@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/colors.dart';
@@ -14,8 +15,8 @@ class DriverHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  var user = FirebaseAuth.instance.currentUser;
-    //  var userId = user!.uid;
+    var user = FirebaseAuth.instance.currentUser;
+    var userId = user!.uid;
     DatabaseReference ref =
         FirebaseDatabase.instance.ref('driver/F74yC0JSyUh4S6gdz3CGn6dxHoJ3');
     return ScaffoldBlueBackground(
@@ -31,7 +32,9 @@ class DriverHomeScreen extends StatelessWidget {
           height: context.height * 0.06,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            print(ref.key);
+          },
           child: Stack(
             alignment: Alignment.center,
             children: [
