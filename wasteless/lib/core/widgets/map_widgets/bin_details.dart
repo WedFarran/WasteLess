@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 
 import '../../utils/styles.dart';
@@ -46,15 +47,15 @@ class BinDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('location:', style: DETAILS_GRAY),
-              Text(location, style: DETAILS_BLUE),
+              Text('location:', style: anyColorSize16(FONT_GRAY)),
+              Text(location, style: anyColorSize16(PRIMARY_BLUE)),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('full expected time:', style: DETAILS_GRAY),
-              Text(fullnesTime, style: DETAILS_BLUE)
+              Text('full expected time:', style: anyColorSize16(FONT_GRAY)),
+              Text(fullnesTime, style: anyColorSize16(PRIMARY_BLUE))
             ],
           ),
         ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'features/admin features/admin_bottom_navigation_bar.dart';
 import 'features/admin features/driver/presentation/screens/all_drivers_screen.dart';
 import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
-import 'features/admin features/settings/presentation/screens/admin_tasks_screen.dart';
+import 'features/admin features/settings/presentation/screens/admin_settings_screen.dart';
 import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
 import 'features/driver features/driver_bottom_navigation_bar.dart';
 import 'features/driver features/home/presentation/screens/driver_home_screen.dart';

@@ -29,7 +29,7 @@ class SettingsButton extends StatelessWidget {
             ),
             Text(
               text,
-              style: RESET_BLACK,
+              style: anyColorSize16(BLACK),
             ),
             const Icon(
               Icons.arrow_forward_ios,

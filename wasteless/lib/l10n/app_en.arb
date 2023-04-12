@@ -17,6 +17,7 @@
 "your_information":"Your information",
 "first_name":"First name",
 "last_name":"Last name",
-"qr":"QR code to enter the company"
+"qr":"QR code to enter the company",
+"empty_email":"Empty email"
 
 }

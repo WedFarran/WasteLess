@@ -5,7 +5,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
 import '../widgets/profile_information.dart';
@@ -33,8 +32,7 @@ class ProfileScreen extends StatelessWidget {
                 title: arguments["fullName"],
                 image: arguments["image"],
                 backArrowVisible: true,
-                onPressed: () => Navigator.of(context)
-                    .popAndPushNamed(DriverSettingsScreen.id),
+                onPressed: () => Navigator.of(context).pop(),
               ),
               SizedBox(
                 height: context.height * 0.05,

@@ -46,18 +46,19 @@ class _LoginScreenState extends State<LoginScreen> {
       await auth.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
+      if (arguments == ADMIN) {
+        if (!mounted) return;
+        Navigator.pushNamed(context, AdminWasteNavigationBar.id);
+      } else {
+        if (!mounted) return;
+        Navigator.pushNamed(context, DriverWasteNavigationBar.id);
+      }
     } on FirebaseAuthException catch (e) {
       LoginUtils.showSnackBar(e.message);
     }
-
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
-    if (arguments == ADMIN) {
-      if (!mounted) return;
-      Navigator.pushNamed(context, AdminWasteNavigationBar.id);
-    } else {
-      if (!mounted) return;
-      Navigator.pushNamed(context, DriverWasteNavigationBar.id);
-    }
+    if (!mounted) return;
+    Navigator.pushNamed(context, AccountType.id);
   }
 
   validateEmail(value) {
@@ -68,6 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (!value.contains('@wasteless.admin.com') &&
         !value.contains('@wasteless.driver.com')) {
       return translations(context).wrong_email_format;
+    } else if (value.toString().isEmpty) {
+      return translations(context).empty_email;
     }
     return null;
   }
