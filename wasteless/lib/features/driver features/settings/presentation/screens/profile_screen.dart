@@ -17,8 +17,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  Map<String, dynamic> arguments =
-    //   ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Map<String, dynamic> arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    String fullName = arguments["fullName"];
+    int i = fullName.indexOf(" ");
+    String firstName = fullName.substring(1, i);
+    String lastName = fullName.substring(i, fullName.length);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -26,8 +31,8 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               NameAndImageWidget(
-                title: 'Ahmed Kamal',
-                image: WASTELESS_LOGO,
+                title: arguments["fullName"],
+                image: arguments["image"],
                 backArrowVisible: true,
                 onPressed: () => Navigator.of(context)
                     .popAndPushNamed(DriverSettingsScreen.id),
@@ -47,19 +52,19 @@ class ProfileScreen extends StatelessWidget {
               ),
               ProfileInformation(
                 title: translations(context).first_name,
-                information: 'Ahmed',
+                information: firstName,
               ),
               ProfileInformation(
                 title: translations(context).last_name,
-                information: 'Kamal',
+                information: lastName,
               ),
               ProfileInformation(
                 title: translations(context).email,
-                information: 'Ahmed@wasteless.driver.com',
+                information: arguments["email"].toString(),
               ),
               Center(
                 child: QrImage(
-                  data: 'data',
+                  data: arguments["qr"].toString(),
                   backgroundColor: WHITE,
                   size: 150,
                 ),

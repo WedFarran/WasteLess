@@ -65,7 +65,7 @@ class NameAndImageWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 30.0),
           child: CircleAvatar(
-            backgroundImage: AssetImage(image),
+            backgroundImage: NetworkImage(image),
             radius: 65,
           ),
         ),
