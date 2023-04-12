@@ -6,7 +6,6 @@ import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
-import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
 import '../widgets/profile_information.dart';

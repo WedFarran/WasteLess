@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/strings/localization.dart';
-import 'package:wasteless/core/utils/assets_path.dart';
-import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
@@ -59,12 +57,12 @@ class DriverSettingsScreen extends StatelessWidget {
                         String langCode = await getLocaleString();
                         if (langCode == ARABIC_CODE) {
                           Locale locale = await setLocale(ENGLISH_CODE);
-                          if (context.mounted)
-                            WasteLess.setLocale(context, locale);
+                          if (context.mounted) return;
+                          WasteLess.setLocale(context, locale);
                         } else if (langCode == ENGLISH_CODE) {
                           Locale locale = await setLocale(ARABIC_CODE);
-                          if (context.mounted)
-                            WasteLess.setLocale(context, locale);
+                          if (context.mounted) return;
+                          WasteLess.setLocale(context, locale);
                         }
                       },
                       icon: Icons.language,
