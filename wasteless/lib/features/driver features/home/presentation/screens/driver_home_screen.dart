@@ -17,8 +17,7 @@ class DriverHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser;
     var userId = user!.uid;
-    DatabaseReference ref =
-        FirebaseDatabase.instance.ref('driver/F74yC0JSyUh4S6gdz3CGn6dxHoJ3');
+    DatabaseReference ref = FirebaseDatabase.instance.ref('driver/$userId');
     return ScaffoldBlueBackground(
       widget: Column(children: [
         Padding(
@@ -31,33 +30,45 @@ class DriverHomeScreen extends StatelessWidget {
         SizedBox(
           height: context.height * 0.06,
         ),
-        InkWell(
-          onTap: () {
-            print(ref.key);
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const GradientWidget(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Ahmed Kamal \n \n 439016210',
-                    style: anyColorSize16(WHITE),
-                  ),
-                  SizedBox(
-                    width: context.width * 0.04,
-                  ),
-                  const CircleAvatar(
-                    backgroundImage: AssetImage(WASTELESS_LOGO),
-                    radius: 55,
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+        StreamBuilder(
+            stream: ref.onValue,
+            builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              Map<dynamic, dynamic> map =
+                  snapshot.data!.snapshot.value as dynamic;
+              List<dynamic> list = map.values.toList();
+              return InkWell(
+                onTap: () {
+                  print(list);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    const GradientWidget(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${list[5]} \n \n ${list[6]}',
+                          style: anyColorSize16(WHITE),
+                        ),
+                        SizedBox(
+                          width: context.width * 0.04,
+                        ),
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(list[1]),
+                          radius: 55,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }),
         /* InkWell(
                 onTap: () {},
                 child: Container(

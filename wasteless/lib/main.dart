@@ -64,7 +64,7 @@ class _WasteLessState extends State<WasteLess> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: _locale,
-        initialRoute: AccountType.id,
+        initialRoute: SplashScreen.id,
         routes: customRoutes,
       ),
     );
