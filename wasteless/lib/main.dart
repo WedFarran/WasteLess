@@ -43,15 +43,15 @@ class WasteLess extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         title: 'WasteLess',
-        initialRoute: AdminWasteNavigationBar.id,
+        initialRoute: DriverMapScreen.id,
         routes: {
-          AdminWasteNavigationBar.id: (context) =>
+          /*AdminWasteNavigationBar.id: (context) =>
               const AdminWasteNavigationBar(),
           DriversScreen.id: (context) => const DriversScreen(),
           AdminMapScreen.id: (context) => const AdminMapScreen(),
           AdminSettingsScreen.id: (context) => const AdminSettingsScreen(),
           AdminTasksScreen.id: (context) => const AdminTasksScreen(),
-          DriverWasteNavigationBar.id: (context) =>
+          */DriverWasteNavigationBar.id: (context) =>
               const DriverWasteNavigationBar(),
           DriverHomeScreen.id: (context) => const DriverHomeScreen(),
           DriverMapScreen.id: (context) => const DriverMapScreen(),
