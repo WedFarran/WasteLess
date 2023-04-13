@@ -56,9 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } on FirebaseAuthException catch (e) {
       LoginUtils.showSnackBar(e.message);
     }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
-    if (!mounted) return;
-    Navigator.pushNamed(context, AccountType.id);
+    navigatorKey.currentState!.popUntil((route) => route.isCurrent);
   }
 
   validateEmail(value) {
