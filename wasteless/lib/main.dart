@@ -33,7 +33,6 @@ class WasteLess extends StatefulWidget {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
 class _WasteLessState extends State<WasteLess> {
   Locale? _locale;
   setLocale(Locale locale) {
