@@ -10,10 +10,8 @@ import 'filtering_button_widget.dart';
 class FilteringOptionsWidget extends StatefulWidget {
   final bool selected;
   final void Function()? ontap;
-  final List<Data> data;
-  final Function(List<Data>) onFilter;
   const FilteringOptionsWidget(
-      {super.key, required this.selected, required this.ontap, required this.data, required this.onFilter});
+      {super.key, required this.selected, required this.ontap});
 
   @override
   State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
@@ -23,28 +21,6 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   bool fullSelected = false;
   bool halfFullSelected = false;
   bool emptySelected = false;
-
-  List<Data> _filteredData = [];
-
-  void _updateFilter() {
-    setState(() {
-      _filteredData = widget.data.where((item) {
-        if (fullSelected && item.status == 'Full') {
-          return true;
-        }
-        if (halfFullSelected && item.status == 'Half Full') {
-          return true;
-        }
-        if (emptySelected && item.status == 'Empty') {
-          return true;
-        }
-        return false;
-      }).toList();
-    });
-
-    widget.onFilter(_filteredData);
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +52,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                     fullSelected = false;
                     halfFullSelected = false;
                     emptySelected = false;
-                    _filteredData = [];
                   });
-
-                  widget.onFilter(widget.data);
                 },
               ),
             ],
@@ -88,7 +61,6 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
             onTap: () {
               setState(() {
                 fullSelected = !fullSelected;
-                _updateFilter();
               });
             },
             selected: fullSelected,
@@ -99,7 +71,6 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
             onTap: () {
               setState(() {
                 halfFullSelected = !halfFullSelected;
-                _updateFilter();
               });
             },
             selected: halfFullSelected,
@@ -110,7 +81,6 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
             onTap: () {
               setState(() {
                 emptySelected = !emptySelected;
-                _updateFilter();
               });
             },
             selected: emptySelected,
@@ -123,10 +93,4 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   }
 }
 
-class Data {
-  String name;
-  String status;
-
-  Data(this.name, this.status);
-}
 

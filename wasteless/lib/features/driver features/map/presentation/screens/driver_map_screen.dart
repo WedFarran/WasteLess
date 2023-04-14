@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/driver%20features/map/presentation/widgets/filtering_options_widget.dart';
+import '../../../../../retrive_firebase.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
@@ -17,6 +19,7 @@ class DriverMapScreen extends StatefulWidget {
   State<DriverMapScreen> createState() => _DriverMapScreenState();
 }
 
+
 class _DriverMapScreenState extends State<DriverMapScreen> {
   late GoogleMapController mapController;
   BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
@@ -25,25 +28,14 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
   double percent = 0.3;
-  List<Data> _allData = [
-    Data('Bin 1', 'Full'),
-    Data('Bin 2', 'Half Full'),
-    Data('Bin 3', 'Empty'),
-  ];
 
-  List<Data> _filteredData = [];
-
+  late RetrieveFirebase retrieveFirebase;
   @override
   void initState() {
     super.initState();
     setCustomerMarkerIcon();
-    _filteredData = _allData;
-  }
+    retrieveFirebase = RetrieveFirebase(driverId: "UAz9G0lKpmRZZjISV0fbbbtix943");
 
-  void _handleFiltering(List<Data> filteredData) {
-    setState(() {
-      _filteredData = filteredData;
-    });
   }
 
   setCustomerMarkerIcon() {
@@ -104,21 +96,17 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: FloatingActionButton(
-              onPressed: () =>
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(40))),
-                    backgroundColor: WHITE,
-                    context: context,
-                    builder: (context) =>
-                        FilteringOptionsWidget(
-                          selected: true,
-                          ontap: () {},
-                          data: _allData,
-                          onFilter: _handleFiltering,
-                        ),
-                  ),
+              onPressed: () => showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40))),
+                backgroundColor: WHITE,
+                context: context,
+                builder: (context) => FilteringOptionsWidget(
+                  selected: true,
+                  ontap: () {},
+                ),
+              ),
               child: Image.asset(
                 FILTRING_ICON,
                 height: context.height * 0.05,
@@ -126,63 +114,16 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
             ),
           ),
           FloatingActionButton(
-            onPressed: () =>
-                showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(40)),
-                  ),
-                  builder: (BuildContext context) {
-                    return Container(
-                      //padding: EdgeInsets.all(45.0),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 65.0,
-                            //top: 5.0,
-                            right: 10.0,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Image.asset(
-                                CLOSE_BUTTON,
-                                height: context.height * 0.05,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 18.0,
-                            right: 70.0,
-                            child: Material(
-                              elevation: 4.0,
-                              shape: CircleBorder(),
-                              clipBehavior: Clip.hardEdge,
-                              child: IconButton(
-                                onPressed: () {
-                                  // Do something when the new button is pressed
-                                },
-                                icon: Image.asset(
-                                  NAVIGATION_BUTTON,
-                                  height: context.height * 0.09,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 120.0),
-                              // Other widgets here
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+              ),
+              builder: (context) => NavigationButtonWidget(
+                selected: true,
+                ontap: () {},
+              ),
+            ),
             child: Image.asset(
               NAVIGATION_BUTTON,
               height: context.height * 0.05,
@@ -190,6 +131,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
           ),
         ],
       ),
+
       body: SafeArea(
         child: StreamBuilder(
             stream: ref.onValue,
@@ -197,24 +139,24 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                Map<dynamic, dynamic> map = snapshot.data!.snapshot
-                    .value as dynamic;
+                Map<dynamic, dynamic> map =
+                    snapshot.data!.snapshot.value as dynamic;
                 List<dynamic> list = [];
                 list.clear();
                 list = map.values.toList();
 
                 //createMarkers(list);
 
-                print('Wed Wed Wed Wed Wed Wed Wed Wed $list');
+                print('R $list');
 
                 return GoogleMap(
                   zoomControlsEnabled: false,
                   compassEnabled: false,
-                  initialCameraPosition: CameraPosition(
-                      target: _initialPosition, zoom: 13),
+                  initialCameraPosition:
+                      CameraPosition(target: _initialPosition, zoom: 13),
                   onMapCreated: (controler) {
                     setState(
-                          () {
+                      () {
                         mapController = controler;
                         mapController.setMapStyle(
                             '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
@@ -225,9 +167,9 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                   markers: Set.from(getGeoCords(list)),
                 );
               }
-            }
-        ),
+            }),
       ),
     );
   }
-  }
+}
+
