@@ -1,2 +1,23 @@
-{"hello": "Hello World!",
-"change_language":"تغيير اللغة إلى العربية"}
+{
+"change_language":"تغيير اللغة إلى العربية",
+"logIn":"LOGIN",
+"password":"Password",
+"email":"Email",
+"administrator":"Aaministrator",
+"driver":"Driver",
+"password_error_message":"Password field is empty!",
+"wrong_driver_account_type":"Please login from the driver login screen",
+"wrong_admin_account_type":"Please login from the admin login screen",
+"wrong_email_format":"Email format is wrong",
+"profile":"Profile",
+"logout":"Logout",
+"logout_confirmation_message":"Are you sure you want to logout ?",
+"yes":"Yes",
+"cancle":"Cancle",
+"your_information":"Your information",
+"first_name":"First name",
+"last_name":"Last name",
+"qr":"QR code to enter the company",
+"empty_email":"Empty email"
+
+}

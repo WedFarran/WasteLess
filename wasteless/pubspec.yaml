@@ -29,6 +29,8 @@ dependencies:
   animated_text_kit: ^4.2.2
   firebase_database: ^10.1.0
   geolocator: ^9.0.2
+  qr_flutter: ^4.0.0
+  firebase_auth: ^4.4.0
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +45,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/translations/
 
   fonts:
     - family: Nunito

@@ -1,25 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:wasteless/core/strings/localization.dart';
-import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/features/general%20features/account_type_screen.dart';
+import '../../../../../core/strings/localization.dart';
+import '../../../../../core/utils/language.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
 import '../../../../../core/widgets/settings_widgets/settings_button.dart';
 import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../main.dart';
-import '../../../../general features/account_type_screen.dart';
-import 'profile_screen.dart';
 
-class DriverSettingsScreen extends StatelessWidget {
-  static const String id = 'driver_settings_screen';
-  const DriverSettingsScreen({super.key});
+class AdminSettingsScreen extends StatelessWidget {
+  static const String id = 'admin_settings_screen';
+  const AdminSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser;
     var id = user!.uid;
-    DatabaseReference ref = FirebaseDatabase.instance.ref('driver/$id');
+    DatabaseReference ref = FirebaseDatabase.instance.ref('admin/$id');
     return Scaffold(
       body: SafeArea(
         child: StreamBuilder(
@@ -37,21 +36,11 @@ class DriverSettingsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   NameAndImageWidget(
-                    title: list[5],
-                    image: list[1],
+                    title: list[1],
+                    image: list[0],
                     backArrowVisible: false,
                   ),
                   SizedBox(height: context.height * 0.05),
-                  SettingsButton(
-                      onTap: () => Navigator.of(context)
-                              .pushNamed(ProfileScreen.id, arguments: {
-                            "fullName": list[5],
-                            "image": list[1],
-                            "email": list[7],
-                            "qr": list[2]
-                          }),
-                      icon: Icons.person_3_outlined,
-                      text: translations(context).profile),
                   SettingsButton(
                       onTap: () async {
                         String langCode = await getLocaleString();

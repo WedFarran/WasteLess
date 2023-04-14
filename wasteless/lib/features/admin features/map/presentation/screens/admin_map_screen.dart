@@ -94,12 +94,13 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
                                   ),
                                   Text(
                                     'Filter',
-                                    style: DETAILS_GRAY,
+                                    style: anyColorSize16(FONT_GRAY),
                                   )
                                 ],
                               ),
                               InkWell(
-                                child: Text('Reset', style: RESET_BLACK),
+                                child:
+                                    Text('Reset', style: anyColorSize16(BLACK)),
                                 onTap: () => setState(() {
                                   fullSelected = false;
                                   halfFullSelected = false;

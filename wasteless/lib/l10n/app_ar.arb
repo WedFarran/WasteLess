@@ -1,2 +1,23 @@
-{"hello":"اهلاً",
-"change_language":"Change to english language"}
+{
+"change_language":"Change to english language",
+"logIn":"تسجيل الدخول",
+"password":"كلمة السر",
+"email":"الإيميل",
+"administrator":"إداري",
+"driver":"سائق",
+"password_error_message":"!خانه كلمة السر فارغة",
+"wrong_driver_account_type":"من فضلك سجل دخول من صفحة تسجيل دخول السائقين",
+"wrong_admin_account_type":"من فضلك سجل دخول من صفحة تسجيل دخول المدراء",
+"wrong_email_format":"الإيميل خاطئ",
+"profile":"الملف الشخصي",
+"logout":"تسجيل خروج",
+"logout_confirmation_message":"هل تريد تسجيل الخروج من حسابك ؟",
+"yes":"نعم",
+"cancle":"إلغاء",
+"your_information":"معلوماتك",
+"first_name":"الإسم الأول",
+"last_name":"اللقب",
+"qr":"رمز الدخول للشركة",
+"empty_email":"أكتب الإيميل من فضلك "
+
+}

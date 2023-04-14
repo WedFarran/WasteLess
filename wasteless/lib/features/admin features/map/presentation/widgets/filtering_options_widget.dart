@@ -45,12 +45,12 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                   ),
                   Text(
                     'Filter',
-                    style: DETAILS_GRAY,
+                    style: anyColorSize16(FONT_GRAY),
                   )
                 ],
               ),
               InkWell(
-                child: Text('Reset', style: RESET_BLACK),
+                child: Text('Reset', style: anyColorSize16(BLACK)),
                 onTap: () => setState(() {
                   widget.fullSelected = false;
                   widget.halfFullSelected = false;
