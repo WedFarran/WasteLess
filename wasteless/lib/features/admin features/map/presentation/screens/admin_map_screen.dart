@@ -7,11 +7,8 @@ import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../../core/widgets/map_widgets/filtering_button.dart';
-import '../../data/models/bins_models.dart';
 import '../map_tools.dart';
 import '../widgets/filtering_button_widget.dart';
-import '../widgets/filtering_options_widget.dart';
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
