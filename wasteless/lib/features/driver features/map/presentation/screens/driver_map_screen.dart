@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/driver%20features/map/presentation/widgets/filtering_options_widget.dart';
-import '../../../../../retrive_firebase.dart';
+import '../widgets/retrive_firebase.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
