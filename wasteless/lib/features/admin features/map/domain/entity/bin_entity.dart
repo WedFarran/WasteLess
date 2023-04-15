@@ -5,7 +5,7 @@ class BinEntity extends Equatable {
   final String fullnesTime;
   final double lat;
   final double lng;
-  final bool statues;
+  final bool status;
   final double wasteLevel;
 
   const BinEntity(
@@ -13,8 +13,8 @@ class BinEntity extends Equatable {
       required this.fullnesTime,
       required this.lat,
       required this.lng,
-      required this.statues,
+      required this.status,
       required this.wasteLevel});
   @override
-  List<Object?> get props => [id, fullnesTime, lat, lng, statues, wasteLevel];
+  List<Object?> get props => [id, fullnesTime, lat, lng, status, wasteLevel];
 }

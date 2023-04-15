@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasteless/features/admin%20features/map/data/models/driver_models.dart';
 import '../../../../core/utils/assets_path.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/widgets/map_widgets/bin_details.dart';
+import '../data/models/bins_models.dart';
+import 'widgets/driver_details_widget.dart';
 
 BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
@@ -28,17 +31,22 @@ setCustomeMarkerIcon() {
       .then((icon) => {brokenBinMarker = icon});
 }
 
-getGeoCords(list, BuildContext context, emptyBinMarker, fullBinMarker,
-    halfFullBinMarker, brokenBinMarker) {
-  List markersList = [];
+getGeoCords(
+  List<BinsModel> binsList,
+  BuildContext context,
+  List<DriversModel> driversList,
+) {
+  List<Marker> binsMarkers = [];
+  List<Marker> driversMarkers = [];
+  List<Marker> markersList = [];
 
-  markersList = list
+  binsMarkers = binsList
       .map((e) => Marker(
-            markerId: MarkerId(e.toString()),
-            icon: e['status'] == true
-                ? e['wasteLevel'] < 0.4
+            markerId: MarkerId(e.id),
+            icon: e.status == true
+                ? e.wasteLevel < 0.4
                     ? emptyBinMarker
-                    : e['wasteLevel'] >= 0.8
+                    : e.wasteLevel >= 0.8
                         ? fullBinMarker
                         : halfFullBinMarker
                 : brokenBinMarker,
@@ -49,14 +57,31 @@ getGeoCords(list, BuildContext context, emptyBinMarker, fullBinMarker,
                 backgroundColor: WHITE,
                 context: context,
                 builder: (context) => BinDetailsWidget(
-                      percent: e['wasteLevel'],
+                      percent: e.wasteLevel,
                       location: 'Abdullah Arif st',
-                      fullnesTime: e['fullnesTime'],
+                      fullnesTime: e.fullnesTime,
                     )),
-            position: LatLng(e['lat'], e['lng']),
+            position: LatLng(e.lat, e.lng),
           ))
       .toList();
-  markerList = markersList;
-
+  driversMarkers = driversList
+      .map((e) => Marker(
+            markerId: MarkerId(e.id),
+            icon: driverMarker,
+            onTap: () => showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40))),
+                backgroundColor: WHITE,
+                context: context,
+                builder: (context) => DriverDetailsWidget(
+                      location: '',
+                      name: e.fullName,
+                    )),
+            position: LatLng(e.lat, e.lng),
+          ))
+      .toList();
+  markersList.addAll(binsMarkers);
+  markersList.addAll(driversMarkers);
   return markersList;
 }

@@ -6,26 +6,26 @@ class BinsModel extends BinEntity {
       required String fullnesTime,
       required double lat,
       required double lng,
-      required bool statues,
+      required bool status,
       required double wasteLevel})
       : super(
             id: id,
             fullnesTime: fullnesTime,
             lat: lat,
             lng: lng,
-            statues: statues,
+            status: status,
             wasteLevel: wasteLevel);
 
-  /* factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
+  factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
     return BinsModel(
       id: map['id'] ?? '',
       fullnesTime: map['fullnesTime'] ?? '',
       lat: map['lat'] ?? '',
       lng: map['lng'] ?? '',
-      statues: map['statues'] ?? false,
+      status: map['status'] ?? false,
       wasteLevel: map['wasteLevel'] ?? '',
     );
-  }*/
+  }
 
   factory BinsModel.fromJson(Map<String, dynamic> json) {
     return BinsModel(
@@ -33,7 +33,7 @@ class BinsModel extends BinEntity {
         fullnesTime: json['fullnesTime'],
         lat: json['lat'],
         lng: json['lng'],
-        statues: json['statues'],
+        status: json['statues'],
         wasteLevel: json['wasteLevel']);
   }
 
@@ -43,7 +43,7 @@ class BinsModel extends BinEntity {
       'fullnesTime': fullnesTime,
       'lat': lat,
       'lng': lng,
-      'statues': statues,
+      'statues': status,
       'wasteLevel': wasteLevel
     };
   }
