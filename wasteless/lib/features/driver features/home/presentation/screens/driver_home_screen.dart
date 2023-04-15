@@ -29,30 +29,19 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      setState(() {
-        accessLocation = false;
-      });
       return Future.error('Location services are disabled');
     }
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        setState(() {
-          accessLocation = false;
-        });
         return Future.error('Location P are denied');
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      setState(() {
-        accessLocation = false;
-      });
       return Future.error('location P are permanently denied ');
     }
-    setState(() {
-      accessLocation = true;
-    });
+
     return Geolocator.getCurrentPosition();
   }
 
@@ -63,10 +52,13 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
         .listen((position) {
       lat = position.latitude;
       long = position.longitude;
-      setState(() {
+      setState(() async {
         locationMessage =
             'latitude: ${lat.toString()} , longitude: ${long.toString()}';
-        addDataToDatabase(lat, long); //update values on the database
+        await ref.update({
+          "lat": position.latitude,
+          "lng": position.longitude,
+        });
       });
     });
   }
@@ -93,6 +85,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                 height: context.height * 0.4,
               ),
             ),
+            //Text(locationMessage),
             SizedBox(
               height: context.height * 0.06,
             ),
@@ -171,7 +164,9 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                             lat = value.latitude;
                             long = value.longitude;
                             setState(() {
-                              addDataToDatabase(lat, long);
+                              locationMessage =
+                                  'latitude: ${lat.toString()} , longitude: ${long.toString()}';
+                              accessLocation = true;
                             });
                             _liveLocation();
                           });
@@ -187,11 +182,4 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       ),
     );
   }
-
-  void addDataToDatabase(double? lat, double? long) async {
-    await ref.update({
-      "lat": lat,
-      "lng": long,
-    });
-  } //update the new data
 }
