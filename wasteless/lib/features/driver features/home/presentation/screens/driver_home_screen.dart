@@ -47,7 +47,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
   void _liveLocation() {
     LocationSettings locationSettings = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 50);
+        accuracy: LocationAccuracy.high, distanceFilter: 5);
     Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen((position) {
       lat = position.latitude;
