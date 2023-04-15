@@ -32,10 +32,13 @@ setCustomeMarkerIcon() {
 }
 
 getGeoCords(
-  List<BinsModel> binsList,
-  BuildContext context,
-  List<DriversModel> driversList,
-) {
+    List<BinsModel> binsList,
+    BuildContext context,
+    List<DriversModel> driversList,
+    bool fullSelected,
+    bool halfFullSelected,
+    bool emptySelected,
+    bool driversSelected) {
   List<Marker> binsMarkers = [];
   List<Marker> driversMarkers = [];
   List<Marker> markersList = [];
@@ -81,7 +84,20 @@ getGeoCords(
             position: LatLng(e.lat, e.lng),
           ))
       .toList();
-  markersList.addAll(binsMarkers);
-  markersList.addAll(driversMarkers);
+  if (fullSelected) {
+    markersList
+        .addAll(binsMarkers.where((element) => element.icon == fullBinMarker));
+  }
+  if (halfFullSelected) {
+    markersList.addAll(
+        binsMarkers.where((element) => element.icon == halfFullBinMarker));
+  }
+  if (emptySelected) {
+    markersList
+        .addAll(binsMarkers.where((element) => element.icon == emptyBinMarker));
+  }
+  // markersList.addAll(binsMarkers);
+
+  driversSelected ? markersList.addAll(driversMarkers) : null;
   return markersList;
 }

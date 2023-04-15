@@ -7,25 +7,28 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
 import 'filtering_button_widget.dart';
 
-class FilteringOptionsWidget extends StatefulWidget {
-  final void Function()? ontap;
-  late bool fullSelected;
-  late bool halfFullSelected;
-  late bool emptySelected;
-  late bool driversSelected;
-  FilteringOptionsWidget(
+class FilteringOptionsWidget extends StatelessWidget {
+  final Function()? fullOnTap;
+  final Function()? halfFullOnTap;
+  final Function()? emptyOnTap;
+  final Function()? driversOnTap;
+  final Function()? resetOnTap;
+  final bool driversSelected;
+  final bool halfFullSelected;
+  final bool emptySelected;
+  final bool fullSelected;
+  const FilteringOptionsWidget(
       {super.key,
-      required this.ontap,
+      required this.driversOnTap,
+      required this.emptyOnTap,
+      required this.fullOnTap,
+      required this.halfFullOnTap,
+      required this.resetOnTap,
       required this.driversSelected,
       required this.emptySelected,
       required this.fullSelected,
       required this.halfFullSelected});
 
-  @override
-  State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
-}
-
-class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,43 +53,26 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                 ],
               ),
               InkWell(
+                onTap: resetOnTap,
                 child: Text('Reset', style: anyColorSize16(BLACK)),
-                onTap: () => setState(() {
-                  widget.fullSelected = false;
-                  widget.halfFullSelected = false;
-                  widget.emptySelected = false;
-                  widget.driversSelected = false;
-                }),
               ),
             ],
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                widget.fullSelected = !widget.fullSelected;
-              });
-            },
-            selected: widget.fullSelected,
+            onTap: fullOnTap,
+            selected: fullSelected,
             icon: Full_BIN_ICON,
             status: 'Full',
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                widget.halfFullSelected = !widget.halfFullSelected;
-              });
-            },
-            selected: widget.halfFullSelected,
+            onTap: halfFullOnTap,
+            selected: halfFullSelected,
             icon: HALF_FULL_BIN_ICON,
             status: 'Half Full',
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                widget.emptySelected = !widget.emptySelected;
-              });
-            },
-            selected: widget.emptySelected,
+            onTap: emptyOnTap,
+            selected: emptySelected,
             icon: EMPTY_BIN_ICON,
             status: 'Empty',
           ),
@@ -95,12 +81,8 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
             thickness: 1,
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                widget.driversSelected = !widget.driversSelected;
-              });
-            },
-            selected: widget.driversSelected,
+            onTap: driversOnTap,
+            selected: driversSelected,
             icon: VEHICLE_ICON,
             status: 'Drivers',
           ),

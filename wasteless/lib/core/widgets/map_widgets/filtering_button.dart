@@ -3,24 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../features/admin features/map/presentation/widgets/filtering_options_widget.dart';
+import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
-  final Function()? onTap;
-  final String image;
-  late bool fullSelected;
-  late bool halfFullSelected;
-  late bool emptySelected;
-  late bool driversSelected;
-  FilteringButton({
-    required this.onTap,
-    required this.image,
-    required this.driversSelected,
-    required this.emptySelected,
-    required this.fullSelected,
-    required this.halfFullSelected,
-    super.key,
-  });
+  final Function()? fullOnTap;
+  final Function()? halfFullOnTap;
+  final Function()? emptyOnTap;
+  final Function()? driversOnTap;
+  final Function()? resetOnTap;
+  final bool driversSelected;
+  final bool halfFullSelected;
+  final bool emptySelected;
+  final bool fullSelected;
+  const FilteringButton(
+      {super.key,
+      required this.driversOnTap,
+      required this.emptyOnTap,
+      required this.fullOnTap,
+      required this.halfFullOnTap,
+      required this.resetOnTap,
+      required this.driversSelected,
+      required this.emptySelected,
+      required this.fullSelected,
+      required this.halfFullSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,7 @@ class FilteringButton extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: WHITE,
         child: Image.asset(
-          image,
+          FILTRING_ICON,
           height: context.height * 0.04,
         ),
         onPressed: () => showModalBottomSheet(
@@ -38,11 +44,15 @@ class FilteringButton extends StatelessWidget {
             backgroundColor: WHITE,
             context: context,
             builder: (context) => FilteringOptionsWidget(
-                  ontap: onTap,
                   fullSelected: fullSelected,
                   halfFullSelected: halfFullSelected,
                   emptySelected: emptySelected,
                   driversSelected: driversSelected,
+                  driversOnTap: driversOnTap,
+                  emptyOnTap: emptyOnTap,
+                  fullOnTap: fullOnTap,
+                  halfFullOnTap: halfFullOnTap,
+                  resetOnTap: resetOnTap,
                 )),
       ),
     );
