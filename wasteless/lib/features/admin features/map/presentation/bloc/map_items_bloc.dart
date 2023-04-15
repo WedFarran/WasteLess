@@ -10,6 +10,7 @@ part 'map_items_state.dart';
 class MapItemsBloc extends Bloc<MapItemsEvent, MapItemsState> {
   MapItemsBloc(super.initialState);
 
+  // ignore: unused_element
   String _mapFailureToString(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:

@@ -7,7 +7,7 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
 import 'filtering_button_widget.dart';
 
-class FilteringOptionsWidget extends StatelessWidget {
+class FilteringOptionsWidget extends StatefulWidget {
   final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
@@ -29,6 +29,11 @@ class FilteringOptionsWidget extends StatelessWidget {
       required this.fullSelected,
       required this.halfFullSelected});
 
+  @override
+  State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
+}
+
+class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,26 +58,26 @@ class FilteringOptionsWidget extends StatelessWidget {
                 ],
               ),
               InkWell(
-                onTap: resetOnTap,
+                onTap: widget.resetOnTap,
                 child: Text('Reset', style: anyColorSize16(BLACK)),
               ),
             ],
           ),
           FilteringButtonWidget(
-            onTap: fullOnTap,
-            selected: fullSelected,
+            onTap: widget.fullOnTap,
+            selected: widget.fullSelected,
             icon: Full_BIN_ICON,
             status: 'Full',
           ),
           FilteringButtonWidget(
-            onTap: halfFullOnTap,
-            selected: halfFullSelected,
+            onTap: widget.halfFullOnTap,
+            selected: widget.halfFullSelected,
             icon: HALF_FULL_BIN_ICON,
             status: 'Half Full',
           ),
           FilteringButtonWidget(
-            onTap: emptyOnTap,
-            selected: emptySelected,
+            onTap: widget.emptyOnTap,
+            selected: widget.emptySelected,
             icon: EMPTY_BIN_ICON,
             status: 'Empty',
           ),
@@ -81,8 +86,8 @@ class FilteringOptionsWidget extends StatelessWidget {
             thickness: 1,
           ),
           FilteringButtonWidget(
-            onTap: driversOnTap,
-            selected: driversSelected,
+            onTap: widget.driversOnTap,
+            selected: widget.driversSelected,
             icon: VEHICLE_ICON,
             status: 'Drivers',
           ),

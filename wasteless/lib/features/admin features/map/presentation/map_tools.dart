@@ -15,9 +15,6 @@ BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
 
 List markerList = [];
 
-/*filtermarkers(){
-
-} */
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
       .then((icon) => {fullBinMarker = icon});

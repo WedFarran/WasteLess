@@ -3,7 +3,6 @@ import 'package:wasteless/core/network/network_info.dart';
 import 'package:wasteless/features/admin%20features/map/domain/entity/driver_entity.dart';
 import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity.dart';
 import 'package:wasteless/core/errors/failure.dart';
-import 'package:dartz/dartz.dart';
 import '../../domain/repo/map_items_repo.dart';
 import '../datasources/map_items_local_data_source.dart';
 import '../datasources/map_items_remote_data_source.dart';

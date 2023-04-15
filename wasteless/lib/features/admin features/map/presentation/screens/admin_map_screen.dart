@@ -26,10 +26,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   bool halfFullCheck = false;
   bool emptyCheck = false;
   bool driversCheck = false;
-  bool fullSelected = true;
-  bool halfFullSelected = true;
-  bool emptySelected = true;
-  bool driversSelected = true;
+
   final LatLng _initialPosition =
       const LatLng(21.42462845849512, 39.82612550889805);
   final Set<Marker> markers = {};
@@ -93,42 +90,33 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
           driversOnTap: () {
             setState(() {
               driversCheck = !driversCheck;
-              driversSelected = driversCheck;
-              print(driversCheck);
             });
           },
           driversSelected: driversCheck,
           fullOnTap: () {
             setState(() {
               fullCheck = !fullCheck;
-              fullSelected = fullCheck;
             });
           },
           fullSelected: fullCheck,
           halfFullOnTap: () {
             setState(() {
               halfFullCheck = !halfFullCheck;
-              halfFullSelected = halfFullCheck;
             });
           },
           halfFullSelected: halfFullCheck,
           emptyOnTap: () {
             setState(() {
               emptyCheck = !emptyCheck;
-              emptySelected = emptyCheck;
             });
           },
           emptySelected: emptyCheck,
           resetOnTap: () {
             setState(() {
-              emptyCheck = false;
-              halfFullCheck = false;
-              fullCheck = false;
-              driversCheck = false;
-              emptySelected = true;
-              halfFullSelected = true;
-              fullSelected = true;
-              driversSelected = true;
+              emptyCheck = true;
+              halfFullCheck = true;
+              fullCheck = true;
+              driversCheck = true;
             });
           },
         ),
@@ -148,7 +136,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
             );
           },
           markers: Set.from(getGeoCords(binsList, context, driversList,
-              fullSelected, halfFullSelected, emptySelected, driversSelected)),
+              fullCheck, halfFullCheck, emptyCheck, driversCheck)),
         )));
   }
 }
