@@ -21,7 +21,7 @@ class FilteringOptionsWidget extends StatefulWidget {
         required this.halfFullOnTap,
         required this.emptySelected,
         required this.fullSelected,
-        required this.halfFullSelected});
+        required this.halfFullSelected, required bool driversSelected, Function()? driversOnTap, Function()? resetOnTap});
 
   @override
   State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
