@@ -36,7 +36,7 @@ class DriverDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('location:', style: DETAILS_GRAY),
+              Text('location:', style: anyColorSize16(DETAILS_GRAY)),
               Text(location, style: DETAILS_BLUE),
             ],
           ),
