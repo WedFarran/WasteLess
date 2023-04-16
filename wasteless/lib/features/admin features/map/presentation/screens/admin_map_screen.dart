@@ -76,7 +76,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
                 context: context,
                 builder: (context) => FilteringOptionsWidget(
                       selected: true,
-                      ontap: () {},
+                      ontap: () {}, emptyOnTap: () {  }, fullOnTap: () {  }, halfFullOnTap: () {  }, emptySelected: null,
                     )),
           ),
         ),

@@ -36,7 +36,7 @@ class FilteringButtonWidget extends StatelessWidget {
                 ),
                 Text(
                   status,
-                  style: anyColorSize16(RESET_BLACK),
+                  style: anyColorSize16(BLACK)
                 )
               ],
             ),

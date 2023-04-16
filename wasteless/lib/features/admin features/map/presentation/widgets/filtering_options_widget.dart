@@ -8,20 +8,26 @@ import '../../../../../core/utils/styles.dart';
 import 'filtering_button_widget.dart';
 
 class FilteringOptionsWidget extends StatefulWidget {
-  final bool selected;
-  final void Function()? ontap;
+  final Function()? fullOnTap;
+  final Function()? halfFullOnTap;
+  final Function()? emptyOnTap;
+  final bool halfFullSelected;
+  final bool emptySelected;
+  final bool fullSelected;
   const FilteringOptionsWidget(
-      {super.key, required this.selected, required this.ontap});
+      {super.key,
+        required this.emptyOnTap,
+        required this.fullOnTap,
+        required this.halfFullOnTap,
+        required this.emptySelected,
+        required this.fullSelected,
+        required this.halfFullSelected});
 
   @override
   State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
 }
 
 class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
-  bool fullSelected = false;
-  bool halfFullSelected = false;
-  bool emptySelected = false;
-  bool driversSelected = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,64 +47,29 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                   ),
                   Text(
                     'Filter',
-                    style: DETAILS_GRAY,
+                    style: anyColorSize16(FONT_GRAY),
                   )
                 ],
-              ),
-              InkWell(
-                child: Text('Reset', style: RESET_BLACK),
-                onTap: () => setState(() {
-                  fullSelected = false;
-                  halfFullSelected = false;
-                  emptySelected = false;
-                  driversSelected = false;
-                }),
               ),
             ],
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                fullSelected = !fullSelected;
-              });
-            },
-            selected: fullSelected,
+            onTap: widget.fullOnTap,
+            selected: widget.fullSelected,
             icon: Full_BIN_ICON,
             status: 'Full',
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                halfFullSelected = !halfFullSelected;
-              });
-            },
-            selected: halfFullSelected,
+            onTap: widget.halfFullOnTap,
+            selected: widget.halfFullSelected,
             icon: HALF_FULL_BIN_ICON,
             status: 'Half Full',
           ),
           FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                emptySelected = !emptySelected;
-              });
-            },
-            selected: emptySelected,
+            onTap: widget.emptyOnTap,
+            selected: widget.emptySelected,
             icon: EMPTY_BIN_ICON,
             status: 'Empty',
-          ),
-          const Divider(
-            color: PRIMARY_BLUE,
-            thickness: 1,
-          ),
-          FilteringButtonWidget(
-            onTap: () {
-              setState(() {
-                driversSelected = !driversSelected;
-              });
-            },
-            selected: driversSelected,
-            icon: VEHICLE_ICON,
-            status: 'Drivers',
           ),
         ],
       ),

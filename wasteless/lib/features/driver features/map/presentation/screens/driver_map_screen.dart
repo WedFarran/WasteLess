@@ -135,7 +135,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: FloatingActionButton(
-              onPressed: () => showModalBottomSheet(
+              onPressed: () => showModalBottomSheet( 
                 shape: const RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(40))),
@@ -143,7 +143,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 context: context,
                 builder: (context) => FilteringOptionsWidget(
                   selected: true,
-                  ontap: () {},
+                  ontap: () {}, emptyOnTap: () {  }, fullOnTap: () {  }, halfFullOnTap: () {  }, emptySelected: null, fullSelected: null, halfFullSelected: null,
                 ),
               ),
               child: Image.asset(
