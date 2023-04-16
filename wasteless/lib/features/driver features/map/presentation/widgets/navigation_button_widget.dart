@@ -58,9 +58,7 @@ class NavigationButtonWidget extends StatelessWidget {
           //children: [
           SizedBox(height: 110.0),
           Positioned(
-            //bottom: 65.0,
-            top: 100.0,
-            //right: 70.0,
+            top: 30.0,
             child: IconButton(
               onPressed: () {
                 Navigator.pop(context);
