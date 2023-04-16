@@ -4,9 +4,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../../core/widgets/map_widgets/filtering_button.dart';
+import '../../../../driver features/map/presentation/widgets/filtering_button_widget.dart';
 import '../../data/models/bins_models.dart';
 import '../../data/models/driver_models.dart';
-import '../map_tools.dart';
+import '../../map_tools.dart';
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
@@ -86,7 +87,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FilteringButton(
+        floatingActionButton: FilteringButtonWidget(
           driversOnTap: () {
             setState(() {
               driversCheck = !driversCheck;

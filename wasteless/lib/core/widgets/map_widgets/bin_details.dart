@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 
-import '../../utils/colors.dart';
 import '../../utils/styles.dart';
 import 'circle_indicator.dart';
 
@@ -47,14 +47,14 @@ class BinDetailsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text('location:', style: anyColorSize16(FONT_GRAY)),
-              Text(location, style: anyColorSize16(BLUE)),
+              Text(location, style: anyColorSize16(PRIMARY_BLUE)),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('full expected time:', style: DETAILS_GRAY),
-              Text(fullnesTime, style: DETAILS_BLUE)
+              Text('full expected time:', style: anyColorSize16(FONT_GRAY)),
+              Text(fullnesTime, style: anyColorSize16(PRIMARY_BLUE))
             ],
           ),
         ],
