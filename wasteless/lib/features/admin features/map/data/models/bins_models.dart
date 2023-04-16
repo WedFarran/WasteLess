@@ -7,7 +7,7 @@ class BinsModel extends BinEntity {
       required double lat,
       required double lng,
       required bool statues,
-      required double wasteLevel})
+      required double wasteLevel, required status})
       : super(
             id: id,
             fullnesTime: fullnesTime,
