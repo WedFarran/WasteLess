@@ -55,7 +55,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
             wasteLevel: value['wasteLevel'],
             lat: value['lat'],
             lng: value['lng'],
-            status: value['status'], statues: , ));
+            status: value['status'],));
       });
       setState(() {});
     });
