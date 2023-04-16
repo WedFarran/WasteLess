@@ -27,7 +27,7 @@ TextStyle responsiveWasteSplash(BuildContext context, Color color) {
 }
 
 TextStyle WASTE_SPLASH =
-    const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 70);
+const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 70);
 TextStyle WASTE_SPLASH_GREEN = const TextStyle(
     color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 70);
 
@@ -37,20 +37,22 @@ TextStyle BIN_STATUS = const TextStyle(
     fontWeight: FontWeight.w700,
     color: FONT_GRAY);
 
-TextStyle DETAILS_BLUE = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: PRIMARY_BLUE);
+TextStyle anyColorSize16(Color color) {
+  return TextStyle(
+      fontFamily: 'Nunito',
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
+      color: color);
+}
 
-TextStyle DETAILS_GRAY = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: FONT_GRAY);
+//boxdecorations
 
-TextStyle RESET_BLACK = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: BLACK);
+TextStyle BOLD_24 = const TextStyle(
+    fontSize: 24, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
+TextStyle NORMAL_20 = const TextStyle(fontSize: 20, fontFamily: 'Nunito');
+BoxDecoration gradient(Color color) {
+  return BoxDecoration(
+      color: color,
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)));
+}
