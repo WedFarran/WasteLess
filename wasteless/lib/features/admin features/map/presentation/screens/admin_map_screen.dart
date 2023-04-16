@@ -87,7 +87,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FilteringButtonWidget(
+        floatingActionButton: FilteringButton(
           driversOnTap: () {
             setState(() {
               driversCheck = !driversCheck;
