@@ -23,7 +23,7 @@ class BinsModel extends BinEntity {
         lat: json['lat'],
         lng: json['lng'],
         statues: json['statues'],
-        wasteLevel: json['wasteLevel']);
+        wasteLevel: json['wasteLevel'], status: "status");
   }
 
   Map<String, dynamic> toJson() {
