@@ -7,8 +7,8 @@ import 'package:wasteless/features/driver%20features/map/data/models/driver_map_
 
 abstract class BinsLocalDataSource {
   //this class to create the needed function we will need a function to save all the bins and another function to return the saved bins
-  Future<List<DriverMapModel>> getCachedBins();
-  Future<Unit> cachedBins(List<DriverMapModel> driverMapModel);
+  Future<List<BinsModel>> getCachedBins();
+  Future<Unit> cachedBins(List<BinsModel> driverMapModel);
 }
 const CASHED_BINS = "CASHED_BINS";
 
@@ -17,7 +17,7 @@ class BinsLocalDataSourceImpl implements BinsLocalDataSource {
 
   BinsLocalDataSourceImpl({required this.sharedPreferences});
   @override
-  Future<Unit> cachedBins(List<DriverMapModel> driverMapModel) {
+  Future<Unit> cachedBins(List<BinsModel> driverMapModel) {
     List binsModelsToJson = driverMapModel
         .map<Map<String, dynamic>>((driverMapModel) => driverMapModel.toJson())
         .toList();
@@ -26,13 +26,13 @@ class BinsLocalDataSourceImpl implements BinsLocalDataSource {
   }
 
   @override
-  Future<List<DriverMapModel>> getCachedBins() {
+  Future<List<BinsModel>> getCachedBins() {
     final jsonString = sharedPreferences.getString(CASHED_BINS);
     if (jsonString != null) {
       List decodeJsonData = json.decode(jsonString);
-      List<DriverMapModel> jsonToDriverMapModels = decodeJsonData
-          .map<DriverMapModel>(
-              (jsonDriverModel) => DriverMapModel.fromJson(jsonDriverModel))
+      List<BinsModel> jsonToDriverMapModels = decodeJsonData
+          .map<BinsModel>(
+              (jsonDriverModel) => BinsModel.fromJson(jsonDriverModel))
           .toList();
       return Future.value(jsonToDriverMapModels);
     }else{

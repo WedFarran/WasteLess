@@ -8,7 +8,7 @@ import '../models/driver_map_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class BinsRemoteDataSource {
-  Future<List<DriverMapModel>> getAllBins();
+  Future<List<BinsModel>> getAllBins();
 }
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
@@ -18,7 +18,7 @@ class BinsRemoteDataSourceImpl implements BinsRemoteDataSource {
 
   BinsRemoteDataSourceImpl({required this.client});
   @override
-  Future<List<DriverMapModel>> getAllBins() async {
+  Future<List<BinsModel>> getAllBins() async {
     final respnse = await client.get(
       Uri.parse(BASE_URL + "/driverMap"),
       headers: {"Content-Type": "application/json"},
@@ -26,9 +26,9 @@ class BinsRemoteDataSourceImpl implements BinsRemoteDataSource {
 
     if (respnse.statusCode == 200) {
       final List decodeJson = json.decode(respnse.body) as List;
-      final List<DriverMapModel> driverMapModels = decodeJson
-          .map<DriverMapModel>((jsonDriverMapModel) =>
-              DriverMapModel.fromJson(jsonDriverMapModel))
+      final List<BinsModel> driverMapModels = decodeJson
+          .map<BinsModel>((jsonDriverMapModel) =>
+          BinsModel.fromJson(jsonDriverMapModel))
           .toList();
 
       return driverMapModels;

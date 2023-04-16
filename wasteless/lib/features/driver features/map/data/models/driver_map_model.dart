@@ -1,32 +1,20 @@
 import 'package:wasteless/features/driver%20features/map/domain/entities/driver_map.dart';
 
-class DriverMapModel extends DriverMap {
-  const DriverMapModel(
-      {required super.binId,
-      required super.status,
-      required super.lat,
-      required super.lng,
-      required super.location,
-      required super.fullnesTime,
-      required super.wasteLevel});
+class BinsModel extends DriverMap {
+  const BinsModel({required super.binId, required super.status, required super.lat, required super.lng, required super.fullnesTime, required super.wasteLevel});
+      
 
-  factory DriverMapModel.fromJson(Map<String, dynamic> json) {
-    return DriverMapModel(
-        binId: json['binId'],
-        status: json['status'],
-        lat: json['lat'],
-        lng: json['lng'],
-        location: json['location'],
-        fullnesTime: json['fullnesTime'],
-        wasteLevel: json['wasteLevel']);
+  factory BinsModel.fromJson(Map<String, dynamic> json) {
+    return BinsModel(binId:json['id'], status: json['status'], fullnesTime: json['fullnesTime'],  lat: json['lat'],lng: json['lng'], wasteLevel: json['wasteLevel'],);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'binId': binId,
-      'status': status,
-      'location': location,
+      'id': binId,
       'fullnesTime': fullnesTime,
+      'lat': lat,
+      'lng': lng,
+      'statues': status,
       'wasteLevel': wasteLevel
     };
   }

@@ -3,8 +3,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/features/driver%20features/map/data/models/driver_map_model.dart';
 import 'package:wasteless/features/driver%20features/map/presentation/widgets/filtering_options_widget.dart';
-import '../widgets/retrive_firebase.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
@@ -19,23 +19,62 @@ class DriverMapScreen extends StatefulWidget {
   State<DriverMapScreen> createState() => _DriverMapScreenState();
 }
 
-
 class _DriverMapScreenState extends State<DriverMapScreen> {
   late GoogleMapController mapController;
+  late Query retrieveBins;
+  List<BinsModel> binsList = [];
+  bool fullCheck = false;
+  bool halfFullCheck = false;
+  bool emptyCheck = false;
   BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
+  String currentUserId = 'UAz9G0lKpmRZZjISV0fbbbtix943';
   double percent = 0.3;
 
-  late RetrieveFirebase retrieveFirebase;
+  void getCurrentUserId() async {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: 'rofidah@wasteless.driver.com', password: '123456789');
+    String currentUserId = userCredential.user!.uid;
+  }
+
   @override
   void initState() {
     super.initState();
     setCustomerMarkerIcon();
-    retrieveFirebase = RetrieveFirebase(driverId: "UAz9G0lKpmRZZjISV0fbbbtix943");
+    getCurrentUserId();
 
+    retrieveBins = FirebaseDatabase.instance
+        .ref("bin/")
+        .orderByChild("driverId")
+        .equalTo(currentUserId);
+    RetrieveBins();
+  }
+
+  void RetrieveBins() {
+    Stream<DatabaseEvent> streamBins = retrieveBins.onValue;
+    streamBins.listen((DatabaseEvent event) {
+      Map<String, dynamic> binsMap =
+          Map<String, dynamic>.from(event.snapshot.value as Map);
+      print(binsMap);
+
+      binsList.clear();
+      binsList.addAll(binsMap.entries
+          .where((entry) => entry.value['driverId'] == currentUserId)
+          .map((entry) {
+        return BinsModel(
+            binId: entry.key,
+            fullnesTime: entry.value['fullnesTime'],
+            wasteLevel: entry.value['wasteLevel'],
+            lat: entry.value['lat'],
+            lng: entry.value['lng'],
+            status: entry.value['status']);
+      }));
+      setState(() {});
+    });
   }
 
   setCustomerMarkerIcon() {
@@ -131,7 +170,6 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
           ),
         ],
       ),
-
       body: SafeArea(
         child: StreamBuilder(
             stream: ref.onValue,
@@ -172,4 +210,3 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
     );
   }
 }
-
