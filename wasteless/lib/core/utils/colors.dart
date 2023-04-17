@@ -18,3 +18,7 @@ const Color FONT_GRAY = Color(0xFF687363);
 const Color CIRCLE = Color(0xFFCEE2EA);
 const Color BLACK = Color(0xFF000000);
 const Color BUTTON_FOCUS_COLOR = Color(0xFFF7F7F7);
+const Color GRADIENT1 = Color(0xFF84BA6E);
+const Color GRADIENT2 = Color(0xFF73B15A);
+const Color GRADIENT3 = Color(0xFF66A94B);
+const Color GRADIENT4 = Color(0xFF5DA440);

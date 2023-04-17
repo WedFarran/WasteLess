@@ -7,7 +7,11 @@ import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
-  final Function()? fullOnTap;
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
+  }
+ /* final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
   final Function()? driversOnTap;
@@ -56,5 +60,5 @@ class FilteringButton extends StatelessWidget {
             )),
       ),
     );
-  }
+  }*/
 }

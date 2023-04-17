@@ -8,7 +8,11 @@ import '../../../../../core/utils/styles.dart';
 import 'filtering_button_widget.dart';
 
 class FilteringOptionsWidget extends StatefulWidget {
-  final Function()? fullOnTap;
+  @override
+  State<StatefulWidget> createState() {
+    throw UnimplementedError();
+  }
+  /*final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
   final bool halfFullSelected;
@@ -73,6 +77,6 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
           ),
         ],
       ),
-    );
+    );*/
   }
-}
+

@@ -5,11 +5,11 @@ import 'package:flutter/cupertino.dart';
 
 class DriverMap extends Equatable {
   final String binId;
-  final Bool status;
-  final Double lat;
-  final Double lng;
+  final bool status;
+  final double lat;
+  final double lng;
   final String fullnesTime;
-  final Double wasteLevel;
+  final double wasteLevel;
 
   const DriverMap({
       required this.binId,

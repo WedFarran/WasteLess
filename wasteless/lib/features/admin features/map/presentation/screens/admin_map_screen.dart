@@ -87,7 +87,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FilteringButton(
+      /*  floatingActionButton: FilteringButton(
           driversOnTap: () {
             setState(() {
               driversCheck = !driversCheck;
@@ -120,7 +120,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
               driversCheck = true;
             });
           },
-        ),
+        ),*/
         body: SafeArea(
             child: GoogleMap(
               zoomControlsEnabled: false,

@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasteless/core/utils/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
-import 'features/admin features/admin_bottom_navigation_bar.dart';
-import 'features/admin features/driver/presentation/screens/all_drivers_screen.dart';
-import 'features/admin features/login/presentation/screens/admin_login.dart';
-import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
-import 'features/admin features/settings/presentation/screens/admin_tasks_screen.dart';
-import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
-import 'features/driver features/driver_bottom_navigation_bar.dart';
-import 'features/driver features/home/presentation/screens/driver_home_screen.dart';
-import 'features/driver features/login/presentation/screens/driver_login.dart';
-import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
-import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
-import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
-import 'features/general features/account_type_screen.dart';
-import 'features/general features/splash_screen.dart';
+import 'package:wasteless/features/general%20features/splash_screen.dart';
+import 'custom_routes.dart';
+import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -29,8 +21,32 @@ void main() async {
   runApp(const WasteLess());
 }
 
-class WasteLess extends StatelessWidget {
+class WasteLess extends StatefulWidget {
   const WasteLess({super.key});
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _WasteLessState? state = context.findAncestorStateOfType<_WasteLessState>();
+    state?.setLocale(newLocale);
+  }
+
+  @override
+  State<WasteLess> createState() => _WasteLessState();
+}
+
+final navigatorKey = GlobalKey<NavigatorState>();
+class _WasteLessState extends State<WasteLess> {
+  Locale? _locale;
+  setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((locale) => setLocale(locale));
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -40,28 +56,15 @@ class WasteLess extends StatelessWidget {
             create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
       ],
       child: MaterialApp(
+        scaffoldMessengerKey: LoginUtils.massengerKey,
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        theme: appTheme,
-        title: 'WasteLess',
-        initialRoute: DriverMapScreen.id,
-        routes: {
-          /*AdminWasteNavigationBar.id: (context) =>
-              const AdminWasteNavigationBar(),
-          DriversScreen.id: (context) => const DriversScreen(),
-          AdminMapScreen.id: (context) => const AdminMapScreen(),
-          AdminSettingsScreen.id: (context) => const AdminSettingsScreen(),
-          AdminTasksScreen.id: (context) => const AdminTasksScreen(),
-          */DriverWasteNavigationBar.id: (context) =>
-              const DriverWasteNavigationBar(),
-          DriverHomeScreen.id: (context) => const DriverHomeScreen(),
-          DriverMapScreen.id: (context) => const DriverMapScreen(),
-          DriverSettingsScreen.id: (context) => const DriverSettingsScreen(),
-          DriverTasksScreen.id: (context) => const DriverTasksScreen(),
-          SplashScreen.id: (context) => const SplashScreen(),
-          AccountType.id: (context) => const AccountType(),
-          AdminLogIn.id: (context) => const AdminLogIn(),
-          DriverLogIn.id: (context) => const DriverLogIn(),
-        },
+        theme: ThemeData(scaffoldBackgroundColor: WHITE),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: _locale,
+        initialRoute: SplashScreen.id,
+        routes: customRoutes,
       ),
 
     );
