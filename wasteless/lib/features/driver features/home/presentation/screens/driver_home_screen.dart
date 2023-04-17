@@ -66,6 +66,7 @@ class DriverHomeScreen extends StatelessWidget {
                         ),
                         CircleAvatar(
                           backgroundImage: NetworkImage(list[1]),
+                          backgroundColor: WHITE,
                           radius: 55,
                         )
                       ],
@@ -74,29 +75,6 @@ class DriverHomeScreen extends StatelessWidget {
                 ),
               );
             }),
-        /* InkWell(
-                onTap: () {},
-                child: Container(
-                  height: context.height * 0.19,
-                  width: context.width * 0.78,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: PRIMARY_GREEN),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(''),
-                        CircleAvatar(
-                          backgroundImage: AssetImage(WASTELESS_LOGO),
-                          radius: 55,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),*/
       ]),
     );
   }

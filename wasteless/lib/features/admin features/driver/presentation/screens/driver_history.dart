@@ -50,6 +50,7 @@ class DriverHistoryScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(driverInformation['image']),
+                  backgroundColor: WHITE,
                   radius: 50,
                 ),
                 Text(
@@ -90,7 +91,7 @@ class DriverHistoryScreen extends StatelessWidget {
                 });
 
                 if (reportsMap.isEmpty) {
-                  return const Text("theres no reports to display");
+                  return Text(translations(context).empty_reports);
                 }
                 List<DataRow> rows = [];
 

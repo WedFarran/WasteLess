@@ -27,11 +27,17 @@ class DriverInformationWidget extends StatelessWidget {
           Container(
             height: context.height * 0.055,
             width: context.width * 0.55,
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
                 border: Border.all(color: PRIMARY_BLUE),
                 borderRadius: BorderRadius.circular(10)),
             alignment: Alignment.center,
-            child: Text(content, style: anyColorSize16(BLACK)),
+            child: Text(
+              content,
+              style: anyColorSize16(BLACK),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           )
         ],
       ),

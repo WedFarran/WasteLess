@@ -26,7 +26,9 @@
 "area":"Area",
 "task_name":"Task name",
 "date_time":"Date time",
-"report":"Report"
+"report":"Report",
+"empty_reports":"Theres no reports to display",
+"members":"Members"
 
 
 }

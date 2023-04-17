@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/core/utils/styles.dart';
-
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 import '../widgets/driver_information_widget.dart';
@@ -50,6 +48,7 @@ class AdminDriverProfileScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(driver['image']),
+                  backgroundColor: WHITE,
                   radius: 50,
                 ),
                 SizedBox(
