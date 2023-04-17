@@ -23,59 +23,29 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   late GoogleMapController mapController;
   late Query retrieveBins;
   List<BinsModel> binsList = [];
-  bool fullCheck = false;
-  bool halfFullCheck = false;
-  bool emptyCheck = false;
   BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
-  String currentUserId = 'UAz9G0lKpmRZZjISV0fbbbtix943';
+  late var currentUserId = '';
   double percent = 0.3;
-
-  void getCurrentUserId() async {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: 'rofidah@wasteless.driver.com', password: '123456789');
-    String currentUserId = userCredential.user!.uid;
-  }
 
   @override
   void initState() {
     super.initState();
     setCustomerMarkerIcon();
-    getCurrentUserId();
+
+    var currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
     retrieveBins = FirebaseDatabase.instance
-        .ref("bin/")
+        .ref("bin")
         .orderByChild("driverId")
         .equalTo(currentUserId);
-    RetrieveBins();
   }
 
-  void RetrieveBins() {
-    Stream<DatabaseEvent> streamBins = retrieveBins.onValue;
-    streamBins.listen((DatabaseEvent event) {
-      Map<String, dynamic> binsMap =
-          Map<String, dynamic>.from(event.snapshot.value as Map);
-      print(binsMap);
 
-      binsList.clear();
-      binsList.addAll(binsMap.entries
-          .where((entry) => entry.value['driverId'] == currentUserId)
-          .map((entry) {
-        return BinsModel(
-            binId: entry.key,
-            fullnesTime: entry.value['fullnesTime'],
-            wasteLevel: entry.value['wasteLevel'],
-            lat: entry.value['lat'],
-            lng: entry.value['lng'],
-            status: entry.value['status']);
-      }));
-      setState(() {});
-    });
-  }
+
 
   setCustomerMarkerIcon() {
     BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
@@ -125,6 +95,8 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
       const LatLng(21.42462845849512, 39.82612550889805);
   final Set<Marker> markers = {};
 
+
+
   @override
   Widget build(BuildContext context) {
     setCustomerMarkerIcon();
@@ -142,8 +114,6 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 backgroundColor: WHITE,
                 context: context,
                 builder: (context) => FilteringOptionsWidget(
-                  selected: true,
-                  ontap: () {}, emptyOnTap: () {  }, fullOnTap: () {  }, halfFullOnTap: () {  }, emptySelected: null, fullSelected: null, halfFullSelected: null,
                 ),
               ),
               child: Image.asset(
@@ -178,14 +148,22 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 return const Center(child: CircularProgressIndicator());
               } else {
                 Map<dynamic, dynamic> map =
-                    snapshot.data!.snapshot.value as dynamic;
-                List<dynamic> list = [];
-                list.clear();
-                list = map.values.toList();
+                    snapshot.data!.snapshot.value as Map;
+
+                binsList.clear();
+                binsList.addAll(map.entries
+                    .where((entry) => entry.value['driverId'] == currentUserId)
+                    .map((entry) {
+                  return BinsModel(
+                      binId: entry.key,
+                      fullnesTime: entry.value['fullnesTime'],
+                      wasteLevel: entry.value['wasteLevel'],
+                      lat: entry.value['lat'],
+                      lng: entry.value['lng'],
+                      status: entry.value['status']);
+                }));
 
                 //createMarkers(list);
-
-                print('R $list');
 
                 return GoogleMap(
                   zoomControlsEnabled: false,
@@ -202,7 +180,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                       },
                     );
                   },
-                  markers: Set.from(getGeoCords(list)),
+                  markers: Set.from(getGeoCords(binsList)),
                 );
               }
             }),

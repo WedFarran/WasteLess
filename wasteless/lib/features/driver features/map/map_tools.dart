@@ -21,8 +21,6 @@ List markerList = [];
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
       .then((icon) => {fullBinMarker = icon});
-  BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, VEHICLE_ICON)
-      .then((icon) => {driverMarker = icon});
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, HALF_FULL_BIN_PIN)
       .then((icon) => {halfFullBinMarker = icon});
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, EMPTY_BIN_PIN)
@@ -44,45 +42,51 @@ getGeoCords(
   List<Marker> markersList = [];
 
   binsMarkers = binsList
-      .map((e) => Marker(
-    markerId: MarkerId(e.id),
-    icon: e.status == true
-        ? e.wasteLevel < 0.4
-        ? emptyBinMarker
-        : e.wasteLevel >= 0.8
-        ? fullBinMarker
-        : halfFullBinMarker
-        : brokenBinMarker,
-    onTap: () => showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.vertical(top: Radius.circular(40))),
-        backgroundColor: WHITE,
-        context: context,
-        builder: (context) => BinDetailsWidget(
-          percent: e.wasteLevel,
-          location: 'Abdullah Arif st',
-          fullnesTime: e.fullnesTime,
-        )),
-    position: LatLng(e.lat, e.lng),
-  ))
+      .map((e) =>
+      Marker(
+        markerId: MarkerId(e.id),
+        icon: e.status == true
+            ? e.wasteLevel < 0.4
+            ? emptyBinMarker
+            : e.wasteLevel >= 0.8
+            ? fullBinMarker
+            : halfFullBinMarker
+            : brokenBinMarker,
+        onTap: () =>
+            showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                    BorderRadius.vertical(top: Radius.circular(40))),
+                backgroundColor: WHITE,
+                context: context,
+                builder: (context) =>
+                    BinDetailsWidget(
+                      percent: e.wasteLevel,
+                      location: 'Abdullah Arif st',
+                      fullnesTime: e.fullnesTime,
+                    )),
+        position: LatLng(e.lat, e.lng),
+      ))
       .toList();
   driversMarkers = driversList
-      .map((e) => Marker(
-    markerId: MarkerId(e.id),
-    icon: driverMarker,
-    onTap: () => showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.vertical(top: Radius.circular(40))),
-        backgroundColor: WHITE,
-        context: context,
-        builder: (context) => DriverDetailsWidget(
-          location: '',
-          name: e.fullName,
-        )),
-    position: LatLng(e.lat, e.lng),
-  ))
+      .map((e) =>
+      Marker(
+        markerId: MarkerId(e.id),
+        icon: driverMarker,
+        onTap: () =>
+            showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                    BorderRadius.vertical(top: Radius.circular(40))),
+                backgroundColor: WHITE,
+                context: context,
+                builder: (context) =>
+                    DriverDetailsWidget(
+                      location: '',
+                      name: e.fullName,
+                    )),
+        position: LatLng(e.lat, e.lng),
+      ))
       .toList();
   if (fullSelected) {
     markersList
@@ -96,8 +100,5 @@ getGeoCords(
     markersList
         .addAll(binsMarkers.where((element) => element.icon == emptyBinMarker));
   }
-  // markersList.addAll(binsMarkers);
-
-  driversSelected ? markersList.addAll(driversMarkers) : null;
-  return markersList;
 }
+  // markersList.addAll(binsMarkers);
