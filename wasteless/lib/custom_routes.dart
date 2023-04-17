@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'features/admin features/admin_bottom_navigation_bar.dart';
+import 'features/admin features/driver/presentation/screens/admin_driver_profile.dart';
 import 'features/admin features/driver/presentation/screens/all_drivers_screen.dart';
+import 'features/admin features/driver/presentation/screens/driver_history.dart';
 import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
 import 'features/admin features/settings/presentation/screens/admin_settings_screen.dart';
 import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
@@ -29,4 +31,6 @@ var customRoutes = <String, WidgetBuilder>{
   AccountType.id: (context) => const AccountType(),
   LoginScreen.id: (context) => const LoginScreen(),
   ProfileScreen.id: (context) => const ProfileScreen(),
+  AdminDriverProfileScreen.id: (context) => const AdminDriverProfileScreen(),
+  DriverHistoryScreen.id: (context) => const DriverHistoryScreen()
 };

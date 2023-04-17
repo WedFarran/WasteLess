@@ -45,6 +45,9 @@ TextStyle anyColorSize16(Color color) {
       color: color);
 }
 
+TextStyle TABLE_TITLE_STYLE =
+    const TextStyle(color: PRIMARY_GREEN, fontFamily: 'Nunito');
+
 //boxdecorations
 
 TextStyle BOLD_24 = const TextStyle(

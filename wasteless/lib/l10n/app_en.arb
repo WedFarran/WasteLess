@@ -18,6 +18,15 @@
 "first_name":"First name",
 "last_name":"Last name",
 "qr":"QR code to enter the company",
-"empty_email":"Empty email"
+"empty_email":"Empty email",
+"history":"History",
+"name":"Name",
+"id_number":"Id Number",
+"nationality":"Nationality",
+"area":"Area",
+"task_name":"Task name",
+"date_time":"Date time",
+"report":"Report"
+
 
 }
