@@ -25,6 +25,10 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   late GoogleMapController mapController;
   late Query retrieveBins;
   late DatabaseReference ref;
+  bool fullCheck = false;
+  bool halfFullCheck = false;
+  bool emptyCheck = false;
+  bool driversCheck = false;
   BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
@@ -94,6 +98,71 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   Widget build(BuildContext context) {
     setCustomerMarkerIcon();
     return Scaffold(
+      floatingActionButton: FilteringButton(
+        driversOnTap: () {
+          setState(() {
+            driversCheck = !driversCheck;
+          });
+        },
+        driversSelected: driversCheck,
+        fullOnTap: () {
+          setState(() {
+            fullCheck = !fullCheck;
+          });
+        },
+        fullSelected: fullCheck,
+        halfFullOnTap: () {
+          setState(() {
+            halfFullCheck = !halfFullCheck;
+          });
+        },
+        halfFullSelected: halfFullCheck,
+        emptyOnTap: () {
+          setState(() {
+            emptyCheck = !emptyCheck;
+          });
+        },
+        emptySelected: emptyCheck,
+        resetOnTap: () {
+          setState(() {
+            emptyCheck = true;
+            halfFullCheck = true;
+            fullCheck = true;
+            driversCheck = true;
+          });
+        },
+      ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 90.0),
         child: Column(
@@ -134,6 +203,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 height: context.height * 0.05,
               ),
             ),
+
           ],
         ),
       ),

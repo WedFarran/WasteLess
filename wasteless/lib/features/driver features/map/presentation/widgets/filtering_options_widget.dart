@@ -5,14 +5,11 @@ import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/map_widgets/filtering_button.dart';
 import 'filtering_button_widget.dart';
 
 class FilteringOptionsWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    throw UnimplementedError();
-  }
- /* final Function()? fullOnTap;
+  final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
   final bool halfFullSelected;
@@ -25,7 +22,7 @@ class FilteringOptionsWidget extends StatefulWidget {
         required this.halfFullOnTap,
         required this.emptySelected,
         required this.fullSelected,
-        required this.halfFullSelected, required bool selected, required Null Function() ontap});
+        required this.halfFullSelected});
 
   @override
   State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
@@ -75,9 +72,11 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
             icon: EMPTY_BIN_ICON,
             status: 'Empty',
           ),
+
         ],
       ),
-    );*/
+    );
   }
+}
 
 
