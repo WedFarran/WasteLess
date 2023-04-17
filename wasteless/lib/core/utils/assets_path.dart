@@ -21,3 +21,4 @@ const EMPTY_BIN_ICON = 'assets/icons/empty.png';
 const BROKEN_BIN_ICON = 'assets/icons/broken_bin.png';
 const CHECK_ICON = 'assets/icons/check.png';
 const WASTELESS_LOGO = 'assets/images/logo_WB.png';
+const WASTELESS_LOGO_TRANS = 'assets/images/logo.png';

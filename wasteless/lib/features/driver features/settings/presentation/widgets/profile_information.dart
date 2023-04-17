@@ -17,7 +17,7 @@ class ProfileInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: const EdgeInsets.only(left: 25, bottom: 15),
+        margin: const EdgeInsets.only(left: 25, bottom: 15, right: 25),
         height: context.height * 0.07,
         width: context.width * 0.83,
         decoration: BoxDecoration(
@@ -31,7 +31,7 @@ class ProfileInformation extends StatelessWidget {
                   color: BLACK.withOpacity(0.25))
             ]),
         child: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
