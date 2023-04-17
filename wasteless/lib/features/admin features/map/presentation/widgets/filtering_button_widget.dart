@@ -6,11 +6,12 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
 
-class FilteringButtonWidget extends StatelessWidget {
+class FilteringButtonWidget extends StatefulWidget {
   final bool selected;
   final void Function()? onTap;
   final String icon;
   final String status;
+
   const FilteringButtonWidget({
     super.key,
     required this.selected,
@@ -20,28 +21,33 @@ class FilteringButtonWidget extends StatelessWidget {
   });
 
   @override
+  State<FilteringButtonWidget> createState() => _FilteringButtonWidgetState();
+}
+
+class _FilteringButtonWidgetState extends State<FilteringButtonWidget> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
-        color: selected == true ? BUTTON_FOCUS_COLOR : null,
+        color: widget.selected == true ? BUTTON_FOCUS_COLOR : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 Image.asset(
-                  icon,
+                  widget.icon,
                   height: context.height * 0.055,
                 ),
                 Text(
-                  status,
+                  widget.status,
                   style: anyColorSize16(BLACK),
                 )
               ],
             ),
             Visibility(
-                visible: selected == true ? true : false,
+                visible: widget.selected == true ? true : false,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Image.asset(
