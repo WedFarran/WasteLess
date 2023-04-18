@@ -45,14 +45,14 @@ TextStyle anyColorSize16(Color color) {
       color: color);
 }
 
+TextStyle TABLE_TITLE_STYLE =
+    const TextStyle(color: PRIMARY_GREEN, fontFamily: 'Nunito');
+
 //boxdecorations
 
 TextStyle BOLD_24 = const TextStyle(
     fontSize: 24, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 TextStyle NORMAL_20 = const TextStyle(fontSize: 20, fontFamily: 'Nunito');
 BoxDecoration gradient(Color color) {
-  return BoxDecoration(
-      color: color,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)));
+  return BoxDecoration(color: color, borderRadius: BorderRadius.circular(20));
 }

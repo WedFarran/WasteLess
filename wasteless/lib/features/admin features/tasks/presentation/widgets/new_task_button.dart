@@ -1,7 +1,7 @@
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
@@ -27,7 +27,7 @@ class NewTaskButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                     blurRadius: 4,
                     color: BLACK.withOpacity(0.25))
               ]),

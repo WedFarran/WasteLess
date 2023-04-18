@@ -1,7 +1,7 @@
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
 
