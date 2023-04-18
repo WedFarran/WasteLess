@@ -13,7 +13,6 @@ import 'map/presentation/screens/admin_map_screen.dart';
 
 class AdminWasteNavigationBar extends StatefulWidget {
   static const String id = 'navigation_bar_screen';
-
   const AdminWasteNavigationBar({super.key});
 
   @override
