@@ -52,7 +52,8 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
             wasteLevel: value['wasteLevel'],
             lat: value['lat'],
             lng: value['lng'],
-            status: value['status']));
+            status: value['status'],
+            location: value['location']));
       });
       setState(() {});
     });
@@ -75,7 +76,8 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
             lat: value['lat'],
             lng: value['lng'],
             nationality: value['nationality'],
-            qR: value['qR']));
+            qR: value['qR'],
+            location: value['location']));
       });
       setState(() {});
     });

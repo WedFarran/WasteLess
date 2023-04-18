@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 
 import '../../../../../core/utils/assets_path.dart';
@@ -28,7 +29,7 @@ class DriverDetailsWidget extends StatelessWidget {
                 backgroundImage: AssetImage(ANWAR_IMAGE),
                 radius: 50,
               ),
-              Text(name, style: BIN_STATUS),
+              Expanded(child: Text(name, style: BIN_STATUS)),
               SizedBox(
                 width: context.width * 0.01,
               )
@@ -37,7 +38,8 @@ class DriverDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('location:', style: anyColorSize16(FONT_GRAY)),
+              Text('${translations(context).location}:',
+                  style: anyColorSize16(FONT_GRAY)),
               Text(location, style: anyColorSize16(PRIMARY_BLUE)),
             ],
           ),

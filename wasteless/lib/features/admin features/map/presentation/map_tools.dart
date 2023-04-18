@@ -58,7 +58,7 @@ getGeoCords(
                 context: context,
                 builder: (context) => BinDetailsWidget(
                       percent: e.wasteLevel,
-                      location: 'Abdullah Arif st',
+                      location: e.location,
                       fullnesTime: e.fullnesTime,
                     )),
             position: LatLng(e.lat, e.lng),
@@ -75,7 +75,7 @@ getGeoCords(
                 backgroundColor: WHITE,
                 context: context,
                 builder: (context) => DriverDetailsWidget(
-                      location: '',
+                      location: e.location,
                       name: e.fullName,
                     )),
             position: LatLng(e.lat, e.lng),

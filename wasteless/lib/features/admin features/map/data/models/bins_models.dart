@@ -2,29 +2,23 @@ import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity
 
 class BinsModel extends BinEntity {
   const BinsModel(
-      {required String id,
-      required String fullnesTime,
-      required double lat,
-      required double lng,
-      required bool status,
-      required double wasteLevel})
-      : super(
-            id: id,
-            fullnesTime: fullnesTime,
-            lat: lat,
-            lng: lng,
-            status: status,
-            wasteLevel: wasteLevel);
+      {required super.id,
+      required super.fullnesTime,
+      required super.lat,
+      required super.lng,
+      required super.status,
+      required super.wasteLevel,
+      required super.location});
 
   factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
     return BinsModel(
-      id: map['id'] ?? '',
-      fullnesTime: map['fullnesTime'] ?? '',
-      lat: map['lat'] ?? '',
-      lng: map['lng'] ?? '',
-      status: map['status'] ?? false,
-      wasteLevel: map['wasteLevel'] ?? '',
-    );
+        id: map['id'] ?? '',
+        fullnesTime: map['fullnesTime'] ?? '',
+        lat: map['lat'] ?? '',
+        lng: map['lng'] ?? '',
+        status: map['status'] ?? false,
+        wasteLevel: map['wasteLevel'] ?? '',
+        location: map['location'] ?? '');
   }
 
   factory BinsModel.fromJson(Map<String, dynamic> json) {
@@ -34,7 +28,8 @@ class BinsModel extends BinEntity {
         lat: json['lat'],
         lng: json['lng'],
         status: json['statues'],
-        wasteLevel: json['wasteLevel']);
+        wasteLevel: json['wasteLevel'],
+        location: json['location']);
   }
 
   Map<String, dynamic> toJson() {
@@ -44,7 +39,8 @@ class BinsModel extends BinEntity {
       'lat': lat,
       'lng': lng,
       'statues': status,
-      'wasteLevel': wasteLevel
+      'wasteLevel': wasteLevel,
+      'location': location
     };
   }
 }

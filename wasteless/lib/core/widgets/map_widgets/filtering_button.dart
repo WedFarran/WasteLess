@@ -7,26 +7,8 @@ import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
-  /*final Function()? fullOnTap;
-  final Function()? halfFullOnTap;
-  final Function()? emptyOnTap;
-  final Function()? driversOnTap;
-  final Function()? resetOnTap;
-  final bool driversSelected;
-  final bool halfFullSelected;
-  final bool emptySelected;
-  final bool fullSelected;*/
   const FilteringButton({
     super.key,
-    /* required this.driversOnTap,
-      required this.emptyOnTap,
-      required this.fullOnTap,
-      required this.halfFullOnTap,
-      required this.resetOnTap,
-      required this.driversSelected,
-      required this.emptySelected,
-      required this.fullSelected,
-      required this.halfFullSelected*/
   });
 
   @override

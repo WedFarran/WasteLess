@@ -31,7 +31,8 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
               wasteLevel: value['wasteLevel'],
               lat: value['lat'],
               lng: value['lng'],
-              status: value['status']));
+              status: value['status'],
+              location: value['location']));
         });
       });
       return binsList;
@@ -62,7 +63,8 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
               lat: value['lat'],
               lng: value['lng'],
               nationality: value['nationality'],
-              qR: value['qR']));
+              qR: value['qR'],
+              location: value['location']));
         });
       });
       return driversList;

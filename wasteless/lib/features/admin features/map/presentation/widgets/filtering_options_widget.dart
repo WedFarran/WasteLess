@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/map/data/datasources/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
@@ -37,7 +38,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                         height: context.height * 0.02,
                       ),
                       Text(
-                        'Filter',
+                        translations(context).filter,
                         style: anyColorSize16(FONT_GRAY),
                       )
                     ],
@@ -51,7 +52,8 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                           true;
                       context.read<FilteringChangeNotifier>().emptyCheck = true;
                     },
-                    child: Text('Reset', style: anyColorSize16(BLACK)),
+                    child: Text(translations(context).reset,
+                        style: anyColorSize16(BLACK)),
                   ),
                 ],
               ),
@@ -63,7 +65,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                       .fullCheck = !fullSelected.fullCheck,
                   selected: fullSelected.fullCheck,
                   icon: Full_BIN_ICON,
-                  status: 'Full',
+                  status: translations(context).full,
                 );
               }),
               Consumer<FilteringChangeNotifier>(
@@ -74,7 +76,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                       .halfFullCheck = !halfFullSelected.halfFullCheck,
                   selected: halfFullSelected.halfFullCheck,
                   icon: HALF_FULL_BIN_ICON,
-                  status: 'Half Full',
+                  status: translations(context).half_full,
                 );
               }),
               Consumer<FilteringChangeNotifier>(
@@ -85,7 +87,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                       .emptyCheck = !emptySelected.emptyCheck,
                   selected: emptySelected.emptyCheck,
                   icon: EMPTY_BIN_ICON,
-                  status: 'Empty',
+                  status: translations(context).empty,
                 );
               }),
               const Divider(
@@ -100,7 +102,7 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
                       .driversCheck = !driverSelected.driversCheck,
                   selected: driverSelected.driversCheck,
                   icon: VEHICLE_ICON,
-                  status: 'Drivers',
+                  status: translations(context).driver,
                 );
               })
             ]));

@@ -46,16 +46,14 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
     LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 2);
     Geolocator.getPositionStream(locationSettings: locationSettings)
-        .listen((position) {
+        .listen((position) async {
       lat = position.latitude;
       long = position.longitude;
+
       setState(() async {
         locationMessage =
             'latitude: ${lat.toString()} , longitude: ${long.toString()}';
-        await ref.update({
-          "lat": position.latitude,
-          "lng": position.longitude,
-        });
+        await ref.update({"lat": position.latitude, "lng": position.longitude});
       });
     });
   }
