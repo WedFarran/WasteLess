@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -57,11 +59,9 @@ class DriverSettingsScreen extends StatelessWidget {
                         String langCode = await getLocaleString();
                         if (langCode == ARABIC_CODE) {
                           Locale locale = await setLocale(ENGLISH_CODE);
-                          if (context.mounted) return;
                           WasteLess.setLocale(context, locale);
                         } else if (langCode == ENGLISH_CODE) {
                           Locale locale = await setLocale(ARABIC_CODE);
-                          if (context.mounted) return;
                           WasteLess.setLocale(context, locale);
                         }
                       },

@@ -8,6 +8,7 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 import '../../../settings/presentation/screens/profile_screen.dart';
+import '../widgets/gradient_widget.dart';
 
 class DriverHomeScreen extends StatefulWidget {
   static const String id = 'driver_home_screen';
@@ -70,60 +71,66 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBlueBackground(
-      widget: Stack(
-        children: [
-          Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Image.asset(
-                WASTELESS_LOGO,
-                height: context.height * 0.4,
-              ),
-            ),
-            //Text(locationMessage),
-            SizedBox(
-              height: context.height * 0.06,
-            ),
-            StreamBuilder(
-                stream: ref.onValue,
-                builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  Map<dynamic, dynamic> map =
-                      snapshot.data!.snapshot.value as dynamic;
-                  List<dynamic> list = map.values.toList();
-                  return InkWell(
-                      onTap: () => Navigator.of(context)
-                              .pushNamed(ProfileScreen.id, arguments: {
+      widget: Column(children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Image.asset(
+            WASTELESS_LOGO,
+            height: context.height * 0.4,
+          ),
+        ),
+        //Text(locationMessage),
+        SizedBox(
+          height: context.height * 0.06,
+        ),
+        StreamBuilder(
+            stream: ref.onValue,
+            builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              Map<dynamic, dynamic> map =
+                  snapshot.data!.snapshot.value as dynamic;
+              List<dynamic> list = map.values.toList();
+              return InkWell(
+                  onTap: () => Navigator.of(context).pushNamed(ProfileScreen.id,
+                          arguments: {
                             "fullName": list[5],
                             "image": list[1],
                             "email": list[7],
                             "qr": list[2]
                           }),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Text(
-                            '${list[5]} \n \n ${list[6]}',
-                            style: anyColorSize16(WHITE),
-                          ),
-                          SizedBox(
-                            width: context.width * 0.04,
-                          ),
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(list[1]),
-                            backgroundColor: WHITE,
-                            radius: 55,
-                          )
-                        ],
-                      ));
-                })
-          ])
-        ],
-      ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const GradientWidget(),
+                      SizedBox(
+                        height: context.height * 0.19,
+                        width: context.width * 0.78,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              '${list[5]}\n \n${list[6]}',
+                              style: anyColorSize16(WHITE),
+                            ),
+                            SizedBox(
+                              width: context.width * 0.04,
+                            ),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(list[1]),
+                              backgroundColor: WHITE,
+                              radius: 55,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ));
+            })
+      ]),
     );
   }
 }
