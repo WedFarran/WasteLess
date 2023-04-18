@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
+import 'package:wasteless/features/admin%20features/map/data/datasources/filtering_change_notifier.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/general%20features/splash_screen.dart';
 import 'custom_routes.dart';
@@ -52,6 +54,9 @@ class _WasteLessState extends State<WasteLess> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => FilteringChangeNotifier(),
+        ),
         BlocProvider(
             create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
       ],

@@ -80,9 +80,7 @@ class DriverSettingsScreen extends StatelessWidget {
                                     AccountType.id,
                                     (Route<dynamic> route) => false);
                               },
-                              cancleOnTap: () {
-                                Navigator.of(context).pop();
-                              }),
+                              cancleOnTap: () => Navigator.of(context).pop()),
                         );
                       },
                       icon: Icons.logout_outlined,

@@ -7,7 +7,7 @@ import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
-  final Function()? fullOnTap;
+  /*final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
   final Function()? driversOnTap;
@@ -15,10 +15,10 @@ class FilteringButton extends StatelessWidget {
   final bool driversSelected;
   final bool halfFullSelected;
   final bool emptySelected;
-  final bool fullSelected;
-  const FilteringButton(
-      {super.key,
-      required this.driversOnTap,
+  final bool fullSelected;*/
+  const FilteringButton({
+    super.key,
+    /* required this.driversOnTap,
       required this.emptyOnTap,
       required this.fullOnTap,
       required this.halfFullOnTap,
@@ -26,7 +26,8 @@ class FilteringButton extends StatelessWidget {
       required this.driversSelected,
       required this.emptySelected,
       required this.fullSelected,
-      required this.halfFullSelected});
+      required this.halfFullSelected*/
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +44,7 @@ class FilteringButton extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
             backgroundColor: WHITE,
             context: context,
-            builder: (context) => FilteringOptionsWidget(
-                  fullSelected: fullSelected,
-                  halfFullSelected: halfFullSelected,
-                  emptySelected: emptySelected,
-                  driversSelected: driversSelected,
-                  driversOnTap: driversOnTap,
-                  emptyOnTap: emptyOnTap,
-                  fullOnTap: fullOnTap,
-                  halfFullOnTap: halfFullOnTap,
-                  resetOnTap: resetOnTap,
-                )),
+            builder: (context) => const FilteringOptionsWidget()),
       ),
     );
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +48,9 @@ class AdminSettingsScreen extends StatelessWidget {
                         String langCode = await getLocaleString();
                         if (langCode == ARABIC_CODE) {
                           Locale locale = await setLocale(ENGLISH_CODE);
-                          if (context.mounted) return;
                           WasteLess.setLocale(context, locale);
                         } else if (langCode == ENGLISH_CODE) {
                           Locale locale = await setLocale(ARABIC_CODE);
-                          if (context.mounted) return;
                           WasteLess.setLocale(context, locale);
                         }
                       },
@@ -61,15 +61,16 @@ class AdminSettingsScreen extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => WarningDialog(
-                              title: translations(context)
-                                  .logout_confirmation_message,
-                              yesOnTap: () {
-                                FirebaseAuth.instance.signOut();
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    AccountType.id,
-                                    (Route<dynamic> route) => false);
-                              },
-                              cancleOnTap: () {}),
+                            title: translations(context)
+                                .logout_confirmation_message,
+                            yesOnTap: () {
+                              FirebaseAuth.instance.signOut();
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  AccountType.id,
+                                  (Route<dynamic> route) => false);
+                            },
+                            cancleOnTap: () => Navigator.of(context).pop(),
+                          ),
                         );
                       },
                       icon: Icons.logout_outlined,
