@@ -40,7 +40,7 @@ class TaskWidget extends StatelessWidget {
             ]),
         child: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 15),
@@ -84,7 +84,7 @@ class TaskWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage(image),
+                  backgroundImage: NetworkImage(image),
                   radius: 25,
                 ),
               ),
