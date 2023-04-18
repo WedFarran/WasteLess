@@ -34,32 +34,34 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
     List tabletIconSize = [0.055, 0.04, 0.05, 0.05];
 
     int selectedIndex = 0;
-    return Scaffold(
-      bottomNavigationBar: WasteLessBottomNavigationBar(
-        widget: ListView.separated(
-          shrinkWrap: true,
-          itemCount: iconsName.length,
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (context, index) => SizedBox(
-            width: context.width * 0.04,
-          ),
-          itemBuilder: (context, i) => GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = i;
-              });
-            },
-            child: NavigationBarIconsWidget(
-                selected: selectedIndex == i ? true : false,
-                iconsName: iconsName[i],
-                iconsSize: isTablet(context) == true
-                    ? tabletIconSize[i]
-                    : iconsSize[i]),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: WasteLessBottomNavigationBar(
+          widget: ListView.separated(
+            shrinkWrap: true,
+            itemCount: iconsName.length,
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) => SizedBox(
+              width: context.width * 0.04,
+            ),
+            itemBuilder: (context, i) => GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedIndex = i;
+                });
+              },
+              child: NavigationBarIconsWidget(
+                  selected: selectedIndex == i ? true : false,
+                  iconsName: iconsName[i],
+                  iconsSize: isTablet(context) == true
+                      ? tabletIconSize[i]
+                      : iconsSize[i]),
+            ),
           ),
         ),
-      ),
-      body: Center(
-        child: screens.elementAt(selectedIndex),
+        body: Center(
+          child: screens.elementAt(selectedIndex),
+        ),
       ),
     );
   }

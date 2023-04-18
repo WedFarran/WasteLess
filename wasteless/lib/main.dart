@@ -15,6 +15,7 @@ import 'features/driver features/login/presentation/screens/driver_login.dart';
 import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
 import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
+import 'features/driver features/tasks/presentation/screens/report_SCREEN.dart';
 import 'features/general features/account_type_screen.dart';
 import 'features/general features/splash_screen.dart';
 import 'firebase_options.dart';
@@ -42,7 +43,7 @@ class WasteLess extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         title: 'WasteLess',
-        initialRoute: AccountType.id,
+        initialRoute: DriverTasksScreen.id,
         routes: {
           AdminWasteNavigationBar.id: (context) =>
               const AdminWasteNavigationBar(),
@@ -55,11 +56,12 @@ class WasteLess extends StatelessWidget {
           DriverHomeScreen.id: (context) => const DriverHomeScreen(),
           DriverDriverScreen.id: (context) => const DriverDriverScreen(),
           DriverSettingsScreen.id: (context) => const DriverSettingsScreen(),
-          DriverTasksScreen.id: (context) => const DriverTasksScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
           AccountType.id: (context) => const AccountType(),
           AdminLogin.id: (context) => const AdminLogin(),
           DriverLogIn.id: (context) => const DriverLogIn(),
+          DriverTasksScreen.id: (context) => const DriverTasksScreen(),
+          ReportScreen.id: (context) => const ReportScreen(),
         },
       ),
     );

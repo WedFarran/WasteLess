@@ -17,4 +17,5 @@ const Color RED = Color(0xFF9F3535);
 const Color FONT_GRAY = Color(0xFF687363);
 const Color CIRCLE = Color(0xFFCEE2EA);
 const Color BLACK = Color(0xFF000000);
+const Color EXTRA_LIGHT_BLUE = Color(0xFFDFEAEE);
 const Color BUTTON_FOCUS_COLOR = Color(0xFFF7F7F7);
