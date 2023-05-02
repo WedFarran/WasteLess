@@ -5,7 +5,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/assets_path.dart';
+import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/dialog_button.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 import '../../../settings/presentation/screens/profile_screen.dart';
 
@@ -21,7 +23,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
   late double? lat;
   late double? long;
   String locationMessage = '';
-  late bool accessLocation = false;
+  late bool accessLocation = true;
   late DatabaseReference ref;
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -38,24 +40,24 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
     if (permission == LocationPermission.deniedForever) {
       return Future.error('location P are permanently denied ');
     }
-
+    _liveLocation();
     return Geolocator.getCurrentPosition();
   }
 
-  void _liveLocation() {
+  void _liveLocation() async {
     LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 2);
     Geolocator.getPositionStream(locationSettings: locationSettings)
-        .listen((position) {
+        .listen((position) async {
       lat = position.latitude;
       long = position.longitude;
-      setState(() async {
+      setState(() {
         locationMessage =
             'latitude: ${lat.toString()} , longitude: ${long.toString()}';
-        await ref.update({
-          "lat": position.latitude,
-          "lng": position.longitude,
-        });
+      });
+      await ref.update({
+        "lat": position.latitude,
+        "lng": position.longitude,
       });
     });
   }
@@ -105,24 +107,74 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                           "email": list[7],
                           "qr": list[2]
                         }),
-                    child: Stack(
-                      alignment: Alignment.center,
+                    child: Visibility(
+                      visible: accessLocation ? false : true,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Text(
+                            '${list[5]} \n \n ${list[6]}',
+                            style: anyColorSize16(WHITE),
+                          ),
+                          SizedBox(
+                            width: context.width * 0.04,
+                          ),
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(list[1]),
+                            backgroundColor: WHITE,
+                            radius: 55,
+                          )
+                        ],
+                      ),
+                    ));
+              }),
+          Visibility(
+              visible: accessLocation,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 30),
+                    height: context.height * 0.34,
+                    width: context.width * 0.85,
+                    decoration: BoxDecoration(
+                        color: LIGHT_BLUE,
+                        borderRadius: BorderRadius.circular(40)),
+                    child: Column(
                       children: [
                         Text(
-                          '${list[5]} \n \n ${list[6]}',
-                          style: anyColorSize16(WHITE),
+                          translations(context).trun_gps_on,
+                          textAlign: TextAlign.center,
+                          style: BOLD_24,
                         ),
                         SizedBox(
-                          width: context.width * 0.04,
+                          height: context.height * 0.03,
                         ),
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(list[1]),
-                          backgroundColor: WHITE,
-                          radius: 55,
-                        )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            DialogButton(
+                              width: 0.7,
+                              color: GREEN,
+                              title: translations(context).yes,
+                              onTap: () {
+                                _getCurrentLocation().then((value) {
+                                  lat = value.latitude;
+                                  long = value.longitude;
+                                  setState(() {
+                                    locationMessage =
+                                        'latitude: ${lat.toString()} , longitude: ${long.toString()}';
+                                    accessLocation = true;
+                                  });
+                                  _liveLocation();
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       ],
-                    ));
-              })
+                    )),
+              ))
         ])
       ],
     ));
