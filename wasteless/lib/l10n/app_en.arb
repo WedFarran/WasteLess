@@ -37,7 +37,15 @@
 "location":"location",
 "full_expected_time":"full expected time",
 "filter":"Filter",
-"reset":"Reset"
-
-
+"reset":"Reset",
+"task_title":"Task title",
+"start":"Start",
+"due":"Due",
+"tap_to_add_a_description":"Tap to add a description",
+"save":"Save",
+"enter_task_title_error":"Enter task title",
+"enter_location_error":"Enter task location",
+"select_driver":"Select a driver",
+"select_dates":"Select dates",
+"select_bin_error":"Select a bin"
 }

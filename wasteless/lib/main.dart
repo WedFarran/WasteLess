@@ -7,6 +7,7 @@ import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/features/admin%20features/map/data/datasources/filtering_change_notifier.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/general%20features/splash_screen.dart';
+import 'core/common/data/dataresource/bin_remote_data_resource.dart';
 import 'custom_routes.dart';
 import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
@@ -57,6 +58,9 @@ class _WasteLessState extends State<WasteLess> {
         ChangeNotifierProvider(
           create: (context) => FilteringChangeNotifier(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => BinRemoteDataSource(),
+        ),
         BlocProvider(
             create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
       ],
@@ -64,7 +68,11 @@ class _WasteLessState extends State<WasteLess> {
         scaffoldMessengerKey: LoginUtils.massengerKey,
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: WHITE),
+        theme: ThemeData(
+          scaffoldBackgroundColor: WHITE,
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(primary: PRIMARY_BLUE, secondary: PRIMARY_GREEN),
+        ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: _locale,

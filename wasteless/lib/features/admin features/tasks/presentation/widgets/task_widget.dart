@@ -4,34 +4,33 @@ import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import 'assigned_task_driver.dart';
 
 class TaskWidget extends StatelessWidget {
   final String taskName;
   final Function()? deleteAction;
   final String taskDate;
-  final Function()? changeDriverAction;
-  final String image;
-  final String driverName;
-  const TaskWidget({
-    required this.taskName,
-    required this.deleteAction,
-    required this.taskDate,
-    required this.changeDriverAction,
-    required this.image,
-    required this.driverName,
-    super.key,
-  });
+  final String driverId;
+  final Function()? onTap;
+  const TaskWidget(
+      {super.key,
+      required this.taskName,
+      required this.deleteAction,
+      required this.taskDate,
+      required this.driverId,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+    return InkWell(
+      onTap: onTap,
       child: Container(
-        height: context.height * 0.18,
+        height: context.height * 0.185,
         width: context.width * 0.8,
+        margin: const EdgeInsets.only(top: 30, bottom: 20, right: 30, left: 30),
         decoration: BoxDecoration(
             color: WHITE,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                   offset: const Offset(0, 4),
@@ -40,7 +39,7 @@ class TaskWidget extends StatelessWidget {
             ]),
         child: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 15),
@@ -78,35 +77,9 @@ class TaskWidget extends StatelessWidget {
             thickness: 1,
             color: PRIMARY_BLUE,
           ),
-          InkWell(
-            onTap: changeDriverAction,
-            child: Row(children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(image),
-                  radius: 25,
-                ),
-              ),
-              SizedBox(
-                width: context.width * 0.05,
-              ),
-              Text(
-                driverName,
-                style: const TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 11,
-                    color: PRIMARY_BLUE,
-                    fontWeight: FontWeight.w700),
-              ),
-              SizedBox(
-                width: context.width * 0.3,
-              ),
-              const Icon(
-                Icons.arrow_downward_outlined,
-              ),
-            ]),
-          )
+          AssignedDriver(
+            driverId: driverId,
+          ),
         ]),
       ),
     );

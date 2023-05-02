@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import '../../../../../core/utils/assets_path.dart';
+import '../../../../../core/widgets/logo_back_widget.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 import '../widgets/driver_information_widget.dart';
 import '../widgets/history_button.dart';
@@ -23,24 +23,7 @@ class AdminDriverProfileScreen extends StatelessWidget {
     return ScaffoldBlueBackground(
       widget: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: PRIMARY_GREEN,
-                    )),
-                Image.asset(
-                  WASTELESS_LOGO_TRANS,
-                  height: context.height * 0.15,
-                )
-              ],
-            ),
-          ),
+          const LogoBackButton(),
           Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Row(

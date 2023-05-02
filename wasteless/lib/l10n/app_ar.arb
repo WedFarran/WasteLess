@@ -37,7 +37,15 @@
 "location":"الموقع",
 "full_expected_time":"وقت إمتلاء الحاوية",
 "filter":"فلترة",
-"reset":"إعادة"
-
-
+"reset":"إعادة",
+"task_title":"عنوان المهمة",
+"start":"البداية",
+"due":"النهاية",
+"Tap_to_add_a_description":"أنقر لإضافة التفاصيل",
+"save":"حفظ",
+"enter_task_title_error":"ادخل اسم المهمة",
+"enter_location_error":"ادخل موقع المهمة",
+"select_driver":"اختار السائق المسؤول عن المهمة",
+"select_dates":"اختار تاريخ بداية و نهاية المهمة",
+"select_bin_error":"أختار حاوية"
 }
