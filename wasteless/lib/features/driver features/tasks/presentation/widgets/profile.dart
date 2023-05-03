@@ -36,7 +36,7 @@ profile() {
               style: TextStyle(fontSize: 18.sp),
             ),
             TextSpan(
-                text: 'tody',
+                text: 'today',
                 style: TextStyle(
                     fontSize: 18.sp, decoration: TextDecoration.underline)),
           ],

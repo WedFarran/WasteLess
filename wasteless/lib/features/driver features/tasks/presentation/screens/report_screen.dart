@@ -100,7 +100,7 @@ class _ReportScreenState extends State<ReportScreen> {
               MyTextFormField(
                 controller: widget.reportModel!.detailsController,
                 hintText: 'details...',
-                maxLines: 18,
+                maxLines: 16,
               ),
 
               Center(

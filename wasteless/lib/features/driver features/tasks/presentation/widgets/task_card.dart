@@ -22,7 +22,7 @@ class TaskCard extends StatelessWidget {
       padding: REdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.r)),
+            borderRadius: BorderRadius.all(Radius.circular(20.r)),
             color: LIGHT_BLUE),
         child: ListTile(
           title: Text(
