@@ -1,23 +1,18 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
-
-import 'driver_tasks_screen.dart';
+import '../../../../admin features/driver/data/models/report_model.dart';
+import '../widgets/text_form_field.dart';
 
 enum WasteType { dangerous, general }
 
 class ReportScreen extends StatefulWidget {
-  static const String id = 'report_screen';
-
   const ReportScreen({
     super.key,
-    this.driverId,
-    this.taskId,
-    this.taskName,
+    this.reportModel,
   });
-  final String? driverId;
-  final String? taskId;
-  final String? taskName;
+  final TaskReportModel? reportModel;
 
   @override
   State<ReportScreen> createState() => _ReportScreenState();
@@ -25,184 +20,144 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   WasteType? _wasteType = WasteType.general;
-  TextEditingController wasteWightController = TextEditingController();
-  TextEditingController detailsController = TextEditingController();
   String wasteType = 'General';
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('report');
 
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('report');
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(50.0),
+          padding: REdgeInsets.all(30.0),
           child: ListView(
             children: [
-              const Center(
+              Center(
                 child: Text(
                   'Bin Report',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 ),
               ),
-              const SizedBox(
-                height: 40,
+              SizedBox(
+                height: 40.h,
               ),
-              const Text(
-                'Waste Type',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              Text(
+                'Waste type',
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
-
               //Waste Type
               Row(
                 children: [
-                  Transform.scale(
-                    scale: 1.3,
-                    child: Radio(
-                        fillColor: MaterialStateColor.resolveWith(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return PRIMARY_BLUE;
-                            }
-                            return PRIMARY_GREEN;
-                          },
-                        ),
-                        value: WasteType.dangerous,
-                        groupValue: _wasteType,
-                        onChanged: (value) {
-                          setState(() {
-                            _wasteType = value;
-                            wasteType = "Dangerous";
-                          });
-                        }),
+                  //Dangerous Radio Button
+                  _radioButton(
+                    groupValue: _wasteType,
+                    value: WasteType.dangerous,
+                    onChanged: ((value) {
+                      setState(() {
+                        _wasteType = value;
+                        wasteType = 'Dangerous';
+                      });
+                    }),
                   ),
                   const Text('Dangerous'),
-                  const SizedBox(
-                    width: 55,
+                  SizedBox(
+                    width: 90.w,
                   ),
-                  Transform.scale(
-                    scale: 1.3,
-                    child: Radio(
-                        fillColor: MaterialStateColor.resolveWith(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return PRIMARY_BLUE;
-                            }
-                            return PRIMARY_GREEN;
-                          },
-                        ),
-                        value: WasteType.general,
-                        groupValue: _wasteType,
-                        onChanged: (value) {
-                          setState(() {
-                            _wasteType = value;
-                          });
-                        }),
+                  //General Radio Button
+                  _radioButton(
+                    groupValue: _wasteType,
+                    value: WasteType.general,
+                    onChanged: ((value) {
+                      setState(() {
+                        _wasteType = value;
+                      });
+                    }),
                   ),
                   const Text('General')
                 ],
               ),
-              const SizedBox(
-                height: 18,
+              SizedBox(
+                height: 40.h,
               ),
-              const Text(
-                'Waste Wight',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: TextFormField(
-                  controller: wasteWightController,
-                  style: const TextStyle(color: BLACK),
-                  decoration: const InputDecoration(
-                      isDense: true,
-                      contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                      hintText: "Waste Wight",
-                      hintStyle: TextStyle(color: GREY),
-                      filled: true,
-                      fillColor: EXTRA_LIGHT_BLUE,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30.0),
-                          ),
-                          borderSide: BorderSide.none)),
-                ),
-              ),
-              const SizedBox(
-                height: 25,
+              Text(
+                'Waste wight',
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
 
-              const Text(
-                'Other Details',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              MyTextFormField(
+                controller: widget.reportModel!.wasteWightController,
+                hintText: 'Waste Wight',
+                maxLines: 1,
+              ),
+              Text(
+                'Other details',
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: TextFormField(
-                  controller: detailsController,
-                  style: const TextStyle(color: BLACK),
-                  maxLines: 14,
-                  decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                      hintText: "Details...",
-                      hintStyle: TextStyle(color: GREY),
-                      filled: true,
-                      fillColor: EXTRA_LIGHT_BLUE,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20.0),
-                          ),
-                          borderSide: BorderSide.none)),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
+              MyTextFormField(
+                controller: widget.reportModel!.detailsController,
+                hintText: 'details...',
+                maxLines: 18,
               ),
 
               Center(
                 child: MaterialButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    minWidth: 300.0,
-                    height: 45,
+                        borderRadius: BorderRadius.circular(16.r)),
+                    minWidth: 270.0.w,
                     color: PRIMARY_GREEN,
-                    child: const Text(
+                    height: 40,
+                    child: Text(
                       "Submit",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: WHITE,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                          fontSize: 16.sp),
                     ),
                     onPressed: () async {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const DriverTasksScreen(),
-                      ));
-                      Map<String, dynamic> report = {
-                        'wastetype': wasteType,
-                        'wastewight': wasteWightController.text,
-                        'details': detailsController.text,
-                        'driverId': widget.driverId,
-                        'taskId': widget.taskId,
-                        'taskName': widget.taskName,
-                        'dateTime':
-                            '${DateTime.now().year} - ${DateTime.now().month}'
-                      };
+                      //Navigate to the next page
+                      Navigator.pop(context);
+
+                      final report = widget.reportModel!.toJson(wasteType);
+                      //push to the database
                       await dbRef.push().set(report);
+                      print(report);
+                      //Update status value
+                      final vlRef = FirebaseDatabase.instance
+                          .ref()
+                          .child('task')
+                          .child(widget.reportModel!.taskId.toString());
+                      vlRef.update({"status": true});
                     }),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Transform _radioButton(
+      {required Object? groupValue,
+      required dynamic value,
+      required void Function(dynamic)? onChanged}) {
+    return Transform.scale(
+      scale: 1.0.sp,
+      child: Radio(
+        fillColor: MaterialStateColor.resolveWith(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return PRIMARY_GREEN;
+            }
+            return LIGHT_GREY;
+          },
+        ),
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged,
       ),
     );
   }

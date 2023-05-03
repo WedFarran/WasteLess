@@ -6,7 +6,7 @@ import '../utils/colors.dart';
 
 class ScaffoldBlueBackground extends StatelessWidget {
   final Widget widget;
-  const ScaffoldBlueBackground({super.key, required this.widget});
+  const ScaffoldBlueBackground({super.key, required this.widget, required Padding child});
 
   @override
   Widget build(BuildContext context) {

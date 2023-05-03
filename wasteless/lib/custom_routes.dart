@@ -11,7 +11,7 @@ import 'features/driver features/home/presentation/screens/driver_home_screen.da
 import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
 import 'features/driver features/settings/presentation/screens/driver_settings_screen.dart';
 import 'features/driver features/settings/presentation/screens/profile_screen.dart';
-import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
+import 'features/driver features/tasks/presentation/screens/driver_task_screen.dart';
 import 'features/general features/account_type_screen.dart';
 import 'features/general features/splash_screen.dart';
 import 'features/general features/wasteless_login_screen.dart';
@@ -26,11 +26,11 @@ var customRoutes = <String, WidgetBuilder>{
   DriverHomeScreen.id: (context) => const DriverHomeScreen(),
   DriverDriverScreen.id: (context) => const DriverDriverScreen(),
   DriverSettingsScreen.id: (context) => const DriverSettingsScreen(),
-  DriverTasksScreen.id: (context) => const DriverTasksScreen(),
   SplashScreen.id: (context) => const SplashScreen(),
   AccountType.id: (context) => const AccountType(),
   LoginScreen.id: (context) => const LoginScreen(),
   ProfileScreen.id: (context) => const ProfileScreen(),
   AdminDriverProfileScreen.id: (context) => const AdminDriverProfileScreen(),
-  DriverHistoryScreen.id: (context) => const DriverHistoryScreen()
+  DriverHistoryScreen.id: (context) => const DriverHistoryScreen(),
+  DriverTaskScreen.id: (context) => const DriverTaskScreen()
 };

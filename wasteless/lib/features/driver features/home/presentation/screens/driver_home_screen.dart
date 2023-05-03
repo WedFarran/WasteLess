@@ -131,6 +131,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                   ));
             })
       ]),
+      child: Padding(padding: EdgeInsets.all(5)),
     );
   }
 }

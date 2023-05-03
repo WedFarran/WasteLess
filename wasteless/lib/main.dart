@@ -8,10 +8,12 @@ import 'package:wasteless/features/admin%20features/map/data/datasources/filteri
 import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/general%20features/splash_screen.dart';
 import 'custom_routes.dart';
+import 'features/driver features/tasks/presentation/bloc/task_bloc.dart';
 import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'injection_container.dart' as di;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,19 +60,26 @@ class _WasteLessState extends State<WasteLess> {
           create: (context) => FilteringChangeNotifier(),
         ),
         BlocProvider(
-            create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
+            create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent())),
+        BlocProvider<TaskBloc>(create: (_) => TaskBloc()),
       ],
-      child: MaterialApp(
-        scaffoldMessengerKey: LoginUtils.massengerKey,
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: WHITE),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: _locale,
-        initialRoute: SplashScreen.id,
-        routes: customRoutes,
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(411.42857142857144, 890.2857142857143),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp(
+              scaffoldMessengerKey: LoginUtils.massengerKey,
+              navigatorKey: navigatorKey,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(scaffoldBackgroundColor: WHITE),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: _locale,
+              initialRoute: SplashScreen.id,
+              routes: customRoutes,
+            );
+          }),
     );
   }
 }
