@@ -2,32 +2,25 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import '../../../features/admin features/map/presentation/widgets/filtering_options_widget.dart';
+
+import '../../../features/driver features/map/presentation/widgets/filtering_options_widget.dart';
 import '../../utils/assets_path.dart';
 import '../../utils/colors.dart';
 
 class FilteringButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
-  }
- /* final Function()? fullOnTap;
+  final Function()? fullOnTap;
   final Function()? halfFullOnTap;
   final Function()? emptyOnTap;
-  final Function()? driversOnTap;
   final Function()? resetOnTap;
-  final bool driversSelected;
   final bool halfFullSelected;
   final bool emptySelected;
   final bool fullSelected;
   const FilteringButton(
       {super.key,
-        required this.driversOnTap,
         required this.emptyOnTap,
         required this.fullOnTap,
         required this.halfFullOnTap,
         required this.resetOnTap,
-        required this.driversSelected,
         required this.emptySelected,
         required this.fullSelected,
         required this.halfFullSelected});
@@ -51,14 +44,11 @@ class FilteringButton extends StatelessWidget {
               fullSelected: fullSelected,
               halfFullSelected: halfFullSelected,
               emptySelected: emptySelected,
-              driversSelected: driversSelected,
-              driversOnTap: driversOnTap,
               emptyOnTap: emptyOnTap,
               fullOnTap: fullOnTap,
               halfFullOnTap: halfFullOnTap,
-              resetOnTap: resetOnTap,
             )),
       ),
     );
-  }*/
+  }
 }

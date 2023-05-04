@@ -9,6 +9,7 @@ import 'package:wasteless/features/admin%20features/map/presentation/widgets/fil
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/bin_details.dart';
+import '../../../../../core/widgets/map_widgets/filtering_button.dart';
 import '../../../../admin features/map/data/models/bins_models.dart';
 import '../widgets/navigation_button_widget.dart';
 
@@ -45,8 +46,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
     var currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
     ref = FirebaseDatabase.instance.ref('bin');
-    retrieveBins=ref.orderByChild("driverId")
-        .equalTo(currentUserId);
+    retrieveBins = ref.orderByChild("driverId").equalTo(currentUserId);
   }
 
   setCustomerMarkerIcon() {
@@ -98,95 +98,40 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   Widget build(BuildContext context) {
     setCustomerMarkerIcon();
     return Scaffold(
-      floatingActionButton: FilteringButton(
-        driversOnTap: () {
-          setState(() {
-            driversCheck = !driversCheck;
-          });
-        },
-        driversSelected: driversCheck,
-        fullOnTap: () {
-          setState(() {
-            fullCheck = !fullCheck;
-          });
-        },
-        fullSelected: fullCheck,
-        halfFullOnTap: () {
-          setState(() {
-            halfFullCheck = !halfFullCheck;
-          });
-        },
-        halfFullSelected: halfFullCheck,
-        emptyOnTap: () {
-          setState(() {
-            emptyCheck = !emptyCheck;
-          });
-        },
-        emptySelected: emptyCheck,
-        resetOnTap: () {
-          setState(() {
-            emptyCheck = true;
-            halfFullCheck = true;
-            fullCheck = true;
-            driversCheck = true;
-          });
-        },
-      ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 90.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: FloatingActionButton(
-                backgroundColor: WHITE,
-                onPressed: () => showModalBottomSheet(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(40))),
-                  backgroundColor: WHITE,
-                  context: context,
-                  builder: (context) => FilteringOptionsWidget(),
-                ),
-                child: Image.asset(
-                  FILTRING_ICON,
-                  height: context.height * 0.05,
-                ),
-              ),
-            ),
-            FloatingActionButton(
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FilteringButton(
+            fullOnTap: () {
+              setState(() {
+                fullCheck = !fullCheck;
+              });
+            },
+            fullSelected: fullCheck,
+            halfFullOnTap: () {
+              setState(() {
+                halfFullCheck = !halfFullCheck;
+              });
+            },
+            halfFullSelected: halfFullCheck,
+            emptyOnTap: () {
+              setState(() {
+                emptyCheck = !emptyCheck;
+              });
+            },
+            emptySelected: emptyCheck,
+            resetOnTap: () {
+              setState(() {
+                emptyCheck = true;
+                halfFullCheck = true;
+                fullCheck = true;
+                driversCheck = true;
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 80.0),
+            child: FloatingActionButton(
               backgroundColor: WHITE,
               onPressed: () => showModalBottomSheet(
                 context: context,
@@ -203,9 +148,9 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 height: context.height * 0.05,
               ),
             ),
-
-          ],
-        ),
+            // SizedBox(height: 80),
+          ),
+        ],
       ),
       body: SafeArea(
         child: StreamBuilder(
@@ -214,31 +159,11 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                Map<String, dynamic> map = Map<String, dynamic>.from( snapshot.data!.snapshot.value as Map);
+                Map<String, dynamic> map = Map<String, dynamic>.from(
+                    snapshot.data!.snapshot.value as Map);
                 List binsList = map.values.toList();
 
                 print(map);
-                /*map.forEach((key, value) {
-                  binsList.add(BinsModel(
-                      id: key,
-                      fullnesTime: value['fullnesTime'],
-                      wasteLevel: value['wasteLevel'],
-                      lat: value['lat'],
-                      lng: value['lng'],
-                      status: value['status']));
-                });*/
-
-                /* binsList.addAll(map.entries
-                    .where((entry) => entry.value['driverId'] == currentUserId)
-                    .map((entry) {
-                  return BinsModel(
-                      binId: entry.key,
-                      fullnesTime: entry.value['fullnesTime'],
-                      wasteLevel: entry.value['wasteLevel'],
-                      lat: entry.value['lat'],
-                      lng: entry.value['lng'],
-                      status: entry.value['status']);
-                }));*/
 
                 return GoogleMap(
                   zoomControlsEnabled: false,
