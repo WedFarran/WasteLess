@@ -11,11 +11,9 @@ class DriverEntity extends Equatable {
   final double lng;
   final String nationality;
   final String qR;
-  final String location;
 
   const DriverEntity(
       {required this.id,
-      required this.location,
       required this.area,
       required this.email,
       required this.fullName,
@@ -26,17 +24,6 @@ class DriverEntity extends Equatable {
       required this.nationality,
       required this.qR});
   @override
-  List<Object?> get props => [
-        id,
-        area,
-        email,
-        fullName,
-        idNumber,
-        image,
-        lat,
-        lng,
-        nationality,
-        location,
-        qR
-      ];
+  List<Object?> get props =>
+      [id, area, email, fullName, idNumber, image, lat, lng, nationality, qR];
 }

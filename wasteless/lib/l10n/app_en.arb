@@ -47,5 +47,8 @@
 "enter_location_error":"Enter task location",
 "select_driver":"Select a driver",
 "select_dates":"Select dates",
-"select_bin_error":"Select a bin"
+"select_bin_error":"Select a bin",
+"location_services_are_disabled":"Location services are disabled",
+"location_permission_are_denied":"Location permission are denied",
+"location_permission_are_permanently_denied":"Location permission are permanently denied"
 }

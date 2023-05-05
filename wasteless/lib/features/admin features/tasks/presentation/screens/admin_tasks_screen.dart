@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import 'package:wasteless/features/admin%20features/tasks/task_utils.dart';
 import '../../../../../core/utils/assets_path.dart';
+import '../../../../../core/utils/language.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
+import '../../../../../core/widgets/warning_dialog.dart';
 import '../widgets/new_task_button.dart';
 import '../widgets/task_widget.dart';
 import 'add_or_modify_task.dart';
@@ -22,7 +26,6 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
   @override
   void initState() {
     ref = FirebaseDatabase.instance.ref('task');
-
     super.initState();
   }
 
@@ -61,7 +64,24 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
                   onTap: () {},
                   taskName: snapshot.child('taskTitle').value.toString(),
                   taskDate: snapshot.child('dueDate').value.toString(),
-                  deleteAction: () {},
+                  deleteAction: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WarningDialog(
+                        title:
+                            translations(context).logout_confirmation_message,
+                        yesOnTap: () {
+                          try {
+                            ref.child('${snapshot.key}').remove();
+                          } on FirebaseException catch (e) {
+                            TaskUtils.showSnackBar(e.message);
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        cancleOnTap: () => Navigator.of(context).pop(),
+                      ),
+                    );
+                  },
                   driverId: snapshot.child('driverId').value.toString(),
                 );
               }),

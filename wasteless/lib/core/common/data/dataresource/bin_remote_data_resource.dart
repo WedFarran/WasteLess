@@ -14,13 +14,13 @@ class BinRemoteDataSource extends ChangeNotifier {
 
       binsMap.forEach((key, value) {
         _binsList.add(BinsModel(
-            id: key,
-            fullnesTime: value['fullnesTime'],
-            wasteLevel: value['wasteLevel'],
-            lat: value['lat'],
-            lng: value['lng'],
-            status: value['status'],
-            location: value['location']));
+          id: key,
+          fullnesTime: value['fullnesTime'],
+          wasteLevel: value['wasteLevel'],
+          lat: value['lat'],
+          lng: value['lng'],
+          status: value['status'],
+        ));
       });
 
       notifyListeners();

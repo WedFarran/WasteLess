@@ -56,14 +56,13 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
   Widget build(BuildContext context) {
     return ScaffoldBlueBackground(
       widget: SingleChildScrollView(
-        child: Column(
-          children: [
-            const LogoBackButton(),
-            Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    WasteLessTextField(
+        child: Column(children: [
+          const LogoBackButton(),
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  WasteLessTextField(
                       title: translations(context).task_title,
                       color: WHITE,
                       hintColor: GREY,
@@ -74,9 +73,8 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                           return translations(context).enter_task_title_error;
                         }
                         return null;
-                      },
-                    ),
-                    WasteLessTextField(
+                      }),
+                  WasteLessTextField(
                       title: translations(context).location,
                       color: WHITE,
                       hintColor: GREY,
@@ -87,12 +85,10 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                           return translations(context).enter_location_error;
                         }
                         return null;
-                      },
-                    ),
-                    DriverDropDownMenu(
+                      }),
+                  DriverDropDownMenu(
                       onChanged: (driver) {
                         this.driver = driver;
-
                         setState(() {
                           driverSelected = this.driver == null
                               ? driverSelected = true
@@ -101,29 +97,28 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                       },
                       value: driver,
                       itemsList: driversList,
-                      itemSelected: driverSelected,
-                    ),
-                    SelectDatesWidgets(
-                      dateError: dateError,
-                      dueDate: dueDate,
-                      dueDateEmpty: translations(context).due,
-                      setDueTaskDate: _setDueTaskDate,
-                      setStartTaskDate: _setStartTaskDate,
-                      startDate: startDate,
-                      startDateEmpty: translations(context).start,
-                    ),
-                    WasteLessTextField(
+                      itemSelected: driverSelected),
+                  SelectDatesWidgets(
+                    dateError:
+                        dueDate.isEmpty || startDate.isEmpty ? true : false,
+                    dueDate: dueDate,
+                    dueDateEmpty: translations(context).due,
+                    setDueTaskDate: _setDueTaskDate,
+                    setStartTaskDate: _setStartTaskDate,
+                    startDate: startDate,
+                    startDateEmpty: translations(context).start,
+                  ),
+                  WasteLessTextField(
                       title: translations(context).tap_to_add_a_description,
                       color: WHITE,
                       hintColor: GREY,
                       textController: _descriptionController,
                       obscureText: false,
                       height: 0.2,
-                      validator: (p0) => null,
-                    ),
-                  ],
-                )),
-            AddOrModifyTaskButtonWidget(
+                      validator: (p0) => null)
+                ],
+              )),
+          AddOrModifyTaskButtonWidget(
               title: translations(context).save,
               onTap: () async {
                 final formIsValid = _formKey.currentState!.validate();
@@ -132,10 +127,6 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                 if (dueDate.isEmpty || startDate.isEmpty) {
                   setState(() {
                     dateError = true;
-                  });
-                } else if (dueDate.isNotEmpty || startDate.isNotEmpty) {
-                  setState(() {
-                    dateError = false;
                   });
                 }
                 if (driver == null) {
@@ -153,21 +144,19 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                     dateError == false &&
                     driverSelected == false) {
                   await dbTasks.push().set({
-                    TaskString.BIN_ID: '',
                     TaskString.START_DATE: startDate,
                     TaskString.DESCRIPTION: _descriptionController.text.trim(),
                     TaskString.DRIVER_ID: driver!.id.toString(),
                     TaskString.DUE_DATE: dueDate,
                     TaskString.STATUS: "false",
-                    TaskString.TASK_TITLE: title
+                    TaskString.TASK_TITLE: _titleController.text.trim(),
+                    TaskString.LOCATION: _locationController.text.trim()
                   });
                   // ignore: use_build_context_synchronously
                   Navigator.pop(context);
                 }
-              },
-            )
-          ],
-        ),
+              })
+        ]),
       ),
     );
   }
@@ -183,9 +172,6 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
         dueDate = DateFormat("yyyy-MM-dd").format(value!).toString();
       });
     });
-    setState(() {
-      dateError = dueDate.isEmpty ? true : false;
-    });
   }
 
   _setStartTaskDate() {
@@ -197,7 +183,6 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
         .then((value) {
       setState(() {
         startDate = DateFormat("yyyy-MM-dd").format(value!).toString();
-        dateError = startDate.isEmpty ? true : false;
       });
     });
   }
@@ -219,8 +204,7 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
             lat: value['lat'],
             lng: value['lng'],
             nationality: value['nationality'],
-            qR: value['qR'],
-            location: value['location']));
+            qR: value['qR']));
       });
       setState(() {});
     });

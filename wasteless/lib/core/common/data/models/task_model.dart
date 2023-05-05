@@ -5,8 +5,7 @@ class TaskModel extends TaskEntity {
   const TaskModel(
       {required super.taskId,
       required super.binId,
-      required super.lat,
-      required super.lng,
+      required super.location,
       required super.status,
       required super.taskTitle,
       required super.startDate,
@@ -18,8 +17,7 @@ class TaskModel extends TaskEntity {
     return TaskModel(
         taskId: map[TaskString.TASK_ID],
         binId: map[TaskString.BIN_ID],
-        lat: map[TaskString.LAT],
-        lng: map[TaskString.LNG],
+        location: map[TaskString.LOCATION],
         status: map[TaskString.STATUS],
         taskTitle: map[TaskString.TASK_TITLE],
         startDate: map[TaskString.START_DATE],
@@ -32,8 +30,7 @@ class TaskModel extends TaskEntity {
     return TaskModel(
         taskId: json[TaskString.TASK_ID],
         binId: json[TaskString.BIN_ID],
-        lat: json[TaskString.LAT],
-        lng: json[TaskString.LNG],
+        location: json[TaskString.LOCATION],
         status: json[TaskString.STATUS],
         taskTitle: json[TaskString.TASK_TITLE],
         startDate: json[TaskString.START_DATE],
@@ -45,8 +42,7 @@ class TaskModel extends TaskEntity {
   Map<String, dynamic> toJson() {
     return {
       TaskString.BIN_ID: binId,
-      TaskString.LAT: lat,
-      TaskString.LNG: lng,
+      TaskString.LOCATION: location,
       TaskString.STATUS: status,
       TaskString.TASK_TITLE: taskTitle,
       TaskString.START_DATE: startDate,

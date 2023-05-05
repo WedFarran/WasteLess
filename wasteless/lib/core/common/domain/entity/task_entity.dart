@@ -3,8 +3,7 @@ import 'package:equatable/equatable.dart';
 class TaskEntity extends Equatable {
   final String taskId;
   final String binId;
-  final double lat;
-  final double lng;
+  final double location;
   final bool status;
   final double taskTitle;
   final String startDate;
@@ -15,8 +14,7 @@ class TaskEntity extends Equatable {
   const TaskEntity({
     required this.taskId,
     required this.binId,
-    required this.lat,
-    required this.lng,
+    required this.location,
     required this.status,
     required this.taskTitle,
     required this.startDate,
@@ -28,8 +26,7 @@ class TaskEntity extends Equatable {
   List<Object?> get props => [
         taskId,
         binId,
-        lat,
-        lng,
+        location,
         status,
         taskTitle,
         startDate,

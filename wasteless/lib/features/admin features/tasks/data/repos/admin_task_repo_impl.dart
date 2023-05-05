@@ -41,8 +41,7 @@ class AdminTaskRepoImpl implements AdminTaskRepo {
     final TaskModel taskModel = TaskModel(
         taskId: task.taskId,
         binId: task.binId,
-        lat: task.lat,
-        lng: task.lng,
+        location: task.location,
         status: task.status,
         taskTitle: task.taskTitle,
         startDate: task.startDate,
@@ -80,8 +79,7 @@ class AdminTaskRepoImpl implements AdminTaskRepo {
     final TaskModel taskModel = TaskModel(
         taskId: task.taskId,
         binId: task.binId,
-        lat: task.lat,
-        lng: task.lng,
+        location: task.location,
         status: task.status,
         taskTitle: task.taskTitle,
         startDate: task.startDate,

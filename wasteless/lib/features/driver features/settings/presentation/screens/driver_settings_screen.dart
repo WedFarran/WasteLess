@@ -79,6 +79,8 @@ class DriverSettingsScreen extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => WarningDialog(
+                        displayCancleButton: true,
+                        displayYesButton: true,
                         title:
                             translations(context).logout_confirmation_message,
                         yesOnTap: () {

@@ -47,5 +47,8 @@
 "enter_location_error":"ادخل موقع المهمة",
 "select_driver":"اختار السائق المسؤول عن المهمة",
 "select_dates":"اختار تاريخ بداية و نهاية المهمة",
-"select_bin_error":"أختار حاوية"
+"select_bin_error":"أختار حاوية",
+"location_services_are_disabled":"خدمة تحديد المواقع متوقفه",
+"location_permission_are_denied":"تم رفض إذن الموقع",
+"location_permission_are_permanently_denied":"تم رفض إذن الموقع بشكل دائم"
 }

@@ -47,13 +47,13 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
       binsMap.forEach((key, value) {
         binsList.add(BinsModel(
-            id: key,
-            fullnesTime: value['fullnesTime'],
-            wasteLevel: value['wasteLevel'],
-            lat: value['lat'],
-            lng: value['lng'],
-            status: value['status'],
-            location: value['location']));
+          id: key,
+          fullnesTime: value['fullnesTime'],
+          wasteLevel: value['wasteLevel'],
+          lat: value['lat'],
+          lng: value['lng'],
+          status: value['status'],
+        ));
       });
       setState(() {});
     });
@@ -67,17 +67,17 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
       driversMap.forEach((key, value) {
         driversList.add(DriversModel(
-            id: key,
-            area: value['area'],
-            email: value['email'],
-            fullName: value['fullName'],
-            idNumber: value['idNumber'],
-            image: value['image'],
-            lat: value['lat'],
-            lng: value['lng'],
-            nationality: value['nationality'],
-            qR: value['qR'],
-            location: value['location']));
+          id: key,
+          area: value['area'],
+          email: value['email'],
+          fullName: value['fullName'],
+          idNumber: value['idNumber'],
+          image: value['image'],
+          lat: value['lat'],
+          lng: value['lng'],
+          nationality: value['nationality'],
+          qR: value['qR'],
+        ));
       });
       setState(() {});
     });

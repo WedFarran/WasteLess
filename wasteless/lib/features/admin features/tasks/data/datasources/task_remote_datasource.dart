@@ -39,8 +39,7 @@ class TaskRemoteImpl implements TaskRemoteDataResource {
             taskTitle: value[TaskString.TASK_TITLE],
             startDate: value[TaskString.START_DATE],
             dueDate: value[TaskString.DUE_DATE],
-            lat: value[TaskString.LAT],
-            lng: value[TaskString.LNG],
+            location: value[TaskString.LOCATION],
             description: value[TaskString.DESCRIPTION],
             driverId: value[TaskString.DRIVER_ID],
           ));
