@@ -70,18 +70,17 @@ class DriverSettingsScreen extends StatelessWidget {
                   SettingsButton(
                       onTap: () {
                         showDialog(
-                          context: context,
-                          builder: (context) => WarningDialog(
-                              title: translations(context)
-                                  .logout_confirmation_message,
-                              yesOnTap: () {
-                                FirebaseAuth.instance.signOut();
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    AccountType.id,
-                                    (Route<dynamic> route) => false);
-                              },
-                              cancleOnTap: () => Navigator.of(context).pop()),
-                        );
+                            context: context,
+                            builder: (context) => WarningDialog(
+                                cancleOnTap: () => Navigator.of(context).pop(),
+                                title: translations(context)
+                                    .logout_confirmation_message,
+                                yesOnTap: () {
+                                  FirebaseAuth.instance.signOut();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      AccountType.id,
+                                      (Route<dynamic> route) => false);
+                                }));
                       },
                       icon: Icons.logout_outlined,
                       text: translations(context).logout),

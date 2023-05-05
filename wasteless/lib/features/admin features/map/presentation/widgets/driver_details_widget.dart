@@ -28,7 +28,7 @@ class DriverDetailsWidget extends StatelessWidget {
                 backgroundImage: AssetImage(ANWAR_IMAGE),
                 radius: 50,
               ),
-              Text(name, style: BIN_STATUS),
+              Text(name, style: anyColorSize32(FONT_GRAY)),
               SizedBox(
                 width: context.width * 0.01,
               )

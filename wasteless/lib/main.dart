@@ -33,7 +33,6 @@ class WasteLess extends StatefulWidget {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
 class _WasteLessState extends State<WasteLess> {
   Locale? _locale;
   setLocale(Locale locale) {
@@ -50,6 +49,7 @@ class _WasteLessState extends State<WasteLess> {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -66,6 +66,7 @@ class _WasteLessState extends State<WasteLess> {
         initialRoute: SplashScreen.id,
         routes: customRoutes,
       ),
+
     );
   }
 }

@@ -31,11 +31,13 @@ TextStyle WASTE_SPLASH =
 TextStyle WASTE_SPLASH_GREEN = const TextStyle(
     color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 70);
 
-TextStyle BIN_STATUS = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 32,
-    fontWeight: FontWeight.w700,
-    color: FONT_GRAY);
+TextStyle anyColorSize32(Color color) {
+  return TextStyle(
+      fontFamily: 'Nunito',
+      fontSize: 32,
+      fontWeight: FontWeight.w700,
+      color: color);
+}
 
 TextStyle anyColorSize16(Color color) {
   return TextStyle(

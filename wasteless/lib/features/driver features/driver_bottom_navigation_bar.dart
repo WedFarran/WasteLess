@@ -22,7 +22,7 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
   List<Widget> screens = const [
     DriverHomeScreen(),
     DriverTasksScreen(),
-    DriverDriverScreen(),
+    DriverMapScreen(),
     DriverSettingsScreen(),
   ];
   int selectedIndex = 0;
@@ -30,7 +30,7 @@ class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
   Widget build(BuildContext context) {
     List iconsName = [HOME_ICON, TASKS_ICON, MAP_ICON, SETTINGS_ICON];
 
-    List iconsSize = [0.08, 0.06, 0.07, 0.07];
+    List iconsSize = [0.08, 0.06, 0.05, 0.07];
     List tabletIconSize = [0.055, 0.04, 0.05, 0.05];
 
     return Scaffold(
