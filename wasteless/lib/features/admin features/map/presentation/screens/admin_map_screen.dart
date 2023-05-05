@@ -103,12 +103,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
                         BorderRadius.vertical(top: Radius.circular(40))),
                 backgroundColor: WHITE,
                 context: context,
-                builder: (context) => FilteringWidget(
-                      driversCheck: driversCheck,
-                      emptyCheck: emptyCheck,
-                      fullCheck: fullCheck,
-                      halfFullCheck: halfFullCheck,
-                    )),
+                builder: (context) => const FilteringWidget()),
           ),
         ),
         body: SafeArea(

@@ -1,22 +1,22 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/admin%20features/map/data/datasources/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
-import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
-import 'filtering_button_widget.dart';
+import '../../../../admin features/map/data/datasources/filtering_change_notifier.dart';
+import '../../../../admin features/map/presentation/widgets/filtering_button_widget.dart';
 
-class FilteringWidget extends StatefulWidget {
-  const FilteringWidget({super.key});
+class FilteringOptionsWidget extends StatefulWidget {
+  const FilteringOptionsWidget({super.key});
 
   @override
-  State<FilteringWidget> createState() => _FilteringWidgetState();
+  State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
 }
 
-class _FilteringWidgetState extends State<FilteringWidget> {
+class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -82,21 +82,6 @@ class _FilteringWidgetState extends State<FilteringWidget> {
               status: 'Empty',
             );
           }),
-          const Divider(
-            color: PRIMARY_BLUE,
-            thickness: 1,
-          ),
-          Consumer<FilteringChangeNotifier>(
-              builder: (context, driverSelected, child) {
-            return FilteringButtonWidget(
-              onTap: () => context
-                  .read<FilteringChangeNotifier>()
-                  .driversCheck = !driverSelected.driversCheck,
-              selected: driverSelected.driversCheck,
-              icon: VEHICLE_ICON,
-              status: 'Drivers',
-            );
-          })
         ],
       ),
     );
