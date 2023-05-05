@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
+import '../../data/datasources/filtering_change_notifier.dart';
 import '../../data/models/bins_models.dart';
 import '../../data/models/driver_models.dart';
 import '../map_tools.dart';
@@ -89,40 +91,36 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 80.0),
-          child: FloatingActionButton(
-            backgroundColor: WHITE,
-            child: Image.asset(
-              FILTRING_ICON,
-              height: context.height * 0.04,
-            ),
-            onPressed: () => showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40))),
-                backgroundColor: WHITE,
-                context: context,
-                builder: (context) => const FilteringWidget()),
-          ),
-        ),
-        body: SafeArea(
-            child: GoogleMap(
-          zoomControlsEnabled: false,
-          compassEnabled: false,
-          initialCameraPosition:
-              CameraPosition(target: _initialPosition, zoom: 13),
-          onMapCreated: (controler) {
-            setState(
-              () {
-                mapController = controler;
-                mapController.setMapStyle(
-                    '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-              },
-            );
-          },
-          markers: Set.from(getGeoCords(binsList, context, driversList,
-              fullCheck, halfFullCheck, emptyCheck, driversCheck)),
-        )));
+        floatingActionButton: const Padding(
+            padding: EdgeInsets.only(bottom: 80.0), child: FilteringWidget()),
+        body: SafeArea(child: Consumer<FilteringChangeNotifier>(
+            builder: (context, filteringOptions, child) {
+          if (binsList.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return GoogleMap(
+            zoomControlsEnabled: false,
+            compassEnabled: false,
+            initialCameraPosition:
+                CameraPosition(target: _initialPosition, zoom: 13),
+            onMapCreated: (controler) {
+              setState(
+                () {
+                  mapController = controler;
+                  mapController.setMapStyle(
+                      '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
+                },
+              );
+            },
+            markers: Set.from(getGeoCords(
+                binsList,
+                context,
+                driversList,
+                filteringOptions.fullCheck,
+                filteringOptions.halfFullCheck,
+                filteringOptions.emptyCheck,
+                filteringOptions.driversCheck)),
+          );
+        })));
   }
 }

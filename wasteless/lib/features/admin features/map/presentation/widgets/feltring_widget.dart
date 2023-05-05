@@ -19,85 +19,101 @@ class FilteringWidget extends StatefulWidget {
 class _FilteringWidgetState extends State<FilteringWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: context.height * 0.33,
-      margin: const EdgeInsets.only(top: 15, right: 20, bottom: 5, left: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+    return FloatingActionButton(
+      backgroundColor: WHITE,
+      child: Image.asset(
+        FILTRING_ICON,
+        height: context.height * 0.04,
+      ),
+      onPressed: () => showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
+        backgroundColor: WHITE,
+        context: context,
+        builder: (context) => Container(
+          height: context.height * 0.33,
+          margin:
+              const EdgeInsets.only(top: 15, right: 20, bottom: 5, left: 20),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    FILTRING_ICON,
-                    height: context.height * 0.02,
+                  Row(
+                    children: [
+                      Image.asset(
+                        FILTRING_ICON,
+                        height: context.height * 0.02,
+                      ),
+                      Text(
+                        'Filter',
+                        style: anyColorSize16(FONT_GRAY),
+                      )
+                    ],
                   ),
-                  Text(
-                    'Filter',
-                    style: anyColorSize16(FONT_GRAY),
-                  )
+                  InkWell(
+                    onTap: () {
+                      context.read<FilteringChangeNotifier>().fullCheck = true;
+                      context.read<FilteringChangeNotifier>().halfFullCheck =
+                          true;
+                      context.read<FilteringChangeNotifier>().emptyCheck = true;
+                    },
+                    child: Text('Reset', style: anyColorSize16(BLACK)),
+                  ),
                 ],
               ),
-              InkWell(
-                onTap: () {
-                  context.read<FilteringChangeNotifier>().driversCheck = true;
-                  context.read<FilteringChangeNotifier>().fullCheck = true;
-                  context.read<FilteringChangeNotifier>().halfFullCheck = true;
-                  context.read<FilteringChangeNotifier>().emptyCheck = true;
-                },
-                child: Text('Reset', style: anyColorSize16(BLACK)),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, fullSelected, child) {
+                return FilteringButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .fullCheck = !fullSelected.fullCheck,
+                  selected: fullSelected.fullCheck,
+                  icon: Full_BIN_ICON,
+                  status: 'Full',
+                );
+              }),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, halfFullSelected, child) {
+                return FilteringButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .halfFullCheck = !halfFullSelected.halfFullCheck,
+                  selected: halfFullSelected.halfFullCheck,
+                  icon: HALF_FULL_BIN_ICON,
+                  status: 'Half Full',
+                );
+              }),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, emptySelected, child) {
+                return FilteringButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .emptyCheck = !emptySelected.emptyCheck,
+                  selected: emptySelected.emptyCheck,
+                  icon: EMPTY_BIN_ICON,
+                  status: 'Empty',
+                );
+              }),
+              const Divider(
+                color: PRIMARY_BLUE,
+                thickness: 1,
               ),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, driverSelected, child) {
+                return FilteringButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .driversCheck = !driverSelected.driversCheck,
+                  selected: driverSelected.driversCheck,
+                  icon: VEHICLE_ICON,
+                  status: 'Drivers',
+                );
+              })
             ],
           ),
-          Consumer<FilteringChangeNotifier>(
-              builder: (context, fullSelected, child) {
-            return FilteringButtonWidget(
-              onTap: () => context.read<FilteringChangeNotifier>().fullCheck =
-                  !fullSelected.fullCheck,
-              selected: fullSelected.fullCheck,
-              icon: Full_BIN_ICON,
-              status: 'Full',
-            );
-          }),
-          Consumer<FilteringChangeNotifier>(
-              builder: (context, halfFullSelected, child) {
-            return FilteringButtonWidget(
-              onTap: () => context
-                  .read<FilteringChangeNotifier>()
-                  .halfFullCheck = !halfFullSelected.halfFullCheck,
-              selected: halfFullSelected.halfFullCheck,
-              icon: HALF_FULL_BIN_ICON,
-              status: 'Half Full',
-            );
-          }),
-          Consumer<FilteringChangeNotifier>(
-              builder: (context, emptySelected, child) {
-            return FilteringButtonWidget(
-              onTap: () => context.read<FilteringChangeNotifier>().emptyCheck =
-                  !emptySelected.emptyCheck,
-              selected: emptySelected.emptyCheck,
-              icon: EMPTY_BIN_ICON,
-              status: 'Empty',
-            );
-          }),
-          const Divider(
-            color: PRIMARY_BLUE,
-            thickness: 1,
-          ),
-          Consumer<FilteringChangeNotifier>(
-              builder: (context, driverSelected, child) {
-            return FilteringButtonWidget(
-              onTap: () => context
-                  .read<FilteringChangeNotifier>()
-                  .driversCheck = !driverSelected.driversCheck,
-              selected: driverSelected.driversCheck,
-              icon: VEHICLE_ICON,
-              status: 'Drivers',
-            );
-          })
-        ],
+        ),
       ),
     );
   }
