@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/media_query.dart';
@@ -27,13 +26,8 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
   late DatabaseReference ref;
   late var currentUserId = '';
 
-  double lat = 21.42462845849512;
-  double lng = 39.82612550889805;
-
   @override
   void initState() {
-    _liveLocation();
-    getCurrentLocation();
     setCustomeMarkerIcon();
     var currentUserId = FirebaseAuth.instance.currentUser!.uid;
     ref = FirebaseDatabase.instance.ref('bin');
@@ -42,23 +36,8 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
     super.initState();
   }
 
-  void _liveLocation() {
-    LocationSettings locationSettings = const LocationSettings(
-        accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 1);
-    Geolocator.getPositionStream(locationSettings: locationSettings)
-        .listen((position) {
-      lat = position.latitude;
-      lng = position.longitude;
-      setState(() {
-        _initialPosition = LatLng(position.latitude, position.longitude);
-        mapController.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target: LatLng(position.latitude, position.longitude))));
-      });
-    });
-  }
-
-  LatLng _initialPosition = const LatLng(21.42462845849512, 39.82612550889805);
+  final LatLng _initialPosition =
+      const LatLng(21.42462845849512, 39.82612550889805);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +89,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                             setState(
                               () {
                                 mapController = controler;
-                                _liveLocation();
+
                                 mapController.setMapStyle(
                                     '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
                               },
@@ -121,8 +100,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                               context,
                               filteringOptions.fullCheck,
                               filteringOptions.halfFullCheck,
-                              filteringOptions.emptyCheck,
-                              LatLng(lat, lng))));
+                              filteringOptions.emptyCheck)));
                     });
                   }
                 })));

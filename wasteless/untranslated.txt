@@ -1,5 +1,1 @@
-{
-  "ar": [
-    "tap_to_add_a_description"
-  ]
-}
+{}

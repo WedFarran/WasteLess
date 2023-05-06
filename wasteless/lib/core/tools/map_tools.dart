@@ -133,12 +133,12 @@ getAllGeoCords(
 }
 
 getBinsGeoCords(
-    List<BinsModel> binsList,
-    BuildContext context,
-    bool fullSelected,
-    bool halfFullSelected,
-    bool emptySelected,
-    LatLng driverLocation) {
+  List<BinsModel> binsList,
+  BuildContext context,
+  bool fullSelected,
+  bool halfFullSelected,
+  bool emptySelected,
+) {
   List<Marker> binsMarkers = [];
   List<Marker> markersList = [];
 
@@ -168,11 +168,6 @@ getBinsGeoCords(
           },
           position: LatLng(e.lat, e.lng)))
       .toList();
-
-  markersList.add(Marker(
-      markerId: const MarkerId('driverId'),
-      icon: currentLocationMarker,
-      position: driverLocation));
 
   if (fullSelected) {
     markersList
