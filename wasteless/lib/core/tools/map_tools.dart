@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/driver_models.dart';
 import 'package:wasteless/features/admin%20features/map/presentation/widgets/driver_details_widget.dart';
 import '../../../../core/utils/assets_path.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/widgets/map_widgets/bin_details.dart';
+import '../model/bins_models.dart';
+import '../model/driver_models.dart';
 
 BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;

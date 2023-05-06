@@ -8,7 +8,7 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../../core/widgets/map_widgets/filtering_button_widget.dart';
+import '../../../../../core/widgets/map_widgets/filter_floating_action_button.dart';
 
 class AdminMapFilteringOptionsWidget extends StatelessWidget {
   const AdminMapFilteringOptionsWidget({super.key});
@@ -31,7 +31,7 @@ class AdminMapFilteringOptionsWidget extends StatelessWidget {
                         height: context.height * 0.02,
                       ),
                       Text(
-                        translations(context).email,
+                        translations(context).filter,
                         style: anyColorSize16(FONT_GRAY),
                       )
                     ],
@@ -45,7 +45,7 @@ class AdminMapFilteringOptionsWidget extends StatelessWidget {
                           true;
                       context.read<FilteringChangeNotifier>().emptyCheck = true;
                     },
-                    child: Text(translations(context).email,
+                    child: Text(translations(context).reset,
                         style: anyColorSize16(BLACK)),
                   ),
                 ],
@@ -58,7 +58,7 @@ class AdminMapFilteringOptionsWidget extends StatelessWidget {
                       .fullCheck = !fullSelected.fullCheck,
                   selected: fullSelected.fullCheck,
                   icon: Full_BIN_ICON,
-                  status: translations(context).email,
+                  status: translations(context).full,
                 );
               }),
               Consumer<FilteringChangeNotifier>(
@@ -69,7 +69,7 @@ class AdminMapFilteringOptionsWidget extends StatelessWidget {
                       .halfFullCheck = !halfFullSelected.halfFullCheck,
                   selected: halfFullSelected.halfFullCheck,
                   icon: HALF_FULL_BIN_ICON,
-                  status: translations(context).email,
+                  status: translations(context).half_full,
                 );
               }),
               Consumer<FilteringChangeNotifier>(
@@ -80,7 +80,7 @@ class AdminMapFilteringOptionsWidget extends StatelessWidget {
                       .emptyCheck = !emptySelected.emptyCheck,
                   selected: emptySelected.emptyCheck,
                   icon: EMPTY_BIN_ICON,
-                  status: translations(context).email,
+                  status: translations(context).empty,
                 );
               }),
               const Divider(

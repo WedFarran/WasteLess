@@ -25,10 +25,6 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   late DatabaseReference dbDrivers;
   List<BinsModel> binsList = [];
   List<DriversModel> driversList = [];
-  bool fullCheck = false;
-  bool halfFullCheck = false;
-  bool emptyCheck = false;
-  bool driversCheck = false;
 
   final LatLng _initialPosition =
       const LatLng(21.42462845849512, 39.82612550889805);

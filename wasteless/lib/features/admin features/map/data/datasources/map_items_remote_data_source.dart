@@ -1,55 +1,74 @@
-import 'dart:convert';
 import 'package:wasteless/core/errors/exception.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:wasteless/core/errors/failure.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../core/model/bins_models.dart';
 import '../../../../../core/model/driver_models.dart';
 
 abstract class MapItemsRemoteDataSource {
-  //Future<Map<String, dynamic>> getAllMapItems();
-  Future<List<BinsModel>> getAllMapBins();
-  Future<List<DriversModel>> getAllMapDrivers();
+  List<BinsModel> getAllMapBins();
+  List<DriversModel> getAllMapDrivers();
 }
-
-const url =
-    'https://wasteless-36ce0-default-rtdb.asia-southeast1.firebasedatabase.app/bin/';
-const url1 =
-    'https://wasteless-36ce0-default-rtdb.asia-southeast1.firebasedatabase.app/driver/';
 
 class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
   final http.Client client;
 
   MapItemsRemoteSourceImp({required this.client});
   @override
-  Future<List<BinsModel>> getAllMapBins() async {
-    //final ref = FirebaseDatabase.instance.ref('bin');
-    final response = await client
-        .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      final List decodedJson = json.decode(response.body) as List;
-      final List<BinsModel> binsModel = decodedJson
-          .map<BinsModel>((jsonBinModel) => BinsModel.fromJson(jsonBinModel))
-          .toList();
-      //  print('wed wed wed wed wed wedw  $binsModel');
-      return binsModel;
-    } else {
-      throw ServerException();
+  List<BinsModel> getAllMapBins() {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("bin");
+    Stream<DatabaseEvent> streamBins = ref.onValue;
+    final List<BinsModel> binsList = [];
+    try {
+      streamBins.listen((DatabaseEvent event) {
+        Map<String, dynamic> binsMap =
+            Map<String, dynamic>.from(event.snapshot.value as Map);
+
+        binsMap.forEach((key, value) {
+          binsList.add(BinsModel(
+              id: key,
+              fullnesTime: value['fullnesTime'],
+              wasteLevel: value['wasteLevel'],
+              lat: value['lat'],
+              lng: value['lng'],
+              status: value['status']));
+        });
+      });
+      return binsList;
+    } on ServerException {
+      ServerFailure();
     }
+    return binsList;
   }
 
   @override
-  Future<List<DriversModel>> getAllMapDrivers() async {
-    final response = await client
-        .get(Uri.parse(url1), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      final List decodedJson = json.decode(response.body) as List;
-      final List<DriversModel> driversModel = decodedJson
-          .map<DriversModel>(
-              (jsondriverModel) => DriversModel.fromJson(jsondriverModel))
-          .toList();
-      //print('wed wed wed wed wed wedw  $driversModel');
-      return driversModel;
-    } else {
-      throw ServerException();
+  List<DriversModel> getAllMapDrivers() {
+    final List<DriversModel> driversList = [];
+    DatabaseReference ref = FirebaseDatabase.instance.ref("bin");
+    Stream<DatabaseEvent> streamDrivers = ref.onValue;
+    try {
+      streamDrivers.listen((DatabaseEvent event) {
+        Map<String, dynamic> driversMap =
+            Map<String, dynamic>.from(event.snapshot.value as Map);
+
+        driversMap.forEach((key, value) {
+          driversList.add(DriversModel(
+              id: key,
+              area: value['area'],
+              email: value['email'],
+              fullName: value['fullName'],
+              idNumber: value['idNumber'],
+              image: value['image'],
+              lat: value['lat'],
+              lng: value['lng'],
+              nationality: value['nationality'],
+              qR: value['qR']));
+        });
+      });
+      return driversList;
+    } on ServerException {
+      ServerFailure();
     }
+    return driversList;
   }
 }

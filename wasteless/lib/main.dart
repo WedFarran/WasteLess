@@ -10,7 +10,7 @@ import 'custom_routes.dart';
 import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'injection_container.dart' as di;
+//import 'injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,8 +54,6 @@ class _WasteLessState extends State<WasteLess> {
     return MultiBlocProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => FilteringChangeNotifier())
-        /* BlocProvider(
-            create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))*/
       ],
       child: MaterialApp(
         scaffoldMessengerKey: LoginUtils.massengerKey,

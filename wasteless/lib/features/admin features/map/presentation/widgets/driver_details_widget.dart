@@ -5,6 +5,7 @@ import 'package:wasteless/core/utils/media_query.dart';
 
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
+import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
 
 class DriverDetailsWidget extends StatelessWidget {
@@ -37,7 +38,8 @@ class DriverDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('location:', style: anyColorSize16(FONT_GRAY)),
+              Text('${translations(context).location}:',
+                  style: anyColorSize16(FONT_GRAY)),
               Text(location, style: anyColorSize16(PRIMARY_BLUE)),
             ],
           ),

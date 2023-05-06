@@ -5,10 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wasteless/core/network/network_info.dart';
 import 'package:wasteless/features/admin%20features/map/data/datasources/map_items_remote_data_source.dart';
 import 'package:wasteless/features/admin%20features/map/data/repos/map_items_repo_impl.dart';
-import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'features/admin features/map/data/datasources/map_items_local_data_source.dart';
 import 'features/admin features/map/domain/repo/map_items_repo.dart';
-import 'features/admin features/map/domain/usecases/get_map_items_usecase.dart';
 
 final sl = GetIt.instance;
 
@@ -16,9 +14,7 @@ Future<void> init() async {
   // features - admin map
 
   // bloc
-  sl.registerFactory(() => MapItemsBloc(getAllAdminMapItems: sl()));
   //usecases
-  sl.registerLazySingleton(() => GetAllAdminMapItemsUseCase(sl()));
   /* sl.registerLazySingleton(() => GetAllAdminMapBinsUseCase(sl()));
   sl.registerLazySingleton(() => GetAllAdminMapDriversUseCase(sl()));*/
   //repos

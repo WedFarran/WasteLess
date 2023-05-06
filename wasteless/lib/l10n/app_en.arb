@@ -19,6 +19,7 @@
 "last_name":"Last name",
 "qr":"QR code to enter the company",
 "empty_email":"Empty email",
+"trun_gps_on":"You must trun on device location to proceed  using the application.",
 "history":"History",
 "name":"Name",
 "id_number":"Id Number",
@@ -28,7 +29,12 @@
 "date_time":"Date time",
 "report":"Report",
 "empty_reports":"Theres no reports to display",
-"members":"Members"
-
-
+"members":"Members",
+"half_full":"Half Full",
+"full":"Full",
+"empty":"Empty",
+"location":"location",
+"full_expected_time":"full expected time",
+"filter":"Filter",
+"reset":"Reset"
 }
