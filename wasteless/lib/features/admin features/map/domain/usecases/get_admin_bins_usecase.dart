@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
-
+import '../../../../../core/entity/bin_entity.dart';
 import '../../../../../core/errors/failure.dart';
-import '../entity/bin_entity.dart';
 import '../repo/map_items_repo.dart';
 
 class GetAllAdminMapBinsUseCase {

@@ -4,21 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
-import '../bloc/filtering_change_notifier.dart';
-import 'filtering_button_widget.dart';
+import '../../../../../core/widgets/map_widgets/filtering_button_widget.dart';
 
-class DriverFilteringOptionsWidget extends StatefulWidget {
-  const DriverFilteringOptionsWidget({super.key});
+class DriverMapFilteringOptionsWidget extends StatelessWidget {
+  const DriverMapFilteringOptionsWidget({super.key});
 
-  @override
-  State<DriverFilteringOptionsWidget> createState() =>
-      _DriverFilteringOptionsWidgetState();
-}
-
-class _DriverFilteringOptionsWidgetState
-    extends State<DriverFilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +37,6 @@ class _DriverFilteringOptionsWidgetState
               ),
               InkWell(
                 onTap: () {
-                  context.read<FilteringChangeNotifier>().driversCheck = true;
                   context.read<FilteringChangeNotifier>().fullCheck = true;
                   context.read<FilteringChangeNotifier>().halfFullCheck = true;
                   context.read<FilteringChangeNotifier>().emptyCheck = true;
@@ -55,7 +47,7 @@ class _DriverFilteringOptionsWidgetState
           ),
           Consumer<FilteringChangeNotifier>(
               builder: (context, fullSelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context.read<FilteringChangeNotifier>().fullCheck =
                   !fullSelected.fullCheck,
               selected: fullSelected.fullCheck,
@@ -65,7 +57,7 @@ class _DriverFilteringOptionsWidgetState
           }),
           Consumer<FilteringChangeNotifier>(
               builder: (context, halfFullSelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context
                   .read<FilteringChangeNotifier>()
                   .halfFullCheck = !halfFullSelected.halfFullCheck,
@@ -76,7 +68,7 @@ class _DriverFilteringOptionsWidgetState
           }),
           Consumer<FilteringChangeNotifier>(
               builder: (context, emptySelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context.read<FilteringChangeNotifier>().emptyCheck =
                   !emptySelected.emptyCheck,
               selected: emptySelected.emptyCheck,

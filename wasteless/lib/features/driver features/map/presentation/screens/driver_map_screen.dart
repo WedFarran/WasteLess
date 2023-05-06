@@ -5,11 +5,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
-import 'package:wasteless/features/driver%20features/map/presentation/bloc/geolocator_services.dart';
-import '../../../../../core/widgets/map_widgets/filtering_button.dart';
-import '../../map_tools.dart';
-import '../bloc/filtering_change_notifier.dart';
+import '../../../../../core/model/bins_models.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
+import '../../../../../core/tools/map_tools.dart';
+import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';
+import '../widgets/driver_filtering_options_widget.dart';
 import '../widgets/navigation_button_widget.dart';
 
 class DriverMapScreen extends StatefulWidget {
@@ -22,7 +22,6 @@ class DriverMapScreen extends StatefulWidget {
 }
 
 class _DriverMapScreenState extends State<DriverMapScreen> {
-  final GeolocatorServices geoServices = GeolocatorServices();
   late GoogleMapController mapController;
   late Query retrieveBins;
   late DatabaseReference ref;
@@ -71,7 +70,9 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const FilteringButton(),
+                      const FilterinFloatingActionButton(
+                        widget: DriverMapFilteringOptionsWidget(),
+                      ),
                       NavigationButtonWidget(selected: true, ontap: () {}),
                     ]))),
         body: SafeArea(

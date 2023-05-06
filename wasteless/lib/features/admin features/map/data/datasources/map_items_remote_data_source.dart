@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:wasteless/core/errors/exception.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/driver_models.dart';
 import 'package:http/http.dart' as http;
+import '../../../../../core/model/bins_models.dart';
+import '../../../../../core/model/driver_models.dart';
 
 abstract class MapItemsRemoteDataSource {
   //Future<Map<String, dynamic>> getAllMapItems();

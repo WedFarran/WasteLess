@@ -4,10 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
-import 'package:wasteless/features/admin%20features/map/presentation/bloc/map_items_bloc.dart';
 import 'package:wasteless/features/general%20features/splash_screen.dart';
+import 'core/providers/map/filtering_change_notifier.dart';
 import 'custom_routes.dart';
-import 'features/driver features/map/presentation/bloc/filtering_change_notifier.dart';
 import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await di.init();
+  // await di.init();
   runApp(const WasteLess());
 }
 
@@ -54,9 +53,9 @@ class _WasteLessState extends State<WasteLess> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => FilteringChangeNotifier()),
-        BlocProvider(
-            create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))
+        ChangeNotifierProvider(create: (context) => FilteringChangeNotifier())
+        /* BlocProvider(
+            create: (_) => di.sl<MapItemsBloc>()..add(GetAllMapItemsEvent()))*/
       ],
       child: MaterialApp(
         scaffoldMessengerKey: LoginUtils.massengerKey,

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import '../../../../../core/entity/driver_entity.dart';
 import '../../../../../core/errors/failure.dart';
-import '../entity/driver_entity.dart';
 import '../repo/map_items_repo.dart';
 
 class GetAllAdminMapDriversUseCase {

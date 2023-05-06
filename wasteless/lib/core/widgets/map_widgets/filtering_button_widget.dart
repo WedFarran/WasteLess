@@ -6,12 +6,12 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
 
-class FilteringButtonWidget extends StatelessWidget {
+class FilteringOptionButtonWidget extends StatelessWidget {
   final bool selected;
   final void Function()? onTap;
   final String icon;
   final String status;
-  const FilteringButtonWidget({
+  const FilteringOptionButtonWidget({
     super.key,
     required this.selected,
     required this.onTap,
@@ -34,10 +34,7 @@ class FilteringButtonWidget extends StatelessWidget {
                   icon,
                   height: context.height * 0.055,
                 ),
-                Text(
-                  status,
-                  style: anyColorSize16(BLACK)
-                )
+                Text(status, style: anyColorSize16(BLACK))
               ],
             ),
             Visibility(

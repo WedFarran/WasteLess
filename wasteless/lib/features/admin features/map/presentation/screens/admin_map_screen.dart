@@ -3,9 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wasteless/features/admin%20features/map/map_tools.dart';
-import '../../data/models/bins_models.dart';
-import '../../data/models/driver_models.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/model/bins_models.dart';
+import '../../../../../core/model/driver_models.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
+import '../../../../../core/tools/map_tools.dart';
+import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';
+import '../widgets/filtering_options_widget.dart';
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
@@ -85,56 +89,38 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*  floatingActionButton: FilteringButton(
-          driversOnTap: () {
-            setState(() {
-              driversCheck = !driversCheck;
-            });
-          },
-          driversSelected: driversCheck,
-          fullOnTap: () {
-            setState(() {
-              fullCheck = !fullCheck;
-            });
-          },
-          fullSelected: fullCheck,
-          halfFullOnTap: () {
-            setState(() {
-              halfFullCheck = !halfFullCheck;
-            });
-          },
-          halfFullSelected: halfFullCheck,
-          emptyOnTap: () {
-            setState(() {
-              emptyCheck = !emptyCheck;
-            });
-          },
-          emptySelected: emptyCheck,
-          resetOnTap: () {
-            setState(() {
-              emptyCheck = true;
-              halfFullCheck = true;
-              fullCheck = true;
-              driversCheck = true;
-            });
-          },
-        ),*/
-        body: SafeArea(
-            child: GoogleMap(
-      zoomControlsEnabled: false,
-      compassEnabled: false,
-      initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 13),
-      onMapCreated: (controler) {
-        setState(
-          () {
-            mapController = controler;
-            mapController.setMapStyle(
-                '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-          },
-        );
-      },
-      markers: Set.from(getGeoCords(binsList, context, driversList, fullCheck,
-          halfFullCheck, emptyCheck, driversCheck)),
-    )));
+        floatingActionButton: const Padding(
+            padding: EdgeInsets.only(bottom: 80.0),
+            child: FilterinFloatingActionButton(
+                widget: AdminMapFilteringOptionsWidget())),
+        body: SafeArea(child: Consumer<FilteringChangeNotifier>(
+            builder: (context, filteringOptions, child) {
+          if (binsList.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return GoogleMap(
+            zoomControlsEnabled: false,
+            compassEnabled: false,
+            initialCameraPosition:
+                CameraPosition(target: _initialPosition, zoom: 13),
+            onMapCreated: (controler) {
+              setState(
+                () {
+                  mapController = controler;
+                  mapController.setMapStyle(
+                      '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
+                },
+              );
+            },
+            markers: Set.from(getAllGeoCords(
+                binsList,
+                context,
+                driversList,
+                filteringOptions.fullCheck,
+                filteringOptions.halfFullCheck,
+                filteringOptions.emptyCheck,
+                filteringOptions.driversCheck)),
+          );
+        })));
   }
 }

@@ -1,20 +1,20 @@
-import 'package:wasteless/features/admin%20features/map/domain/entity/bin_entity.dart';
+import '../entity/bin_entity.dart';
 
 class BinsModel extends BinEntity {
   const BinsModel(
       {required String id,
-        required String fullnesTime,
-        required double lat,
-        required double lng,
-        required bool status,
-        required double wasteLevel})
+      required String fullnesTime,
+      required double lat,
+      required double lng,
+      required bool status,
+      required double wasteLevel})
       : super(
-      id: id,
-      fullnesTime: fullnesTime,
-      lat: lat,
-      lng: lng,
-      status: status,
-      wasteLevel: wasteLevel);
+            id: id,
+            fullnesTime: fullnesTime,
+            lat: lat,
+            lng: lng,
+            status: status,
+            wasteLevel: wasteLevel);
 
   factory BinsModel.fromMap(Map<dynamic, dynamic> map) {
     return BinsModel(
