@@ -50,5 +50,7 @@
 "select_bin_error":"Select a bin",
 "location_services_are_disabled":"Location services are disabled",
 "location_permission_are_denied":"Location permission are denied",
-"location_permission_are_permanently_denied":"Location permission are permanently denied"
+"location_permission_are_permanently_denied":"Location permission are permanently denied",
+"delete_task_confirmation":"Are you sure you want to delete the task?",
+"modify_task_confirmation":"Are you sure you want to modify the task?"
 }

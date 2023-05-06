@@ -66,6 +66,8 @@ class AdminSettingsScreen extends StatelessWidget {
                   context: context,
                   builder: (context) => WarningDialog(
                     title: translations(context).logout_confirmation_message,
+                    displayCancleButton: true,
+                    displayYesButton: true,
                     yesOnTap: () {
                       FirebaseAuth.instance.signOut();
                       Navigator.of(context).pushNamedAndRemoveUntil(

@@ -68,8 +68,9 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => WarningDialog(
-                        title:
-                            translations(context).logout_confirmation_message,
+                        displayCancleButton: true,
+                        displayYesButton: true,
+                        title: translations(context).delete_task_confirmation,
                         yesOnTap: () {
                           try {
                             ref.child('${snapshot.key}').remove();

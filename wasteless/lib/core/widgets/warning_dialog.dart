@@ -33,22 +33,27 @@ class WarningDialog extends StatelessWidget {
       ),
       backgroundColor: LIGHT_BLUE,
       actions: [
-        Visibility(
-          visible: displayCancleButton!,
-          child: DialogButton(
-            color: GREEN,
-            title: translations(context).cancle,
-            onTap: cancleOnTap,
-          ),
-        ),
-        Visibility(
-          visible: displayYesButton!,
-          child: DialogButton(
-            color: LIGHT_RED,
-            title: translations(context).yes,
-            onTap: yesOnTap,
-          ),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Visibility(
+              visible: displayCancleButton!,
+              child: DialogButton(
+                color: GREEN,
+                title: translations(context).cancle,
+                onTap: cancleOnTap,
+              ),
+            ),
+            Visibility(
+              visible: displayYesButton!,
+              child: DialogButton(
+                color: LIGHT_RED,
+                title: translations(context).yes,
+                onTap: yesOnTap,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
