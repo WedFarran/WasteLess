@@ -8,6 +8,7 @@ import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/widgets/named_and_image_widget.dart';
 import '../../../../../core/widgets/settings_widgets/settings_button.dart';
+import '../../../../../core/widgets/settings_widgets/settings_loading_widget.dart';
 import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../main.dart';
 import '../../../../general features/account_type_screen.dart';
@@ -31,9 +32,7 @@ class DriverSettingsScreen extends StatelessWidget {
                 stream: ref.onValue,
                 builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                   if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const SettingsLoadingWidget();
                   }
                   Map<dynamic, dynamic> map =
                       snapshot.data!.snapshot.value as dynamic;
