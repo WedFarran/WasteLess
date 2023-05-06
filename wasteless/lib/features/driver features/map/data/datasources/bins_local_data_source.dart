@@ -10,6 +10,8 @@ abstract class BinsLocalDataSource {
   Future<List<BinsModel>> getCachedBins();
   Future<Unit> cachedBins(List<BinsModel> driverMapModel);
 }
+
+// ignore: constant_identifier_names
 const CASHED_BINS = "CASHED_BINS";
 
 class BinsLocalDataSourceImpl implements BinsLocalDataSource {
@@ -35,7 +37,7 @@ class BinsLocalDataSourceImpl implements BinsLocalDataSource {
               (jsonDriverModel) => BinsModel.fromJson(jsonDriverModel))
           .toList();
       return Future.value(jsonToDriverMapModels);
-    }else{
+    } else {
       throw EmptyCacheException();
     }
   }

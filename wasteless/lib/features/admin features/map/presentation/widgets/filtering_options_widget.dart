@@ -1,11 +1,8 @@
+// ignore_for_file: no_logic_in_create_state, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
-import 'package:wasteless/core/utils/colors.dart';
-import 'package:wasteless/core/utils/media_query.dart';
-import '../../../../../core/utils/assets_path.dart';
-import '../../../../../core/utils/styles.dart';
-import 'filtering_button_widget.dart';
 
 class FilteringOptionsWidget extends StatefulWidget {
   @override
@@ -78,5 +75,4 @@ class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
         ],
       ),
     );*/
-  }
-
+}

@@ -4,10 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/features/admin%20features/map/map_tools.dart';
-import '../../../../../core/widgets/map_widgets/filtering_button.dart';
 import '../../data/models/bins_models.dart';
 import '../../data/models/driver_models.dart';
-
 
 class AdminMapScreen extends StatefulWidget {
   static const String id = 'admin_map_screen';
@@ -29,7 +27,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   bool driversCheck = false;
 
   final LatLng _initialPosition =
-  const LatLng(21.42462845849512, 39.82612550889805);
+      const LatLng(21.42462845849512, 39.82612550889805);
   final Set<Marker> markers = {};
 
   @override
@@ -46,7 +44,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     Stream<DatabaseEvent> streamBins = dbBins.onValue;
     streamBins.listen((DatabaseEvent event) {
       Map<String, dynamic> binsMap =
-      Map<String, dynamic>.from(event.snapshot.value as Map);
+          Map<String, dynamic>.from(event.snapshot.value as Map);
 
       binsMap.forEach((key, value) {
         binsList.add(BinsModel(
@@ -65,7 +63,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     Stream<DatabaseEvent> streamDrivers = dbDrivers.onValue;
     streamDrivers.listen((DatabaseEvent event) {
       Map<String, dynamic> driversMap =
-      Map<String, dynamic>.from(event.snapshot.value as Map);
+          Map<String, dynamic>.from(event.snapshot.value as Map);
 
       driversMap.forEach((key, value) {
         driversList.add(DriversModel(
@@ -87,7 +85,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*  floatingActionButton: FilteringButton(
+        /*  floatingActionButton: FilteringButton(
           driversOnTap: () {
             setState(() {
               driversCheck = !driversCheck;
@@ -123,21 +121,20 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
         ),*/
         body: SafeArea(
             child: GoogleMap(
-              zoomControlsEnabled: false,
-              compassEnabled: false,
-              initialCameraPosition:
-              CameraPosition(target: _initialPosition, zoom: 13),
-              onMapCreated: (controler) {
-                setState(
-                      () {
-                    mapController = controler;
-                    mapController.setMapStyle(
-                        '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-                  },
-                );
-              },
-              markers: Set.from(getGeoCords(binsList, context, driversList,
-                  fullCheck, halfFullCheck, emptyCheck, driversCheck)),
-            )));
+      zoomControlsEnabled: false,
+      compassEnabled: false,
+      initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 13),
+      onMapCreated: (controler) {
+        setState(
+          () {
+            mapController = controler;
+            mapController.setMapStyle(
+                '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
+          },
+        );
+      },
+      markers: Set.from(getGeoCords(binsList, context, driversList, fullCheck,
+          halfFullCheck, emptyCheck, driversCheck)),
+    )));
   }
 }

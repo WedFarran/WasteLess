@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
 class DriverMap extends Equatable {
   final String binId;
@@ -12,12 +9,12 @@ class DriverMap extends Equatable {
   final double wasteLevel;
 
   const DriverMap({
-      required this.binId,
-      required this.status,
-      required this.lat,
-      required this.lng,
-      required this.fullnesTime,
-      required this.wasteLevel,
+    required this.binId,
+    required this.status,
+    required this.lat,
+    required this.lng,
+    required this.fullnesTime,
+    required this.wasteLevel,
   });
 
   @override

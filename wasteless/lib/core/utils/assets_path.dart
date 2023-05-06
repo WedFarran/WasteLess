@@ -24,3 +24,4 @@ const WASTELESS_LOGO_TRANS = 'assets/images/logo.png';
 const BROKEN_BIN_ICON = 'assets/icons/broken_bin.png';
 const NAVIGATION_ICON = 'assets/icons/navigation.png';
 const CLOSE_BUTTON = 'assets/icons/close.png';
+const CURRENT_LOCATION_ICON = 'assets/icons/current_location_icon.png';
