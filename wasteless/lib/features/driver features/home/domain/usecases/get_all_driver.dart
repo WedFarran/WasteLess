@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
+import '../../../../../core/common/domain/entity/driver_entity.dart';
 import '../../../../../core/errors/failure.dart';
-
-import '../entities/driver.dart';
 import '../repos/driver_repos.dart';
 
 class GetAllDriverUsecases {

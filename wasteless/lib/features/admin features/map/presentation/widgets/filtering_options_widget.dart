@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
-import '../../../../../core/utils/colors.dart';
-import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/map_widgets/filter_floating_action_button.dart';
 

@@ -5,9 +5,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/driver/data/models/report_model.dart';
-import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/logo_back_widget.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 
 class DriverHistoryScreen extends StatelessWidget {
@@ -24,24 +24,7 @@ class DriverHistoryScreen extends StatelessWidget {
     return ScaffoldBlueBackground(
       widget: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: PRIMARY_GREEN,
-                    )),
-                Image.asset(
-                  WASTELESS_LOGO_TRANS,
-                  height: context.height * 0.15,
-                )
-              ],
-            ),
-          ),
+          const LogoBackButton(),
           SizedBox(height: context.height * 0.02),
           Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8),

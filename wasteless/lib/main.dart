@@ -59,7 +59,11 @@ class _WasteLessState extends State<WasteLess> {
         scaffoldMessengerKey: LoginUtils.massengerKey,
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: WHITE),
+        theme: ThemeData(
+          scaffoldBackgroundColor: WHITE,
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(primary: PRIMARY_BLUE, secondary: PRIMARY_GREEN),
+        ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: _locale,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class DriverTasksScreen extends StatelessWidget {
   static const String id = 'driver_tasks_screen';
@@ -6,6 +6,6 @@ class DriverTasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(child: Text('tasks screen'));
+    return const Text('data');
   }
 }

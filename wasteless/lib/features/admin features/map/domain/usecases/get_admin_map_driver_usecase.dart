@@ -1,4 +1,4 @@
-import '../../../../../core/entity/driver_entity.dart';
+import '../../../../../core/common/domain/entity/driver_entity.dart';
 import '../repo/map_items_repo.dart';
 
 class GetAllAdminMapDriversUseCase {

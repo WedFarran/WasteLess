@@ -1,4 +1,4 @@
-import '../entity/driver_entity.dart';
+import 'package:wasteless/core/common/domain/entity/driver_entity.dart';
 
 class DriversModel extends DriverEntity {
   const DriversModel(
@@ -12,6 +12,7 @@ class DriversModel extends DriverEntity {
       required super.lng,
       required super.nationality,
       required super.qR});
+
   factory DriversModel.fromMap(Map<dynamic, dynamic> map) {
     return DriversModel(
       id: map['id'] ?? '',
@@ -28,16 +29,17 @@ class DriversModel extends DriverEntity {
   }
   factory DriversModel.fromJson(Map<String, dynamic> json) {
     return DriversModel(
-        id: json['id'],
-        area: json['area'],
-        email: json['email'],
-        fullName: json['fullName'],
-        idNumber: json['idNumber'],
-        image: json['image'],
-        lat: json['lat'],
-        lng: json['lng'],
-        nationality: json['nationality'],
-        qR: json['qR']);
+      id: json['id'],
+      area: json['area'],
+      email: json['email'],
+      fullName: json['fullName'],
+      idNumber: json['idNumber'],
+      image: json['image'],
+      lat: json['lat'],
+      lng: json['lng'],
+      nationality: json['nationality'],
+      qR: json['qR'],
+    );
   }
 
   Map<String, dynamic> toJson() {

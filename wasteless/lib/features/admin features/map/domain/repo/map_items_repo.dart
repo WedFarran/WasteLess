@@ -1,5 +1,5 @@
-import '../../../../../core/entity/bin_entity.dart';
-import '../../../../../core/entity/driver_entity.dart';
+import '../../../../../core/common/domain/entity/bin.dart';
+import '../../../../../core/common/domain/entity/driver_entity.dart';
 
 abstract class MapItemsRepo {
   List<BinEntity> getAllMapBins();

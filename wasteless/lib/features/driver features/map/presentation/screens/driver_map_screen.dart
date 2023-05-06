@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import '../../../../../core/model/bins_models.dart';
+import '../../../../../core/common/data/models/bins_models.dart';
 import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/tools/map_tools.dart';
 import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';

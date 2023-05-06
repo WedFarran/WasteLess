@@ -1,8 +1,8 @@
 import 'package:wasteless/core/errors/exception.dart';
 import 'package:wasteless/core/network/network_info.dart';
 import 'package:wasteless/core/errors/failure.dart';
-import '../../../../../core/entity/bin_entity.dart';
-import '../../../../../core/entity/driver_entity.dart';
+import '../../../../../core/common/domain/entity/bin.dart';
+import '../../../../../core/common/domain/entity/driver_entity.dart';
 import '../../domain/repo/map_items_repo.dart';
 import '../datasources/map_items_local_data_source.dart';
 import '../datasources/map_items_remote_data_source.dart';

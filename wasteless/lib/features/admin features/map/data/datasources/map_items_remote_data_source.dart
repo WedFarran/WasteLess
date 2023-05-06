@@ -2,8 +2,9 @@ import 'package:wasteless/core/errors/exception.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:wasteless/core/errors/failure.dart';
 import 'package:http/http.dart' as http;
-import '../../../../../core/model/bins_models.dart';
-import '../../../../../core/model/driver_models.dart';
+
+import '../../../../../core/common/data/models/bins_models.dart';
+import '../../../../../core/common/data/models/driver_models.dart';
 
 abstract class MapItemsRemoteDataSource {
   List<BinsModel> getAllMapBins();
@@ -26,12 +27,13 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
 
         binsMap.forEach((key, value) {
           binsList.add(BinsModel(
-              id: key,
-              fullnesTime: value['fullnesTime'],
-              wasteLevel: value['wasteLevel'],
-              lat: value['lat'],
-              lng: value['lng'],
-              status: value['status']));
+            id: key,
+            fullnesTime: value['fullnesTime'],
+            wasteLevel: value['wasteLevel'],
+            lat: value['lat'],
+            lng: value['lng'],
+            status: value['status'],
+          ));
         });
       });
       return binsList;
@@ -53,16 +55,17 @@ class MapItemsRemoteSourceImp implements MapItemsRemoteDataSource {
 
         driversMap.forEach((key, value) {
           driversList.add(DriversModel(
-              id: key,
-              area: value['area'],
-              email: value['email'],
-              fullName: value['fullName'],
-              idNumber: value['idNumber'],
-              image: value['image'],
-              lat: value['lat'],
-              lng: value['lng'],
-              nationality: value['nationality'],
-              qR: value['qR']));
+            id: key,
+            area: value['area'],
+            email: value['email'],
+            fullName: value['fullName'],
+            idNumber: value['idNumber'],
+            image: value['image'],
+            lat: value['lat'],
+            lng: value['lng'],
+            nationality: value['nationality'],
+            qR: value['qR'],
+          ));
         });
       });
       return driversList;

@@ -4,8 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../../../../core/model/bins_models.dart';
-import '../../../../../core/model/driver_models.dart';
+import '../../../../../core/common/data/models/bins_models.dart';
+import '../../../../../core/common/data/models/driver_models.dart';
 import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/tools/map_tools.dart';
 import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';
@@ -48,12 +48,13 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
       binsMap.forEach((key, value) {
         binsList.add(BinsModel(
-            id: key,
-            fullnesTime: value['fullnesTime'],
-            wasteLevel: value['wasteLevel'],
-            lat: value['lat'],
-            lng: value['lng'],
-            status: value['status']));
+          id: key,
+          fullnesTime: value['fullnesTime'],
+          wasteLevel: value['wasteLevel'],
+          lat: value['lat'],
+          lng: value['lng'],
+          status: value['status'],
+        ));
       });
       setState(() {});
     });
@@ -67,16 +68,17 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
       driversMap.forEach((key, value) {
         driversList.add(DriversModel(
-            id: key,
-            area: value['area'],
-            email: value['email'],
-            fullName: value['fullName'],
-            idNumber: value['idNumber'],
-            image: value['image'],
-            lat: value['lat'],
-            lng: value['lng'],
-            nationality: value['nationality'],
-            qR: value['qR']));
+          id: key,
+          area: value['area'],
+          email: value['email'],
+          fullName: value['fullName'],
+          idNumber: value['idNumber'],
+          image: value['image'],
+          lat: value['lat'],
+          lng: value['lng'],
+          nationality: value['nationality'],
+          qR: value['qR'],
+        ));
       });
       setState(() {});
     });

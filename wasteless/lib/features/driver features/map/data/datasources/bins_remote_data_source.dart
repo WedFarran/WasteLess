@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:wasteless/core/errors/exception.dart';
-
-import '../models/driver_map_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../../../core/common/data/models/bins_models.dart';
 
 abstract class BinsRemoteDataSource {
   Future<List<BinsModel>> getAllBins();
