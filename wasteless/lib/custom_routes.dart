@@ -5,8 +5,9 @@ import 'features/admin features/driver/presentation/screens/all_drivers_screen.d
 import 'features/admin features/driver/presentation/screens/driver_history.dart';
 import 'features/admin features/map/presentation/screens/admin_map_screen.dart';
 import 'features/admin features/settings/presentation/screens/admin_settings_screen.dart';
-import 'features/admin features/tasks/presentation/screens/add_or_modify_task.dart';
+import 'features/admin features/tasks/presentation/screens/add_task.dart';
 import 'features/admin features/tasks/presentation/screens/admin_tasks_screen.dart';
+import 'features/admin features/tasks/presentation/screens/modify_task.dart';
 import 'features/driver features/driver_bottom_navigation_bar.dart';
 import 'features/driver features/home/presentation/screens/driver_home_screen.dart';
 import 'features/driver features/map/presentation/screens/driver_map_screen.dart';
@@ -34,5 +35,6 @@ var customRoutes = <String, WidgetBuilder>{
   ProfileScreen.id: (context) => const ProfileScreen(),
   AdminDriverProfileScreen.id: (context) => const AdminDriverProfileScreen(),
   DriverHistoryScreen.id: (context) => const DriverHistoryScreen(),
-  AddOrModifyTaskScreen.id: (context) => const AddOrModifyTaskScreen()
+  AddTaskScreen.id: (context) => const AddTaskScreen(),
+  ModifyTaskScreen.id: (context) => const ModifyTaskScreen()
 };

@@ -13,17 +13,17 @@ import '../widgets/add_or_modify_task_button_widget.dart';
 import '../widgets/dates_widgets.dart';
 import '../widgets/drivers_dropdown_menu.dart';
 
-class AddOrModifyTaskScreen extends StatefulWidget {
-  static const String id = 'AddOrModifyTaskScreen';
-  const AddOrModifyTaskScreen({super.key});
+class AddTaskScreen extends StatefulWidget {
+  static const String id = 'AddTaskScreen';
+  const AddTaskScreen({super.key});
 
   @override
-  State<AddOrModifyTaskScreen> createState() => _AddOrModifyTaskScreenState();
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
 }
 
 final _formKey = GlobalKey<FormState>();
 
-class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
+class _AddTaskScreenState extends State<AddTaskScreen> {
   String dueDate = '';
   String startDate = '';
 
@@ -33,22 +33,19 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
 
   bool dateError = false;
 
-  late DatabaseReference dbDrivers;
   late DatabaseReference dbTasks;
-
-  List<DriversModel> driversList = [];
 
   DriversModel? driver;
   String? title;
 
   bool driverSelected = false;
   bool titleSelected = false;
+  bool start = false;
+  bool due = false;
 
   @override
   void initState() {
-    dbDrivers = FirebaseDatabase.instance.ref(DRIVER);
     dbTasks = FirebaseDatabase.instance.ref().child(TASK);
-    getDrivers();
     super.initState();
   }
 
@@ -96,7 +93,6 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                         });
                       },
                       value: driver,
-                      itemsList: driversList,
                       itemSelected: driverSelected),
                   SelectDatesWidgets(
                     dateError:
@@ -107,6 +103,8 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                     setStartTaskDate: _setStartTaskDate,
                     startDate: startDate,
                     startDateEmpty: translations(context).start,
+                    due: due,
+                    start: start,
                   ),
                   WasteLessTextField(
                       title: translations(context).tap_to_add_a_description,
@@ -134,23 +132,20 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
                     driverSelected = true;
                   });
                 }
-
-                if (title == null) {
-                  setState(() {
-                    titleSelected = true;
-                  });
-                }
                 if (formIsValid &&
                     dateError == false &&
                     driverSelected == false) {
                   await dbTasks.push().set({
                     TaskString.START_DATE: startDate,
-                    TaskString.DESCRIPTION: _descriptionController.text.trim(),
+                    TaskString.DESCRIPTION:
+                        _descriptionController.text.trim().toString(),
                     TaskString.DRIVER_ID: driver!.id.toString(),
                     TaskString.DUE_DATE: dueDate,
                     TaskString.STATUS: "false",
-                    TaskString.TASK_TITLE: _titleController.text.trim(),
-                    TaskString.LOCATION: _locationController.text.trim()
+                    TaskString.TASK_TITLE:
+                        _titleController.text.trim().toString(),
+                    TaskString.LOCATION:
+                        _locationController.text.trim().toString()
                   });
                   // ignore: use_build_context_synchronously
                   Navigator.pop(context);
@@ -169,6 +164,8 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
             lastDate: DateTime(2024))
         .then((value) {
       setState(() {
+        due = false;
+        if (startDate == '') start = true;
         dueDate = DateFormat("yyyy-MM-dd").format(value!).toString();
       });
     });
@@ -182,31 +179,10 @@ class _AddOrModifyTaskScreenState extends State<AddOrModifyTaskScreen> {
             lastDate: DateTime(2024))
         .then((value) {
       setState(() {
+        start = false;
+        if (dueDate == '') due = true;
         startDate = DateFormat("yyyy-MM-dd").format(value!).toString();
       });
-    });
-  }
-
-  void getDrivers() {
-    Stream<DatabaseEvent> streamDrivers = dbDrivers.onValue;
-    streamDrivers.listen((DatabaseEvent event) {
-      Map<String, dynamic> driversMap =
-          Map<String, dynamic>.from(event.snapshot.value as Map);
-
-      driversMap.forEach((key, value) {
-        driversList.add(DriversModel(
-            id: key,
-            area: value['area'],
-            email: value['email'],
-            fullName: value['fullName'],
-            idNumber: value['idNumber'],
-            image: value['image'],
-            lat: value['lat'],
-            lng: value['lng'],
-            nationality: value['nationality'],
-            qR: value['qR']));
-      });
-      setState(() {});
     });
   }
 }

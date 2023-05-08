@@ -13,6 +13,8 @@ class SelectDatesWidgets extends StatelessWidget {
   final String dueDate;
   final String dueDateEmpty;
   final bool dateError;
+  final bool start;
+  final bool due;
   const SelectDatesWidgets(
       {super.key,
       required this.setStartTaskDate,
@@ -21,7 +23,9 @@ class SelectDatesWidgets extends StatelessWidget {
       required this.dueDate,
       required this.dueDateEmpty,
       required this.startDate,
-      required this.startDateEmpty});
+      required this.startDateEmpty,
+      required this.start,
+      required this.due});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class SelectDatesWidgets extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
         width: context.width * 0.88,
-        height: context.height * 0.08,
+        height: context.height * 0.09,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: WHITE,
@@ -69,15 +73,17 @@ class SelectDatesWidgets extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              width: context.width * 0.03,
-            ),
+            SizedBox(width: context.width * 0.03),
             Visibility(
               visible: dateError,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  translations(context).select_dates,
+                  start
+                      ? translations(context).select_start_date
+                      : due
+                          ? translations(context).select_due_date
+                          : translations(context).select_dates,
                   style: anyColorSize16(RED),
                 ),
               ),

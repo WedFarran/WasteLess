@@ -52,5 +52,8 @@
 "location_permission_are_denied":"Location permission are denied",
 "location_permission_are_permanently_denied":"Location permission are permanently denied",
 "delete_task_confirmation":"Are you sure you want to delete the task?",
-"modify_task_confirmation":"Are you sure you want to modify the task?"
+"modify_task_confirmation":"Are you sure you want to modify the task?",
+"modify":"Modify",
+"select_start_date":"Select start date",
+"select_due_date":"Select due date"
 }

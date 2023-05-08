@@ -32,7 +32,6 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
     var currentUserId = FirebaseAuth.instance.currentUser!.uid;
     ref = FirebaseDatabase.instance.ref('bin');
     retrieveBins = ref.orderByChild("driverId").equalTo(currentUserId);
-
     super.initState();
   }
 
