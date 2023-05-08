@@ -1,82 +1,103 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
-import 'filtering_button_widget.dart';
+import '../../../../../core/widgets/map_widgets/filter_floating_action_button.dart';
 
-class FilteringOptionsWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    throw UnimplementedError();
-  }
-  /*final Function()? fullOnTap;
-  final Function()? halfFullOnTap;
-  final Function()? emptyOnTap;
-  final bool halfFullSelected;
-  final bool emptySelected;
-  final bool fullSelected;
-  const FilteringOptionsWidget(
-      {super.key,
-        required this.emptyOnTap,
-        required this.fullOnTap,
-        required this.halfFullOnTap,
-        required this.emptySelected,
-        required this.fullSelected,
-        required this.halfFullSelected, required bool driversSelected, Function()? driversOnTap, Function()? resetOnTap});
+class AdminMapFilteringOptionsWidget extends StatelessWidget {
+  const AdminMapFilteringOptionsWidget({super.key});
 
-  @override
-  State<FilteringOptionsWidget> createState() => _FilteringOptionsWidgetState();
-}
-
-class _FilteringOptionsWidgetState extends State<FilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * 0.33,
-      margin: const EdgeInsets.only(top: 15, right: 20, bottom: 5, left: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+        height: context.height * 0.33,
+        margin: const EdgeInsets.only(top: 15, right: 20, bottom: 5, left: 20),
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    FILTRING_ICON,
-                    height: context.height * 0.02,
+                  Row(
+                    children: [
+                      Image.asset(
+                        FILTRING_ICON,
+                        height: context.height * 0.02,
+                      ),
+                      Text(
+                        translations(context).filter,
+                        style: anyColorSize16(FONT_GRAY),
+                      )
+                    ],
                   ),
-                  Text(
-                    'Filter',
-                    style: anyColorSize16(FONT_GRAY),
-                  )
+                  InkWell(
+                    onTap: () {
+                      context.read<FilteringChangeNotifier>().driversCheck =
+                          true;
+                      context.read<FilteringChangeNotifier>().fullCheck = true;
+                      context.read<FilteringChangeNotifier>().halfFullCheck =
+                          true;
+                      context.read<FilteringChangeNotifier>().emptyCheck = true;
+                    },
+                    child: Text(translations(context).reset,
+                        style: anyColorSize16(BLACK)),
+                  ),
                 ],
               ),
-            ],
-          ),
-          FilteringButtonWidget(
-            onTap: widget.fullOnTap,
-            selected: widget.fullSelected,
-            icon: Full_BIN_ICON,
-            status: 'Full',
-          ),
-          FilteringButtonWidget(
-            onTap: widget.halfFullOnTap,
-            selected: widget.halfFullSelected,
-            icon: HALF_FULL_BIN_ICON,
-            status: 'Half Full',
-          ),
-          FilteringButtonWidget(
-            onTap: widget.emptyOnTap,
-            selected: widget.emptySelected,
-            icon: EMPTY_BIN_ICON,
-            status: 'Empty',
-          ),
-        ],
-      ),
-    );*/
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, fullSelected, child) {
+                return FilteringOptionButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .fullCheck = !fullSelected.fullCheck,
+                  selected: fullSelected.fullCheck,
+                  icon: Full_BIN_ICON,
+                  status: translations(context).full,
+                );
+              }),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, halfFullSelected, child) {
+                return FilteringOptionButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .halfFullCheck = !halfFullSelected.halfFullCheck,
+                  selected: halfFullSelected.halfFullCheck,
+                  icon: HALF_FULL_BIN_ICON,
+                  status: translations(context).half_full,
+                );
+              }),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, emptySelected, child) {
+                return FilteringOptionButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .emptyCheck = !emptySelected.emptyCheck,
+                  selected: emptySelected.emptyCheck,
+                  icon: EMPTY_BIN_ICON,
+                  status: translations(context).empty,
+                );
+              }),
+              const Divider(
+                color: PRIMARY_BLUE,
+                thickness: 1,
+              ),
+              Consumer<FilteringChangeNotifier>(
+                  builder: (context, driverSelected, child) {
+                return FilteringOptionButtonWidget(
+                  onTap: () => context
+                      .read<FilteringChangeNotifier>()
+                      .driversCheck = !driverSelected.driversCheck,
+                  selected: driverSelected.driversCheck,
+                  icon: VEHICLE_ICON,
+                  status: translations(context).driver,
+                );
+              })
+            ]));
   }
-
+}

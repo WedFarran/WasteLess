@@ -10,8 +10,8 @@ import 'package:wasteless/features/admin%20features/admin_bottom_navigation_bar.
 import 'package:wasteless/features/driver%20features/driver_bottom_navigation_bar.dart';
 import 'package:wasteless/features/general%20features/widgets/choose_account_decoration_widget.dart';
 import 'package:wasteless/features/general%20features/widgets/login_button.dart';
-import 'package:wasteless/features/general%20features/widgets/text_field.dart';
 import '../../../core/utils/assets_path.dart';
+import '../../core/widgets/text_field.dart';
 import '../../main.dart';
 import 'account_type_screen.dart';
 import 'widgets/login_utils.dart';
@@ -28,15 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final emailFormKey = GlobalKey<FormState>();
-  final passwordFormKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   String arguments = '';
   bool secure = true;
 
   Future signIn() async {
-    final emailIsValid = emailFormKey.currentState!.validate();
-    final passwordIsValid = passwordFormKey.currentState!.validate();
-    if (!emailIsValid && !passwordIsValid) return;
+    final formIsValid = formKey.currentState!.validate();
+    if (!formIsValid) return;
     showDialog(
         context: context,
         builder: (context) => const Center(
@@ -86,8 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       backgroundColor: arguments == ADMIN ? PRIMARY_BLUE : PRIMARY_GREEN,
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -103,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 1,
                 ),
                 Container(
-                  height: context.height * 0.8,
+                  height: context.height * 0.79,
                   decoration: const BoxDecoration(
                       color: WHITE,
                       borderRadius: BorderRadius.only(
@@ -139,52 +137,63 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         //Email TextField
 
-                        WasteLessTextField(
-                          textController: _emailController,
-                          color: arguments == ADMIN ? LIGHT_GREEN : LIGHT_BLUE,
-                          title: translations(context).email,
-                          obscureText: false,
-                          hintColor:
-                              arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
-                          formKey: emailFormKey,
-                          validator: (value) {
-                            return validateEmail(value);
-                          },
-                        ),
-                        SizedBox(height: context.height * 0.02),
+                        Form(
+                            key: formKey,
+                            child: Column(
+                              children: [
+                                WasteLessTextField(
+                                  textController: _emailController,
+                                  color: arguments == ADMIN
+                                      ? LIGHT_GREEN
+                                      : LIGHT_BLUE,
+                                  title: translations(context).email,
+                                  obscureText: false,
+                                  hintColor: arguments == ADMIN
+                                      ? PRIMARY_GREEN
+                                      : PRIMARY_BLUE,
+                                  validator: (value) {
+                                    return validateEmail(value);
+                                  },
+                                ),
+                                SizedBox(height: context.height * 0.02),
 
-                        //Password TextField
+                                //Password TextField
 
-                        WasteLessTextField(
-                          textController: _passwordController,
-                          title: translations(context).password,
-                          validator: (value) => value != null
-                              ? null
-                              : translations(context).password_error_message,
-                          color: arguments == ADMIN ? LIGHT_GREEN : LIGHT_BLUE,
-                          obscureText: secure,
-                          hintColor:
-                              arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
-                          formKey: passwordFormKey,
-                          widget: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                secure = !secure;
-                              });
-                            },
-                            child: Icon(
-                              secure == true
-                                  ? Icons.visibility_outlined
-                                  : Icons.visibility_off_outlined,
-                              color: arguments == ADMIN
-                                  ? PRIMARY_GREEN
-                                  : PRIMARY_BLUE,
-                            ),
-                          ),
-                        ),
+                                WasteLessTextField(
+                                  textController: _passwordController,
+                                  title: translations(context).password,
+                                  validator: (value) => value != null
+                                      ? null
+                                      : translations(context)
+                                          .password_error_message,
+                                  color: arguments == ADMIN
+                                      ? LIGHT_GREEN
+                                      : LIGHT_BLUE,
+                                  obscureText: secure,
+                                  hintColor: arguments == ADMIN
+                                      ? PRIMARY_GREEN
+                                      : PRIMARY_BLUE,
+                                  widget: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        secure = !secure;
+                                      });
+                                    },
+                                    child: Icon(
+                                      secure == true
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined,
+                                      color: arguments == ADMIN
+                                          ? PRIMARY_GREEN
+                                          : PRIMARY_BLUE,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
 
                         SizedBox(
-                          height: context.height * 0.09,
+                          height: context.height * 0.05,
                         ),
 
                         // LOGIN Button

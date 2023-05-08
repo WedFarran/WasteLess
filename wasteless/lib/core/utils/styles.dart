@@ -27,15 +27,17 @@ TextStyle responsiveWasteSplash(BuildContext context, Color color) {
 }
 
 TextStyle WASTE_SPLASH =
-const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 70);
+    const TextStyle(color: BLACK, fontFamily: 'norwester', fontSize: 70);
 TextStyle WASTE_SPLASH_GREEN = const TextStyle(
     color: PRIMARY_GREEN, fontFamily: 'norwester', fontSize: 70);
 
-TextStyle BIN_STATUS = const TextStyle(
-    fontFamily: 'Nunito',
-    fontSize: 32,
-    fontWeight: FontWeight.w700,
-    color: FONT_GRAY);
+TextStyle anyColorSize32(Color color) {
+  return TextStyle(
+      fontFamily: 'Nunito',
+      fontSize: 32,
+      fontWeight: FontWeight.w700,
+      color: color);
+}
 
 TextStyle anyColorSize16(Color color) {
   return TextStyle(
@@ -45,14 +47,14 @@ TextStyle anyColorSize16(Color color) {
       color: color);
 }
 
+TextStyle TABLE_TITLE_STYLE =
+    const TextStyle(color: PRIMARY_GREEN, fontFamily: 'Nunito');
+
 //boxdecorations
 
 TextStyle BOLD_24 = const TextStyle(
     fontSize: 24, fontFamily: 'Nunito', fontWeight: FontWeight.w700);
 TextStyle NORMAL_20 = const TextStyle(fontSize: 20, fontFamily: 'Nunito');
 BoxDecoration gradient(Color color) {
-  return BoxDecoration(
-      color: color,
-      borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)));
+  return BoxDecoration(color: color, borderRadius: BorderRadius.circular(20));
 }

@@ -10,10 +10,14 @@ class WarningDialog extends StatelessWidget {
   final String title;
   final Function()? yesOnTap;
   final Function()? cancleOnTap;
+  final bool? displayCancleButton;
+  final bool? displayYesButton;
   const WarningDialog({
-    required this.cancleOnTap,
+    this.cancleOnTap,
     required this.title,
-    required this.yesOnTap,
+    this.yesOnTap,
+    this.displayCancleButton,
+    this.displayYesButton,
     super.key,
   });
 
@@ -29,16 +33,27 @@ class WarningDialog extends StatelessWidget {
       ),
       backgroundColor: LIGHT_BLUE,
       actions: [
-        DialogButton(
-          color: GREEN,
-          title: translations(context).cancle,
-          onTap: cancleOnTap,
-        ),
-        DialogButton(
-          color: LIGHT_RED,
-          title: translations(context).yes,
-          onTap: yesOnTap,
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Visibility(
+              visible: displayCancleButton!,
+              child: DialogButton(
+                color: GREEN,
+                title: translations(context).cancle,
+                onTap: cancleOnTap,
+              ),
+            ),
+            Visibility(
+              visible: displayYesButton!,
+              child: DialogButton(
+                color: LIGHT_RED,
+                title: translations(context).yes,
+                onTap: yesOnTap,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

@@ -9,10 +9,12 @@ class DialogButton extends StatelessWidget {
   final Function()? onTap;
   final String title;
   final Color color;
+  final double width;
   const DialogButton({
     required this.onTap,
     required this.title,
     required this.color,
+    this.width = 0.35,
     super.key,
   });
 
@@ -24,7 +26,7 @@ class DialogButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
             height: context.height * 0.07,
-            width: context.width * 0.35,
+            width: context.width * width,
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: color, borderRadius: BorderRadius.circular(20)),
