@@ -36,6 +36,7 @@ dependencies:
   firebase_storage: ^11.1.0
   dio: ^5.1.1
   geocoding: ^2.1.0
+  google_maps_webservice: ^0.0.19
 
 dev_dependencies:
   flutter_test:
