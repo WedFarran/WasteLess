@@ -1,4 +1,4 @@
-import 'package:wasteless/core/common/domain/entity/bin.dart';
+import '../../entity/bin.dart';
 
 class BinsModel extends BinEntity {
   const BinsModel({

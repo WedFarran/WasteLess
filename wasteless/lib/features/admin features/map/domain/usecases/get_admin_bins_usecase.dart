@@ -1,4 +1,5 @@
-import '../../../../../core/common/domain/entity/bin.dart';
+/*import '../../../../../core/common/domain/entity/bin.dart';
+import '../../../../../core/common/entity/bin.dart';
 import '../repo/map_items_repo.dart';
 
 class GetAllAdminMapBinsUseCase {
@@ -8,3 +9,4 @@ class GetAllAdminMapBinsUseCase {
     return _mapItemsRepo.getAllMapBins();
   }
 }
+*/

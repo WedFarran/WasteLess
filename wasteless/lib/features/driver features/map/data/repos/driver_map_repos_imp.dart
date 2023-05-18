@@ -4,8 +4,7 @@ import 'package:wasteless/core/errors/failure.dart';
 import 'package:wasteless/features/driver%20features/map/data/datasources/bins_local_data_source.dart';
 import 'package:wasteless/features/driver%20features/map/data/datasources/bins_remote_data_source.dart';
 import 'package:wasteless/features/driver%20features/map/domain/repos/driver_map_repos.dart';
-
-import '../../../../../core/common/domain/entity/driver_entity.dart';
+import '../../../../../core/common/entity/driver_entity.dart';
 import '../../../../../core/network/network_info.dart';
 
 class DriverMapReposImpl implements DriverMapRepos {

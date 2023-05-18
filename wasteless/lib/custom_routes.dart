@@ -15,7 +15,7 @@ import 'features/driver features/settings/presentation/screens/driver_settings_s
 import 'features/driver features/settings/presentation/screens/profile_screen.dart';
 import 'features/driver features/tasks/presentation/screens/driver_tasks_screen.dart';
 import 'features/general features/account_type_screen.dart';
-import 'features/general features/splash_screen.dart';
+import 'features/general features/splash/presentation/pages/splash_screen.dart';
 import 'features/general features/wasteless_login_screen.dart';
 
 var customRoutes = <String, WidgetBuilder>{

@@ -1,4 +1,4 @@
-import 'package:wasteless/core/common/domain/entity/driver_entity.dart';
+import '../../entity/driver_entity.dart';
 
 class DriversModel extends DriverEntity {
   const DriversModel(

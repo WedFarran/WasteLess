@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:wasteless/core/common/domain/entity/driver_entity.dart';
 import 'package:wasteless/core/errors/failure.dart';
+
+import '../../../../../core/common/entity/driver_entity.dart';
 
 abstract class DriverMapRepos {
   //These methods it return either a failure(something error in the app or Unit

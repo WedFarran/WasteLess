@@ -174,7 +174,7 @@ class _ModifyTaskScreenState extends State<ModifyTaskScreen> {
                                 : _descriptionController.text.trim().toString(),
                             TaskString.DRIVER_ID: driver == null
                                 ? driverId
-                                : driver!.id.toString(),
+                                : driverId, // driver!.id.toString(),
                             TaskString.DUE_DATE:
                                 dueDate.isEmpty ? initialDueDate : dueDate,
                             TaskString.TASK_TITLE: _titleController.text.isEmpty

@@ -139,7 +139,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     TaskString.START_DATE: startDate,
                     TaskString.DESCRIPTION:
                         _descriptionController.text.trim().toString(),
-                    TaskString.DRIVER_ID: driver!.id.toString(),
+                    TaskString.DRIVER_ID: '', // driver!.id.toString(),
                     TaskString.DUE_DATE: dueDate,
                     TaskString.STATUS: "false",
                     TaskString.TASK_TITLE:

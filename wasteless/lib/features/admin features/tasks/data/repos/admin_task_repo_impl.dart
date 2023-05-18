@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:wasteless/core/network/network_info.dart';
 import 'package:wasteless/features/admin%20features/tasks/domain/repos/admin_task_repo.dart';
 import '../../../../../core/common/data/models/task_model.dart';
-import '../../../../../core/common/domain/entity/task_entity.dart';
+import '../../../../../core/common/entity/task_entity.dart';
 import '../datasources/task_local_datasource.dart';
 import '../datasources/task_remote_datasource.dart';
 
@@ -29,7 +29,7 @@ class AdminTaskRepoImpl implements AdminTaskRepo {
     } else {
       try {
         final localTasks = await taskLocalDataResource.getCachedTasks();
-        return Right(localTasks);
+        return Right(localTasks.cast<TaskEntity>());
       } on EmptyCacheException {
         return Left(EmptyCacheFailure());
       }

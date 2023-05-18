@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:wasteless/core/errors/failure.dart';
-
-import '../../../../../core/common/domain/entity/task_entity.dart';
+import '../../../../../core/common/entity/task_entity.dart';
 
 abstract class AdminTaskRepo {
   Future<Either<Failure, List<TaskEntity>>> getAllTasks();

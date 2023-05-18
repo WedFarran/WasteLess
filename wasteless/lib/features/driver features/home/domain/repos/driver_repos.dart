@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:wasteless/core/errors/failure.dart';
-
-import '../../../../../core/common/domain/entity/driver_entity.dart';
+import '../../../../../core/common/entity/driver_entity.dart';
 
 abstract class DriverRepos {
   Future<Either<Failure, List<DriverEntity>>> getAllDriver();

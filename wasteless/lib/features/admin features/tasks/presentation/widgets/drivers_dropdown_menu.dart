@@ -82,12 +82,12 @@ class _DriverDropDownMenuState extends State<DriverDropDownMenu> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(
+                                /* CircleAvatar(
                                   backgroundImage: NetworkImage(driver.image),
-                                ),
+                                ),*/
                                 SizedBox(width: context.width * 0.03),
                                 Text(
-                                  driver.fullName.toString(),
+                                  '', // driver.fullName.toString(),
                                   style: anyColorSize16(PRIMARY_BLUE),
                                 )
                               ],

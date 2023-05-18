@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import '../../../../../core/common/domain/entity/driver_entity.dart';
+import '../../../../../core/common/entity/driver_entity.dart';
 import '../../../../../core/errors/failure.dart';
 import '../repos/driver_repos.dart';
 
-class GetAllDriverUsecases {
+/*class GetAllDriverUsecases {
   final DriverRepos driver;
 
   GetAllDriverUsecases(this.driver);
@@ -11,4 +11,4 @@ class GetAllDriverUsecases {
   Future<Either<Failure, List<DriverEntity>>> call() async {
     return await driver.getAllDriver();
   }
-}
+}*/

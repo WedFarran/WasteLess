@@ -57,20 +57,20 @@ class _AssignedDriverState extends State<AssignedDriver> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CircleAvatar(
+                            /* CircleAvatar(
                               backgroundImage: NetworkImage(listDriver.image),
-                            ),
+                            ),*/
                             SizedBox(width: context.width * 0.03),
                             Text(
-                              listDriver.fullName.toString(),
+                              '', //listDriver.fullName.toString(),
                               style: anyColorSize16(PRIMARY_BLUE),
                             )
                           ],
                         )))
                     .toList(),
-                value: widget.driver ??
+                /* value: widget.driver ??
                     driversList
-                        .firstWhere((element) => element.id == widget.driverId),
+                        .firstWhere((element) => element.id == widget.driverId),*/
                 onChanged: widget.onChanged,
                 isExpanded: true,
               );

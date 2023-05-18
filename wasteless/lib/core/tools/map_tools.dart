@@ -65,7 +65,7 @@ getAllGeoCords(
   List<Marker> driversMarkers = [];
   List<Marker> markersList = [];
 
-  binsMarkers = binsList
+  /*binsMarkers = binsList
       .map((e) => Marker(
             markerId: MarkerId(e.id),
             icon: e.status == true
@@ -114,7 +114,7 @@ getAllGeoCords(
             },
             position: LatLng(e.lat, e.lng),
           ))
-      .toList();
+      .toList();*/
   if (fullSelected) {
     markersList
         .addAll(binsMarkers.where((element) => element.icon == fullBinMarker));
@@ -142,7 +142,7 @@ getBinsGeoCords(
   List<Marker> binsMarkers = [];
   List<Marker> markersList = [];
 
-  binsMarkers = binsList
+  /*binsMarkers = binsList
       .map((e) => Marker(
           markerId: MarkerId(e.id),
           icon: e.status == true
@@ -168,7 +168,7 @@ getBinsGeoCords(
           },
           position: LatLng(e.lat, e.lng)))
       .toList();
-
+*/
   if (fullSelected) {
     markersList
         .addAll(binsMarkers.where((element) => element.icon == fullBinMarker));
