@@ -1,32 +1,26 @@
-import '../../domain/entities/report_entity.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 
-class ReportModel extends ReportEntity {
-  const ReportModel(
-      {required super.dateTime,
-      required super.driverId,
-      required super.id,
-      required super.reportFile,
-      required super.taskId,
-      required super.taskName});
+class TaskReportModel {
+  final String? taskId;
+  final String? taskTitle;
+  final TextEditingController wasteWightController = TextEditingController();
+  final TextEditingController detailsController = TextEditingController();
 
-  factory ReportModel.fromJson(Map<String, dynamic> json) {
-    return ReportModel(
-        dateTime: json['dateTime'],
-        driverId: json['driverId'],
-        id: json['id'],
-        reportFile: json['reportFile'],
-        taskId: json['taskId'],
-        taskName: json['taskName']);
-  }
+  TaskReportModel({this.taskId, this.taskTitle});
 
-  Map<String, dynamic> toJson() {
+  TaskReportModel.fromSnapshot(DataSnapshot snapshot)
+      : taskId = snapshot.key,
+        taskTitle = snapshot.child('taskTitle').value.toString();
+
+  toJson(String wasteType) {
     return {
-      'id': id,
-      'taskName': taskName,
-      'taskId': taskId,
-      'reportFile': reportFile,
-      'driverId': driverId,
-      'dateTime': dateTime
+      'wastetype': wasteType,
+      'wastewight': wasteWightController.text,
+      'details': detailsController.text,
+      'taskid': taskId,
+      'taskTitle': taskTitle,
+      'date': '${DateTime.now().year} - ${DateTime.now().month}'
     };
   }
 }

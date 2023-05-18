@@ -201,6 +201,7 @@ class _ModifyTaskScreenState extends State<ModifyTaskScreen> {
               })
         ]),
       ),
+      child: const Padding(padding: EdgeInsets.all(0)),
     );
   }
 

@@ -37,100 +37,105 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBlueBackground(
-        widget: Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          NewTaskButton(
-            onTap: () => Navigator.pushNamed(context, AddTaskScreen.id),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Image.asset(
-              WASTELESS_LOGO,
-              height: context.height * 0.15,
+      widget: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            NewTaskButton(
+              onTap: () => Navigator.pushNamed(context, AddTaskScreen.id),
             ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: context.height * 0.02,
-      ),
-      Flexible(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 80),
-          child: FirebaseAnimatedList(
-              query: todoTasks,
-              defaultChild: const Center(
-                child: CircularProgressIndicator(),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Image.asset(
+                WASTELESS_LOGO,
+                height: context.height * 0.15,
               ),
-              itemBuilder: (context, snapshot, animation, index) {
-                List<DriversModel?> items =
-                    List.filled(snapshot.children.length, driver);
+            ),
+          ],
+        ),
+        SizedBox(
+          height: context.height * 0.02,
+        ),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 80),
+            child: FirebaseAnimatedList(
+                query: todoTasks,
+                defaultChild: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                itemBuilder: (context, snapshot, animation, index) {
+                  List<DriversModel?> items =
+                      List.filled(snapshot.children.length, driver);
 
-                return TaskWidget(
-                    onTap: () => Navigator.pushNamed(
-                            context, ModifyTaskScreen.id, arguments: {
-                          TaskString.DRIVER_ID: snapshot
-                              .child(TaskString.DRIVER_ID)
-                              .value
-                              .toString(),
-                          TaskString.TASK_TITLE: snapshot
-                              .child(TaskString.TASK_TITLE)
-                              .value
-                              .toString(),
-                          TaskString.DUE_DATE: snapshot
-                              .child(TaskString.DUE_DATE)
-                              .value
-                              .toString(),
-                          TaskString.START_DATE: snapshot
-                              .child(TaskString.START_DATE)
-                              .value
-                              .toString(),
-                          TaskString.LOCATION: snapshot
-                              .child(TaskString.LOCATION)
-                              .value
-                              .toString(),
-                          TaskString.DESCRIPTION: snapshot
-                              .child(TaskString.DESCRIPTION)
-                              .value
-                              .toString(),
-                          TaskString.TASK_ID: snapshot.key
-                        }),
-                    taskName:
-                        snapshot.child(TaskString.TASK_TITLE).value.toString(),
-                    taskDate:
-                        snapshot.child(TaskString.DUE_DATE).value.toString(),
-                    deleteAction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => WarningDialog(
-                          displayCancleButton: true,
-                          displayYesButton: true,
-                          title: translations(context).delete_task_confirmation,
-                          yesOnTap: () {
-                            try {
-                              ref.child('${snapshot.key}').remove();
-                            } on FirebaseException catch (e) {
-                              TaskUtils.showSnackBar(e.message);
-                            }
-                            Navigator.of(context).pop();
-                          },
-                          cancleOnTap: () => Navigator.of(context).pop(),
-                        ),
-                      );
-                    },
-                    widget:
-                        Container() /*AssignedDriver(
+                  return TaskWidget(
+                      onTap: () => Navigator.pushNamed(
+                              context, ModifyTaskScreen.id, arguments: {
+                            TaskString.DRIVER_ID: snapshot
+                                .child(TaskString.DRIVER_ID)
+                                .value
+                                .toString(),
+                            TaskString.TASK_TITLE: snapshot
+                                .child(TaskString.TASK_TITLE)
+                                .value
+                                .toString(),
+                            TaskString.DUE_DATE: snapshot
+                                .child(TaskString.DUE_DATE)
+                                .value
+                                .toString(),
+                            TaskString.START_DATE: snapshot
+                                .child(TaskString.START_DATE)
+                                .value
+                                .toString(),
+                            TaskString.LOCATION: snapshot
+                                .child(TaskString.LOCATION)
+                                .value
+                                .toString(),
+                            TaskString.DESCRIPTION: snapshot
+                                .child(TaskString.DESCRIPTION)
+                                .value
+                                .toString(),
+                            TaskString.TASK_ID: snapshot.key
+                          }),
+                      taskName: snapshot
+                          .child(TaskString.TASK_TITLE)
+                          .value
+                          .toString(),
+                      taskDate:
+                          snapshot.child(TaskString.DUE_DATE).value.toString(),
+                      deleteAction: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => WarningDialog(
+                            displayCancleButton: true,
+                            displayYesButton: true,
+                            title:
+                                translations(context).delete_task_confirmation,
+                            yesOnTap: () {
+                              try {
+                                ref.child('${snapshot.key}').remove();
+                              } on FirebaseException catch (e) {
+                                TaskUtils.showSnackBar(e.message);
+                              }
+                              Navigator.of(context).pop();
+                            },
+                            cancleOnTap: () => Navigator.of(context).pop(),
+                          ),
+                        );
+                      },
+                      widget:
+                          Container() /*AssignedDriver(
                     driverId:
                         snapshot.child(TaskString.DRIVER_ID).value.toString(),
                     onChanged: (value) {},
                     driver: driver,
                   ),*/
-                    );
-              }),
+                      );
+                }),
+          ),
         ),
-      ),
-    ]));
+      ]),
+      child: const Padding(padding: EdgeInsets.all(0)),
+    );
   }
 }

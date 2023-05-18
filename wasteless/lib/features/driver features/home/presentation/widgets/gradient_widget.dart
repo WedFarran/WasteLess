@@ -22,21 +22,21 @@ class GradientWidget extends StatelessWidget {
         ),
         Container(
           height: context.height * 0.19,
-          width: context.width * 0.7,
+          width: context.width * 0.6,
           decoration: gradient(GRADIENT1),
         ),
         Positioned(
             left: 60,
             child: Container(
               height: context.height * 0.19,
-              width: context.width * 0.6,
+              width: context.width * 0.55,
               decoration: gradient(GRADIENT2),
             )),
         Positioned(
-            right: 60,
+            left: 130,
             child: Container(
               height: context.height * 0.19,
-              width: context.width * 0.35,
+              width: context.width * 0.4,
               decoration: gradient(GRADIENT3),
             )),
         Positioned(

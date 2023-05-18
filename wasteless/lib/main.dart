@@ -7,10 +7,11 @@ import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/features/general%20features/splash_screen.dart';
 import 'core/providers/map/filtering_change_notifier.dart';
 import 'custom_routes.dart';
+import 'features/driver features/tasks/presentation/bloc/task_bloc.dart';
 import 'features/general features/widgets/login_utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-//import 'injection_container.dart' as di;
+import 'injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,17 +54,16 @@ class _WasteLessState extends State<WasteLess> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => FilteringChangeNotifier())
+        ChangeNotifierProvider(
+          create: (context) => FilteringChangeNotifier(),
+        ),
+        BlocProvider(create: (_) => di.sl<TaskBloc>()..add(TaskEvent()))
       ],
       child: MaterialApp(
         scaffoldMessengerKey: LoginUtils.massengerKey,
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: WHITE,
-          colorScheme: ColorScheme.fromSwatch()
-              .copyWith(primary: PRIMARY_BLUE, secondary: PRIMARY_GREEN),
-        ),
+        theme: ThemeData(scaffoldBackgroundColor: WHITE),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: _locale,

@@ -153,6 +153,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               })
         ]),
       ),
+      child: const Padding(padding: EdgeInsets.all(0)),
     );
   }
 

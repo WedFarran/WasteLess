@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/settings/presentation/screens/admin_settings_screen.dart';
-import 'package:wasteless/features/admin%20features/tasks/presentation/screens/admin_tasks_screen.dart';
 import '../../../../core/utils/assets_path.dart';
 import '../../../../core/utils/responsive.dart';
 import '../../../../core/widgets/bottom_navigation_icon.dart';
 import '../../core/utils/styles.dart';
 import '../../core/widgets/bottom_navigation_bar_widget.dart';
 import '../../core/widgets/web_navigation_bar_icons.dart';
+import '../driver features/tasks/presentation/screens/driver_task_screen.dart';
 import 'driver/presentation/screens/all_drivers_screen.dart';
 import 'map/presentation/screens/admin_map_screen.dart';
 
 class AdminWasteNavigationBar extends StatefulWidget {
   static const String id = 'navigation_bar_screen';
-
   const AdminWasteNavigationBar({super.key});
 
   @override
@@ -25,7 +24,7 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
   List<Widget> screens = const [
     DriversScreen(),
     AdminMapScreen(),
-    AdminTasksScreen(),
+    DriverTaskScreen(),
     AdminSettingsScreen()
   ];
   int selectedIndex = 0;

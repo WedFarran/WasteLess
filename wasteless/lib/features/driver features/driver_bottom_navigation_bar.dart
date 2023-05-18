@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
-import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_tasks_screen.dart';
+import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_task_screen.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/widgets/bottom_navigation_bar_widget.dart';
@@ -21,7 +21,7 @@ class DriverWasteNavigationBar extends StatefulWidget {
 class _AdminWasteNavigationBarState extends State<DriverWasteNavigationBar> {
   List<Widget> screens = const [
     DriverHomeScreen(),
-    DriverTasksScreen(),
+    DriverTaskScreen(),
     DriverMapScreen(),
     DriverSettingsScreen(),
   ];

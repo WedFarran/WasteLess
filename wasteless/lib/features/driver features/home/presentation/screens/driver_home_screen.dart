@@ -85,70 +85,67 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBlueBackground(
-      widget: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(children: [
-            Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child:
-                    Image.asset(WASTELESS_LOGO, height: context.height * 0.4)),
-            SizedBox(
-              height: context.height * 0.05,
-            ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                const GradientWidget(),
-                StreamBuilder(
-                    stream: ref.onValue,
-                    builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      Map<dynamic, dynamic> map =
-                          snapshot.data!.snapshot.value as dynamic;
-                      List<dynamic> list = map.values.toList();
-                      return InkWell(
-                          onTap: () => Navigator.of(context)
-                                  .pushNamed(ProfileScreen.id, arguments: {
-                                "fullName": list[5],
-                                "image": list[1],
-                                "email": list[7],
-                                "qr": list[2]
-                              }),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${list[5]} \n \n ${list[6]}',
-                                style: anyColorSize16(WHITE),
-                              ),
-                              SizedBox(
-                                width: context.width * 0.04,
-                              ),
-                              CircleAvatar(
-                                backgroundImage: NetworkImage(list[1]),
-                                backgroundColor: WHITE,
-                                radius: 55,
-                              )
-                            ],
-                          ));
-                    })
-              ],
-            ),
-          ]),
-          Visibility(
-              visible: displayErrorMessage,
-              child: Center(
-                child: WarningDialog(
-                  title: errorMessage,
-                ),
-              )),
-        ],
-      ),
+      widget: Column(children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Image.asset(
+            WASTELESS_LOGO,
+            height: context.height * 0.4,
+          ),
+        ),
+        //Text(locationMessage),
+        SizedBox(
+          height: context.height * 0.06,
+        ),
+        StreamBuilder(
+            stream: ref.onValue,
+            builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              Map<dynamic, dynamic> map =
+                  snapshot.data!.snapshot.value as dynamic;
+              List<dynamic> list = map.values.toList();
+              return InkWell(
+                  onTap: () => Navigator.of(context).pushNamed(ProfileScreen.id,
+                          arguments: {
+                            "fullName": list[5],
+                            "image": list[1],
+                            "email": list[7],
+                            "qr": list[2]
+                          }),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const GradientWidget(),
+                      SizedBox(
+                        height: context.height * 0.19,
+                        width: context.width * 0.78,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              '${list[5]}\n \n${list[6]}',
+                              style: anyColorSize16(WHITE),
+                            ),
+                            SizedBox(
+                              width: context.width * 0.04,
+                            ),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(list[1]),
+                              backgroundColor: WHITE,
+                              radius: 55,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ));
+            })
+      ]),
+      child: Padding(padding: EdgeInsets.all(5)),
     );
   }
 }
