@@ -1,5 +1,5 @@
 import '../../../strings/models_attributes.dart';
-import '../../domain/entity/task_entity.dart';
+import '../../entity/task_entity.dart';
 
 class TaskModel extends TaskEntity {
   const TaskModel(
