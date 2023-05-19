@@ -57,7 +57,7 @@ class _WasteLessState extends State<WasteLess> {
         ChangeNotifierProvider(
           create: (context) => FilteringChangeNotifier(),
         ),
-        BlocProvider(create: (_) => di.sl<TaskBloc>()..add(TaskEvent()))
+        // BlocProvider(create: (_) => di.sl<TaskBloc>()..add(TaskEvent()))
       ],
       child: MaterialApp(
         scaffoldMessengerKey: LoginUtils.massengerKey,
