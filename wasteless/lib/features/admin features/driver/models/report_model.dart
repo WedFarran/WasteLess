@@ -1,4 +1,4 @@
-import '../../domain/entities/report_entity.dart';
+import '../entities/report_entity.dart';
 
 class ReportModel extends ReportEntity {
   const ReportModel(
