@@ -62,10 +62,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: SplashTextAnimation(
                     textStyle: responsiveWasteSplash(context, PRIMARY_GREEN),
                     title: 'LESS',
-                    widget: Image.asset(MOVING_PIN,
-                        height: isDesktop(context)
-                            ? context.height * 0.22
-                            : context.height * 0.12),
+                    widget: Align(
+                      //TODO: please add the alignment to the arabic langugage
+                      child: Image.asset(MOVING_PIN,
+                          height: isDesktop(context)
+                              ? context.height * 0.22
+                              : context.height * 0.12),
+                    ),
                   ),
                 )),
           ],

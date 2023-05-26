@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:wasteless/core/common/data/models/driver_models.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
@@ -108,29 +109,45 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                           child: CircularProgressIndicator(),
                         );
                       }
-                      Map<dynamic, dynamic> map =
-                          snapshot.data!.snapshot.value as dynamic;
-                      List<dynamic> list = map.values.toList();
+                      Map<String, dynamic> map = Map<String, dynamic>.from(
+                          snapshot.data!.snapshot.value as Map);
+                      List<DriversModel> driver = [];
+                      map.forEach((key, value) {
+                        driver.add(DriversModel(
+                          id: key,
+                          lat: value['lat'],
+                          lng: value['lng'],
+                          area: ' d',
+                          email: value['email'],
+                          fullName: value['fullName'],
+                          idNumber: value['idNumber'],
+                          image: value['image'],
+                          nationality: value['nationality'],
+                          qR: value['qR'],
+                        ));
+                      });
+
                       return InkWell(
                           onTap: () => Navigator.of(context)
                                   .pushNamed(ProfileScreen.id, arguments: {
-                                "fullName": list[5],
-                                "image": list[1],
-                                "email": list[7],
-                                "qr": list[2]
+                                "fullName": driver.first.fullName,
+                                "image": driver.first.image,
+                                "email": driver.first.email,
+                                "qr": driver.first.qR
                               }),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${list[5]} \n \n ${list[6]}',
+                                '${driver.first.fullName} \n \n ${driver.first.fullName}',
                                 style: anyColorSize16(WHITE),
                               ),
                               SizedBox(
                                 width: context.width * 0.04,
                               ),
                               CircleAvatar(
-                                backgroundImage: NetworkImage(list[1]),
+                                backgroundImage:
+                                    NetworkImage(driver.first.image),
                                 backgroundColor: WHITE,
                                 radius: 55,
                               )

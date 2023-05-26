@@ -58,12 +58,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   validateEmail(value) {
-    if (value!.contains('@wasteless.driver.com') && arguments == ADMIN) {
+    if (value!.contains('@wl.d.com') && arguments == ADMIN) {
       return translations(context).wrong_driver_account_type;
-    } else if (value.contains('@wasteless.admin.com') && arguments == DRIVER) {
+    } else if (value.contains('@wl.a.com') && arguments == DRIVER) {
       return translations(context).wrong_admin_account_type;
-    } else if (!value.contains('@wasteless.admin.com') &&
-        !value.contains('@wasteless.driver.com')) {
+    } else if (!value.contains('@wl.a.com') && !value.contains('@wl.d.com')) {
       return translations(context).wrong_email_format;
     } else if (value.toString().isEmpty) {
       return translations(context).empty_email;
@@ -71,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  @override
+  @override //TODO: add the same method the rest of statefull widgets
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -84,8 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       backgroundColor: arguments == ADMIN ? PRIMARY_BLUE : PRIMARY_GREEN,
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -101,112 +100,115 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 1,
                 ),
                 Container(
-                  height: context.height * 0.79,
+                  height: context.height * 0.81,
                   decoration: const BoxDecoration(
                       color: WHITE,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50))),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, AccountType.id);
-                                  },
-                                  child: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: PRIMARY_GREEN,
-                                  ),
-                                )
-                              ]),
-                        ),
-                        Image.asset(
-                          WASTELESS_LOGO,
-                          height: context.height * 0.25,
-                        ),
-                        //subititle
-
-                        SizedBox(height: context.height * 0.05),
-
-                        //Email TextField
-
-                        Form(
-                            key: formKey,
-                            child: Column(
-                              children: [
-                                WasteLessTextField(
-                                  textController: _emailController,
-                                  color: arguments == ADMIN
-                                      ? LIGHT_GREEN
-                                      : LIGHT_BLUE,
-                                  title: translations(context).email,
-                                  obscureText: false,
-                                  hintColor: arguments == ADMIN
-                                      ? PRIMARY_GREEN
-                                      : PRIMARY_BLUE,
-                                  validator: (value) {
-                                    return validateEmail(value);
-                                  },
-                                ),
-                                SizedBox(height: context.height * 0.02),
-
-                                //Password TextField
-
-                                WasteLessTextField(
-                                  textController: _passwordController,
-                                  title: translations(context).password,
-                                  validator: (value) => value != null
-                                      ? null
-                                      : translations(context)
-                                          .password_error_message,
-                                  color: arguments == ADMIN
-                                      ? LIGHT_GREEN
-                                      : LIGHT_BLUE,
-                                  obscureText: secure,
-                                  hintColor: arguments == ADMIN
-                                      ? PRIMARY_GREEN
-                                      : PRIMARY_BLUE,
-                                  widget: GestureDetector(
+                  child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  InkWell(
                                     onTap: () {
-                                      setState(() {
-                                        secure = !secure;
-                                      });
+                                      Navigator.pushNamed(
+                                          context, AccountType.id);
                                     },
-                                    child: Icon(
-                                      secure == true
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: arguments == ADMIN
-                                          ? PRIMARY_GREEN
-                                          : PRIMARY_BLUE,
+                                    child: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: PRIMARY_GREEN,
+                                    ),
+                                  )
+                                ]),
+                          ),
+                          Image.asset(
+                            WASTELESS_LOGO,
+                            height: context.height * 0.25,
+                          ),
+                          //subititle
+
+                          SizedBox(height: context.height * 0.05),
+
+                          //Email TextField
+
+                          Form(
+                              key: formKey,
+                              child: Column(
+                                children: [
+                                  WasteLessTextField(
+                                    textController: _emailController,
+                                    color: arguments == ADMIN
+                                        ? LIGHT_GREEN
+                                        : LIGHT_BLUE,
+                                    title: translations(context).email,
+                                    obscureText: false,
+                                    hintColor: arguments == ADMIN
+                                        ? PRIMARY_GREEN
+                                        : PRIMARY_BLUE,
+                                    validator: (value) {
+                                      return validateEmail(value);
+                                    },
+                                  ),
+                                  SizedBox(height: context.height * 0.02),
+
+                                  //Password TextField
+
+                                  WasteLessTextField(
+                                    textController: _passwordController,
+                                    title: translations(context).password,
+                                    validator: (value) => value != null
+                                        ? null
+                                        : translations(context)
+                                            .password_error_message,
+                                    color: arguments == ADMIN
+                                        ? LIGHT_GREEN
+                                        : LIGHT_BLUE,
+                                    obscureText: secure,
+                                    hintColor: arguments == ADMIN
+                                        ? PRIMARY_GREEN
+                                        : PRIMARY_BLUE,
+                                    widget: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          secure = !secure;
+                                        });
+                                      },
+                                      child: Icon(
+                                        secure == true
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        color: arguments == ADMIN
+                                            ? PRIMARY_GREEN
+                                            : PRIMARY_BLUE,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              )),
 
-                        SizedBox(
-                          height: context.height * 0.05,
-                        ),
+                          SizedBox(
+                            height: context.height * 0.05,
+                          ),
 
-                        // LOGIN Button
-                        Button(
-                          title: translations(context).logIn,
-                          onTap: signIn,
-                          color:
-                              arguments == ADMIN ? PRIMARY_GREEN : PRIMARY_BLUE,
-                        ),
-                        SizedBox(
-                          height: context.height * 0.07,
-                        ),
-                      ]),
+                          // LOGIN Button
+                          Button(
+                            title: translations(context).logIn,
+                            onTap: signIn,
+                            color: arguments == ADMIN
+                                ? PRIMARY_GREEN
+                                : PRIMARY_BLUE,
+                          ),
+                          SizedBox(
+                            height: context.height * 0.07,
+                          ),
+                        ]),
+                  ),
                 )
               ]),
         ),

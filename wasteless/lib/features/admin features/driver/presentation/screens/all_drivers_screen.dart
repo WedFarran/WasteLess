@@ -45,6 +45,7 @@ class DriversScreen extends StatelessWidget {
           Expanded(
             child: FirebaseAnimatedList(
                 query: ref,
+                padding: const EdgeInsets.only(bottom: 80),
                 defaultChild: const Center(
                   child: CircularProgressIndicator(),
                 ),

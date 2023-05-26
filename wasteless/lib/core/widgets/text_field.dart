@@ -30,7 +30,6 @@ class WasteLessTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
         height: context.height * height,
-        padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color: color,
@@ -42,6 +41,7 @@ class WasteLessTextField extends StatelessWidget {
                 color: BLACK.withOpacity(0.25))
           ],
         ),
+        alignment: Alignment.center,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextFormField(

@@ -16,7 +16,6 @@ BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
-BitmapDescriptor currentLocationMarker = BitmapDescriptor.defaultMarker;
 
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
@@ -29,9 +28,6 @@ setCustomeMarkerIcon() {
       .then((icon) => {emptyBinMarker = icon});
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, BROKEN_BIN_ICON)
       .then((icon) => {brokenBinMarker = icon});
-  BitmapDescriptor.fromAssetImage(
-          ImageConfiguration.empty, CURRENT_LOCATION_ICON)
-      .then((icon) => {currentLocationMarker = icon});
 }
 
 Future<Position> getCurrentLocation() async {
