@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       var user = FirebaseAuth.instance.currentUser;
       user == null
           ? Navigator.of(context).pushNamed(AccountType.id)
-          : user.email!.contains('@wasteless.admin.com')
+          : user.email!.contains('@wl.a.com')
               ? Navigator.of(context).pushNamed(AdminWasteNavigationBar.id)
               : Navigator.of(context).pushNamed(DriverWasteNavigationBar.id);
     });
