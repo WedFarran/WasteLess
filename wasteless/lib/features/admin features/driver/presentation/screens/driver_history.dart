@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/admin%20features/driver/data/models/report_model.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/logo_back_widget.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
+import '../../models/report_model.dart';
 
 class DriverHistoryScreen extends StatelessWidget {
   static const String id = 'DriverHistoryScreen';
@@ -114,6 +114,7 @@ class DriverHistoryScreen extends StatelessWidget {
     );
   }
 
+//TODO: implemrnt the download pdf file
   downloadFile(value, context) async {
     final tempDir = await getTemporaryDirectory();
     await Dio().download(value, tempDir.path);

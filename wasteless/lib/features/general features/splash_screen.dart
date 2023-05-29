@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       var user = FirebaseAuth.instance.currentUser;
       user == null
           ? Navigator.of(context).pushNamed(AccountType.id)
-          : user.email!.contains('@wasteless.admin.com')
+          : user.email!.contains('@wl.a.com')
               ? Navigator.of(context).pushNamed(AdminWasteNavigationBar.id)
               : Navigator.of(context).pushNamed(DriverWasteNavigationBar.id);
     });
@@ -59,12 +59,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 visible: visibility,
                 child: Padding(
                   padding: EdgeInsets.only(left: isDesktop(context) ? 150 : 50),
-                  child: SplashTextAnimation(
-                    textStyle: responsiveWasteSplash(context, PRIMARY_GREEN),
-                    title: 'LESS',
-                    widget: Align(
-                      //TODO: please add the alignment to the arabic langugage
-                      child: Image.asset(MOVING_PIN,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: SplashTextAnimation(
+                      textStyle: responsiveWasteSplash(context, PRIMARY_GREEN),
+                      title: 'LESS',
+                      widget: Image.asset(MOVING_PIN,
                           height: isDesktop(context)
                               ? context.height * 0.22
                               : context.height * 0.12),

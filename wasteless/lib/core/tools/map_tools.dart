@@ -13,10 +13,10 @@ import '../common/data/models/driver_models.dart';
 
 BitmapDescriptor driverMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
-BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
-BitmapDescriptor brokenBinMarker = BitmapDescriptor.defaultMarker;
-
+BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
+BitmapDescriptor brokeBinMarker = BitmapDescriptor.defaultMarker;
+//TODO: fix the empty pin marker
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
       .then((icon) => {fullBinMarker = icon});
@@ -24,10 +24,10 @@ setCustomeMarkerIcon() {
       .then((icon) => {driverMarker = icon});
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, HALF_FULL_BIN_PIN)
       .then((icon) => {halfFullBinMarker = icon});
+  BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, BROKIN_BIN_PIN)
+      .then((icon) => {brokeBinMarker = icon});
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, EMPTY_BIN_PIN)
       .then((icon) => {emptyBinMarker = icon});
-  BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, BROKEN_BIN_ICON)
-      .then((icon) => {brokenBinMarker = icon});
 }
 
 Future<Position> getCurrentLocation() async {
@@ -70,7 +70,7 @@ getAllGeoCords(
                     : e.wasteLevel >= 0.8
                         ? fullBinMarker
                         : halfFullBinMarker
-                : brokenBinMarker,
+                : brokeBinMarker,
             onTap: () async {
               List<Placemark> placemarks =
                   await placemarkFromCoordinates(e.lat, e.lng);
@@ -121,7 +121,7 @@ getAllGeoCords(
   }
   if (emptySelected) {
     markersList
-        .addAll(binsMarkers.where((element) => element.icon == emptyBinMarker));
+        .addAll(binsMarkers.where((element) => element.icon == brokeBinMarker));
   }
 
   driversSelected ? markersList.addAll(driversMarkers) : null;
@@ -147,7 +147,7 @@ getBinsGeoCords(
                   : e.wasteLevel >= 0.8
                       ? fullBinMarker
                       : halfFullBinMarker
-              : brokenBinMarker,
+              : brokeBinMarker,
           onTap: () async {
             List<Placemark> placemarks =
                 await placemarkFromCoordinates(e.lat, e.lng);
@@ -175,7 +175,7 @@ getBinsGeoCords(
   }
   if (emptySelected) {
     markersList
-        .addAll(binsMarkers.where((element) => element.icon == emptyBinMarker));
+        .addAll(binsMarkers.where((element) => element.icon == brokeBinMarker));
   }
 
   return markersList;

@@ -117,7 +117,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                           id: key,
                           lat: value['lat'],
                           lng: value['lng'],
-                          area: ' d',
+                          area: value['area'],
                           email: value['email'],
                           fullName: value['fullName'],
                           idNumber: value['idNumber'],
@@ -139,7 +139,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${driver.first.fullName} \n \n ${driver.first.fullName}',
+                                'driver.first.fullName} \n \n driver.first.fullName}',
                                 style: anyColorSize16(WHITE),
                               ),
                               SizedBox(

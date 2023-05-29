@@ -32,7 +32,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
 
   @override
   void initState() {
-    dbBins = FirebaseDatabase.instance.ref("bin/");
+    dbBins = FirebaseDatabase.instance.ref("bin");
     dbDrivers = FirebaseDatabase.instance.ref("driver");
     setCustomeMarkerIcon();
     getBins();
@@ -40,6 +40,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     super.initState();
   }
 
+//TODO: remove this to the map remote data source
   getBins() {
     Stream<DatabaseEvent> streamBins = dbBins.onValue;
     streamBins.listen((DatabaseEvent event) {
@@ -60,6 +61,7 @@ class _AdminMapScreenState extends State<AdminMapScreen> {
     });
   }
 
+//TODO: remove this to the map remote data source
   getDrivers() {
     Stream<DatabaseEvent> streamDrivers = dbDrivers.onValue;
     streamDrivers.listen((DatabaseEvent event) {

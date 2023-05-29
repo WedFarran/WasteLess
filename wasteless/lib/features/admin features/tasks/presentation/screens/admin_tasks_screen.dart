@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/strings/models_attributes.dart';
+import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/tasks/presentation/screens/modify_task.dart';
 import 'package:wasteless/features/admin%20features/tasks/task_utils.dart';
@@ -30,7 +31,7 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
   @override
   void initState() {
     ref = FirebaseDatabase.instance.ref('task');
-    todoTasks = ref.orderByChild(TaskString.STATUS).equalTo(false);
+    todoTasks = ref.orderByChild('status').equalTo(false);
     super.initState();
   }
 
@@ -56,80 +57,80 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
       SizedBox(
         height: context.height * 0.02,
       ),
-      Flexible(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 80),
-          child: FirebaseAnimatedList(
-              query: todoTasks,
-              defaultChild: const Center(
-                child: CircularProgressIndicator(),
-              ),
-              itemBuilder: (context, snapshot, animation, index) {
-                List<DriversModel?> items =
-                    List.filled(snapshot.children.length, driver);
-
-                return TaskWidget(
-                    onTap: () => Navigator.pushNamed(
-                            context, ModifyTaskScreen.id, arguments: {
-                          TaskString.DRIVER_ID: snapshot
-                              .child(TaskString.DRIVER_ID)
-                              .value
-                              .toString(),
-                          TaskString.TASK_TITLE: snapshot
-                              .child(TaskString.TASK_TITLE)
-                              .value
-                              .toString(),
-                          TaskString.DUE_DATE: snapshot
-                              .child(TaskString.DUE_DATE)
-                              .value
-                              .toString(),
-                          TaskString.START_DATE: snapshot
-                              .child(TaskString.START_DATE)
-                              .value
-                              .toString(),
-                          TaskString.LOCATION: snapshot
-                              .child(TaskString.LOCATION)
-                              .value
-                              .toString(),
-                          TaskString.DESCRIPTION: snapshot
-                              .child(TaskString.DESCRIPTION)
-                              .value
-                              .toString(),
-                          TaskString.TASK_ID: snapshot.key
-                        }),
-                    taskName:
-                        snapshot.child(TaskString.TASK_TITLE).value.toString(),
-                    taskDate:
-                        snapshot.child(TaskString.DUE_DATE).value.toString(),
-                    deleteAction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => WarningDialog(
-                          displayCancleButton: true,
-                          displayYesButton: true,
-                          title: translations(context).delete_task_confirmation,
-                          yesOnTap: () {
-                            try {
-                              ref.child('${snapshot.key}').remove();
-                            } on FirebaseException catch (e) {
-                              TaskUtils.showSnackBar(e.message);
-                            }
-                            Navigator.of(context).pop();
-                          },
-                          cancleOnTap: () => Navigator.of(context).pop(),
-                        ),
-                      );
-                    },
-                    widget:
-                        Container() /*AssignedDriver(
-                    driverId:
-                        snapshot.child(TaskString.DRIVER_ID).value.toString(),
-                    onChanged: (value) {},
-                    driver: driver,
-                  ),*/
+      //TODO: fixed this mess
+      Expanded(
+        child: FirebaseAnimatedList(
+            query: todoTasks,
+            // shrinkWrap: true,
+            padding: const EdgeInsets.only(bottom: 80),
+            defaultChild: const Center(
+              child: CircularProgressIndicator(),
+            ),
+            itemBuilder: (context, snapshot, animation, index) {
+              //List<DriversModel?> items =
+              // List.filled(snapshot.children.length, driver);
+              print(index);
+              return CircularProgressIndicator(); /*TaskWidget(
+                  onTap: () => Navigator.pushNamed(context, ModifyTaskScreen.id,
+                          arguments: {
+                            TaskString.DRIVER_ID: snapshot
+                                .child(TaskString.DRIVER_ID)
+                                .value
+                                .toString(),
+                            TaskString.TASK_TITLE: snapshot
+                                .child(TaskString.TASK_TITLE)
+                                .value
+                                .toString(),
+                            TaskString.DUE_DATE: snapshot
+                                .child(TaskString.DUE_DATE)
+                                .value
+                                .toString(),
+                            TaskString.START_DATE: snapshot
+                                .child(TaskString.START_DATE)
+                                .value
+                                .toString(),
+                            TaskString.LOCATION: snapshot
+                                .child(TaskString.LOCATION)
+                                .value
+                                .toString(),
+                            TaskString.DESCRIPTION: snapshot
+                                .child(TaskString.DESCRIPTION)
+                                .value
+                                .toString(),
+                            TaskString.TASK_ID: snapshot.key
+                          }),
+                  taskName:
+                      snapshot.child(TaskString.TASK_TITLE).value.toString(),
+                  taskDate:
+                      snapshot.child(TaskString.DUE_DATE).value.toString(),
+                  deleteAction: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WarningDialog(
+                        displayCancleButton: true,
+                        displayYesButton: true,
+                        title: translations(context).delete_task_confirmation,
+                        yesOnTap: () {
+                          try {
+                            ref.child('${snapshot.key}').remove();
+                          } on FirebaseException catch (e) {
+                            TaskUtils.showSnackBar(e.message);
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        cancleOnTap: () => Navigator.of(context).pop(),
+                      ),
                     );
-              }),
-        ),
+                  },
+                  widget:
+                      Container() AssignedDriver(
+                  driverId:
+                      snapshot.child(TaskString.DRIVER_ID).value.toString(),
+                  onChanged: (value) {},
+                  driver: driver,
+                ),
+                  );*/
+            }),
       ),
     ]));
   }
