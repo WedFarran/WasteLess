@@ -109,51 +109,94 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                           child: CircularProgressIndicator(),
                         );
                       }
-                      Map<String, dynamic> map = Map<String, dynamic>.from(
-                          snapshot.data!.snapshot.value as Map);
-                      List<DriversModel> driver = [];
-                      map.forEach((key, value) {
-                        driver.add(DriversModel(
-                          id: key,
-                          lat: value['lat'],
-                          lng: value['lng'],
-                          area: value['area'],
-                          email: value['email'],
-                          fullName: value['fullName'],
-                          idNumber: value['idNumber'],
-                          image: value['image'],
-                          nationality: value['nationality'],
-                          qR: value['qR'],
-                        ));
-                      });
-
+                      Map<dynamic, dynamic> map =
+                          snapshot.data!.snapshot.value as dynamic;
+                      List<dynamic> list = map.values.toList();
                       return InkWell(
                           onTap: () => Navigator.of(context)
                                   .pushNamed(ProfileScreen.id, arguments: {
-                                "fullName": driver.first.fullName,
-                                "image": driver.first.image,
-                                "email": driver.first.email,
-                                "qr": driver.first.qR
+                                "fullName": list[5],
+                                "image": list[1],
+                                "email": list[7],
+                                "qr": list[2]
                               }),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Stack(
+                            alignment: Alignment.center,
                             children: [
-                              Text(
-                                'driver.first.fullName} \n \n driver.first.fullName}',
-                                style: anyColorSize16(WHITE),
-                              ),
+                              const GradientWidget(),
                               SizedBox(
-                                width: context.width * 0.04,
-                              ),
-                              CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(driver.first.image),
-                                backgroundColor: WHITE,
-                                radius: 55,
+                                height: context.height * 0.19,
+                                width: context.width * 0.78,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      '${list[5]}\n \n${list[6]}',
+                                      style: anyColorSize16(WHITE),
+                                    ),
+                                    SizedBox(
+                                      width: context.width * 0.04,
+                                    ),
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(list[1]),
+                                      backgroundColor: WHITE,
+                                      radius: 55,
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           ));
-                    })
+                    }),
+                /*StreamBuilder(
+                    stream: ref.onValue,
+                    builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      Map<dynamic, dynamic> map =
+                          snapshot.data!.snapshot.value as dynamic;
+                      List<dynamic> list = map.values.toList();
+                      return InkWell(
+                          onTap: () => Navigator.of(context)
+                                  .pushNamed(ProfileScreen.id, arguments: {
+                                "fullName": list[5],
+                                "image": list[1],
+                                "email": list[7],
+                                "qr": list[2]
+                              }),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              const GradientWidget(),
+                              SizedBox(
+                                height: context.height * 0.19,
+                                width: context.width * 0.78,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      '${list[5]}\n \n${list[6]}',
+                                      style: anyColorSize16(WHITE),
+                                    ),
+                                    SizedBox(
+                                      width: context.width * 0.04,
+                                    ),
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(list[1]),
+                                      backgroundColor: WHITE,
+                                      radius: 55,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ));
+                    })*/
               ],
             ),
           ]),
