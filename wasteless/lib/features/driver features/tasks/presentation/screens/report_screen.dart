@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import '../../../../admin features/driver/data/models/report_model.dart';
 import '../widgets/text_form_field.dart';
 
@@ -20,11 +21,11 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   WasteType? _wasteType = WasteType.general;
-  String wasteType = 'General';
 
   DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('report');
   @override
   Widget build(BuildContext context) {
+    String wasteType = translations(context).general;
     return SafeArea(
       child: Scaffold(
         body: Padding(

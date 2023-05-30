@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
@@ -57,18 +58,23 @@ class _WasteLessState extends State<WasteLess> {
         ChangeNotifierProvider(
           create: (context) => FilteringChangeNotifier(),
         ),
-        // BlocProvider(create: (_) => di.sl<TaskBloc>()..add(TaskEvent()))
+        BlocProvider(create: (_) => TaskBloc()),
       ],
-      child: MaterialApp(
-        scaffoldMessengerKey: LoginUtils.massengerKey,
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: WHITE),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: _locale,
-        initialRoute: SplashScreen.id,
-        routes: customRoutes,
+      child: ScreenUtilInit(
+        designSize: const Size(411.42857142857144, 890.2857142857143),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (BuildContext context, Widget? child) => MaterialApp(
+          scaffoldMessengerKey: LoginUtils.massengerKey,
+          navigatorKey: navigatorKey,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(scaffoldBackgroundColor: WHITE),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: _locale,
+          initialRoute: SplashScreen.id,
+          routes: customRoutes,
+        ),
       ),
     );
   }

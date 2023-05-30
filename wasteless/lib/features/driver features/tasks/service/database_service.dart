@@ -9,7 +9,12 @@ class DatabaseService {
 
   //* get Tasks count
   static getTasksAmount() async {
-    final response = await FirebaseDatabase.instance.ref().child('task').once();
+    final response = await FirebaseDatabase.instance
+        .ref()
+        .child('task')
+        .orderByChild("status")
+        .equalTo(false)
+        .once();
     taskCount = response.snapshot.children.length;
   }
 
