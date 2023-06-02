@@ -27,7 +27,7 @@ class NavigationButtonWidget extends StatelessWidget {
             builder: (context) => Container(
                   height: context.height * 0.16,
                   width: context.width,
-                  margin: const EdgeInsets.only(left: 30),
+                  margin: const EdgeInsets.only(left: 20),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     Row(

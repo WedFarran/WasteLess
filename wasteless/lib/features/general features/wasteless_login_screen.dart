@@ -60,12 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   validateEmail(value) {
-    if (value!.contains('@wasteless.driver.com') && arguments == ADMIN) {
+    if (value!.contains('@wl.d.com') && arguments == ADMIN) {
       return translations(context).wrong_driver_account_type;
-    } else if (value.contains('@wasteless.admin.com') && arguments == DRIVER) {
+    } else if (value.contains('@wl.a.com') && arguments == DRIVER) {
       return translations(context).wrong_admin_account_type;
-    } else if (!value.contains('@wasteless.admin.com') &&
-        !value.contains('@wasteless.driver.com')) {
+    } else if (!value.contains('@wl.a.com') && !value.contains('@wl.d.com')) {
       return translations(context).wrong_email_format;
     } else if (value.toString().isEmpty) {
       return translations(context).empty_email;
