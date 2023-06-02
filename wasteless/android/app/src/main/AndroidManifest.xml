@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wasteless">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <application
         android:label="wasteless"
         android:name="${applicationName}"
@@ -31,6 +35,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBxjt7A4XxrVYo9mtEY74DuCJ8bsUo5Z7w"/>    
+               android:value="AIzaSyAVSFYwmtyPBRcXlXx7LQjd8QgvqwtyTNY"/>
     </application>
 </manifest>

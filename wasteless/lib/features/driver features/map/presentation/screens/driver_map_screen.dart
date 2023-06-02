@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/admin%20features/map/data/models/bins_models.dart';
-import 'package:wasteless/features/driver%20features/map/presentation/bloc/geolocator_services.dart';
-import '../../../../../core/widgets/map_widgets/filtering_button.dart';
-import '../../map_tools.dart';
-import '../bloc/filtering_change_notifier.dart';
+import '../../../../../core/common/data/models/bins_models.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
+import '../../../../../core/tools/map_tools.dart';
+import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';
+import '../widgets/driver_filtering_options_widget.dart';
 import '../widgets/navigation_button_widget.dart';
 
 class DriverMapScreen extends StatefulWidget {
@@ -22,45 +23,60 @@ class DriverMapScreen extends StatefulWidget {
 }
 
 class _DriverMapScreenState extends State<DriverMapScreen> {
-  final GeolocatorServices geoServices = GeolocatorServices();
   late GoogleMapController mapController;
   late Query retrieveBins;
   late DatabaseReference ref;
-  late var currentUserId = '';
+  static const LatLng SOURCE_LOCATION = LatLng(21.357832620119908, 39.78452627440951);
+  static const LatLng DEST_LOCATION = LatLng(21.34404297896124, 39.7866291263894);
+  late LatLng currentLocation;
+  late LatLng destinationLocation;
 
-  double lat = 21.42462845849512;
-  double lng = 39.82612550889805;
+  Set<Polyline> _polylines = Set<Polyline>();
+  List<LatLng> polylineCoordinates = [];
+  late PolylinePoints polylinePoints;
+
+
+
+  late var currentUserId = '';
+  late Position _currentPosition;
+  final LatLng _initialPosition =
+  const LatLng(21.42462845849512, 39.82612550889805);
+  final Set<Marker> markers = {};
+  List<BinsModel> binsList = [];
+
+  //late List<Polyline> _polylines = [];
+
 
   @override
   void initState() {
-    _liveLocation();
-    getCurrentLocation();
     setCustomeMarkerIcon();
     var currentUserId = FirebaseAuth.instance.currentUser!.uid;
     ref = FirebaseDatabase.instance.ref('bin');
     retrieveBins = ref.orderByChild("driverId").equalTo(currentUserId);
+    polylinePoints = PolylinePoints();
+    //this.setInitialLocation();
 
     super.initState();
   }
-
-  void _liveLocation() {
-    LocationSettings locationSettings = const LocationSettings(
-        accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 1);
-    Geolocator.getPositionStream(locationSettings: locationSettings)
-        .listen((position) {
-      lat = position.latitude;
-      lng = position.longitude;
-      setState(() {
-        _initialPosition = LatLng(position.latitude, position.longitude);
-        mapController.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target: LatLng(position.latitude, position.longitude))));
-      });
-    });
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled');
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location P are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('location P are permanently denied');
+    }
+    return Geolocator.getCurrentPosition();
   }
 
-  LatLng _initialPosition = const LatLng(21.42462845849512, 39.82612550889805);
-
+  List<LatLng> _polylineCoordinates = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,9 +87,24 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const FilteringButton(),
-                      NavigationButtonWidget(selected: true, ontap: () {}),
-                    ]))),
+                      const FilterinFloatingActionButton(
+                        widget: DriverMapFilteringOptionsWidget(),
+                      ),
+                      NavigationButtonWidget(selected: true, ontap: ()  {
+                        setPolylines();
+                       /* _polylineCoordinates.add(LatLng(21.357832620119908, 39.78452627440951));
+                        _polylineCoordinates.add(LatLng(DEST_LOCATION.latitude, DEST_LOCATION.longitude));
+                        _polylines.clear();
+                        _polylines.add(Polyline(
+                            polylineId: PolylineId('polyline_1'),
+                        color: Colors.blue,
+                        width: 5,
+                        points: _polylineCoordinates,));*/
+                        setState(() {
+
+                        });
+
+                      })]))),
         body: SafeArea(
             child: StreamBuilder(
                 stream: retrieveBins.onValue,
@@ -83,7 +114,7 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                   } else {
                     Map<String, dynamic> map = Map<String, dynamic>.from(
                         snapshot.data!.snapshot.value as Map);
-                    List<BinsModel> binsList = [];
+
                     map.forEach((key, value) {
                       binsList.add(BinsModel(
                           id: key,
@@ -103,27 +134,77 @@ class _DriverMapScreenState extends State<DriverMapScreen> {
                           myLocationEnabled: true,
                           zoomControlsEnabled: false,
                           compassEnabled: false,
+                          polylines: _polylines,
                           initialCameraPosition: CameraPosition(
                               target: _initialPosition, zoom: 13),
                           onMapCreated: (controler) {
                             setState(
                               () {
                                 mapController = controler;
-                                _liveLocation();
+                               // setPolylines();
                                 mapController.setMapStyle(
                                     '[{"featureType": "poi","stylers": [{"visibility": "off"}]}]');
-                              },
-                            );
+
+
+                              });
                           },
+
                           markers: Set.from(getBinsGeoCords(
                               binsList,
                               context,
                               filteringOptions.fullCheck,
                               filteringOptions.halfFullCheck,
-                              filteringOptions.emptyCheck,
-                              LatLng(lat, lng))));
+                              filteringOptions.emptyCheck,)),
+                      );
                     });
                   }
+
                 })));
   }
+void setPolylines() async {
+  List<PolylineWayPoint> polylineCoordinates = [];
+  List<PointLatLng> locations = [];
+
+  binsList.forEach((location) {
+    if(location.wasteLevel>0.6){
+      locations.add(PointLatLng(location.lat, location.lng));
+    }
+  });
+
+  List<PolylineWayPoint> polylineWayPoints = locations.map((location) {
+
+    return PolylineWayPoint(location: location.toString());
+  }).toList();
+
+  _getCurrentLocation().then((value) {
+    currentLocation = LatLng(value.latitude, value.longitude) ;
+    locations.add(PointLatLng(currentLocation.latitude, currentLocation.longitude));
+  });
+  PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    'AIzaSyAVSFYwmtyPBRcXlXx7LQjd8QgvqwtyTNY', // replace with your own API key
+
+    polylineCoordinates.first as PointLatLng,
+    polylineCoordinates.last as PointLatLng,
+ wayPoints: polylineCoordinates,
+  );
+
+  if (result.points.isNotEmpty) {
+    polylineCoordinates.clear();
+    result.points.forEach((PointLatLng point) {
+      polylineCoordinates.add(PolylineWayPoint( location: PointLatLng(point.latitude, point.longitude).toString()));
+    });
+
+    setState(() {
+      _polylines.add(Polyline(
+        width: 5,
+        polylineId: PolylineId('route'),
+        color: Colors.red,
+        points: polylineCoordinates as dynamic,
+      ));
+    });
+  }
+
+  }
 }
+
+

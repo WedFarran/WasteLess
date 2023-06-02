@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wasteless/core/errors/exception.dart';
-import 'package:wasteless/features/driver%20features/map/data/models/driver_map_model.dart';
+
+import '../../../../../core/common/data/models/bins_models.dart';
 
 abstract class BinsLocalDataSource {
   //this class to create the needed function we will need a function to save all the bins and another function to return the saved bins

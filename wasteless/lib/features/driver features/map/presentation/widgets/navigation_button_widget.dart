@@ -1,6 +1,8 @@
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/core/utils/styles.dart';
 import '../../../../../core/utils/assets_path.dart';
@@ -18,6 +20,7 @@ class NavigationButtonWidget extends StatelessWidget {
     double kiloM = 50;
     String time = '15';
     String duration = int.parse(time) < 60 ? 'min' : 'hour';
+
     return FloatingActionButton(
         backgroundColor: WHITE,
         onPressed: () => showModalBottomSheet(
@@ -49,9 +52,8 @@ class NavigationButtonWidget extends StatelessWidget {
                             shape: const CircleBorder(),
                             clipBehavior: Clip.hardEdge,
                             child: IconButton(
-                                onPressed: () {
-                                  // Do something when the new button is pressed
-                                },
+                                onPressed:ontap,
+
                                 icon: Image.asset(NAVIGATION_ICON,
                                     height: context.height * 0.4)))),
                     Align(

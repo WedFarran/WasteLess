@@ -4,21 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/media_query.dart';
+import '../../../../../core/providers/map/filtering_change_notifier.dart';
 import '../../../../../core/utils/assets_path.dart';
+import '../../../../../core/utils/language.dart';
 import '../../../../../core/utils/styles.dart';
-import '../bloc/filtering_change_notifier.dart';
-import 'filtering_button_widget.dart';
+import '../../../../../core/widgets/map_widgets/filter_floating_action_button.dart';
 
-class DriverFilteringOptionsWidget extends StatefulWidget {
-  const DriverFilteringOptionsWidget({super.key});
+class DriverMapFilteringOptionsWidget extends StatelessWidget {
+  const DriverMapFilteringOptionsWidget({super.key});
 
-  @override
-  State<DriverFilteringOptionsWidget> createState() =>
-      _DriverFilteringOptionsWidgetState();
-}
-
-class _DriverFilteringOptionsWidgetState
-    extends State<DriverFilteringOptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,51 +31,51 @@ class _DriverFilteringOptionsWidgetState
                     height: context.height * 0.02,
                   ),
                   Text(
-                    'Filter',
+                    translations(context).filter,
                     style: anyColorSize16(FONT_GRAY),
                   )
                 ],
               ),
               InkWell(
                 onTap: () {
-                  context.read<FilteringChangeNotifier>().driversCheck = true;
                   context.read<FilteringChangeNotifier>().fullCheck = true;
                   context.read<FilteringChangeNotifier>().halfFullCheck = true;
                   context.read<FilteringChangeNotifier>().emptyCheck = true;
                 },
-                child: Text('Reset', style: anyColorSize16(BLACK)),
+                child: Text(translations(context).reset,
+                    style: anyColorSize16(BLACK)),
               ),
             ],
           ),
           Consumer<FilteringChangeNotifier>(
               builder: (context, fullSelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context.read<FilteringChangeNotifier>().fullCheck =
                   !fullSelected.fullCheck,
               selected: fullSelected.fullCheck,
               icon: Full_BIN_ICON,
-              status: 'Full',
+              status: translations(context).full,
             );
           }),
           Consumer<FilteringChangeNotifier>(
               builder: (context, halfFullSelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context
                   .read<FilteringChangeNotifier>()
                   .halfFullCheck = !halfFullSelected.halfFullCheck,
               selected: halfFullSelected.halfFullCheck,
               icon: HALF_FULL_BIN_ICON,
-              status: 'Half Full',
+              status: translations(context).half_full,
             );
           }),
           Consumer<FilteringChangeNotifier>(
               builder: (context, emptySelected, child) {
-            return FilteringButtonWidget(
+            return FilteringOptionButtonWidget(
               onTap: () => context.read<FilteringChangeNotifier>().emptyCheck =
                   !emptySelected.emptyCheck,
               selected: emptySelected.emptyCheck,
               icon: EMPTY_BIN_ICON,
-              status: 'Empty',
+              status: translations(context).empty,
             );
           }),
         ],

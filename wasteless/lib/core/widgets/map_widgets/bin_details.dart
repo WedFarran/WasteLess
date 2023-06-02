@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-
 import '../../utils/styles.dart';
 import 'circle_indicator.dart';
 
@@ -28,15 +28,13 @@ class BinDetailsWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircleIndicator(
-                percent: percent,
-              ),
+              CircleIndicator(percent: percent),
               Text(
                   percent < 0.4
-                      ? 'Empty'
+                      ? translations(context).empty
                       : percent >= 0.8
-                          ? 'Full'
-                          : 'Half',
+                          ? translations(context).full
+                          : translations(context).half_full,
                   style: anyColorSize32(FONT_GRAY)),
               SizedBox(
                 width: context.width * 0.01,
@@ -44,17 +42,27 @@ class BinDetailsWidget extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('location:', style: anyColorSize16(FONT_GRAY)),
-              Text(location, style: anyColorSize16(PRIMARY_BLUE)),
+              Text('${translations(context).location}:',
+                  style: anyColorSize16(FONT_GRAY)),
+              SizedBox(width: context.width * 0.2),
+              Expanded(
+                  child: Text(location,
+                      style: anyColorSize16(PRIMARY_BLUE),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis)),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('full expected time:', style: anyColorSize16(FONT_GRAY)),
-              Text(fullnesTime, style: anyColorSize16(PRIMARY_BLUE))
+              Text('${translations(context).full_expected_time}:',
+                  style: anyColorSize16(FONT_GRAY)),
+              SizedBox(width: context.width * 0.2),
+              Expanded(
+                  child: Text(fullnesTime,
+                      style: anyColorSize16(PRIMARY_BLUE),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis))
             ],
           ),
         ],
