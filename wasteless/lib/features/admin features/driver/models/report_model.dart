@@ -2,31 +2,37 @@ import '../entities/report_entity.dart';
 
 class ReportModel extends ReportEntity {
   const ReportModel(
-      {required super.dateTime,
-      required super.driverId,
+      {required super.driverId,
       required super.id,
       required super.reportFile,
-      required super.taskId,
-      required super.taskName});
+      required super.details,
+      required super.date,
+      required super.taskTitle,
+      required super.taskid,
+      required super.wasteype,
+      required super.wastewight});
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
-        dateTime: json['dateTime'],
+        date: json['date'],
         driverId: json['driverId'],
         id: json['id'],
         reportFile: json['reportFile'],
-        taskId: json['taskId'],
-        taskName: json['taskName']);
+        taskid: json['taskid'],
+        taskTitle: json['taskTitle'],
+        details: json['details'],
+        wasteype: json['wastetype'],
+        wastewight: json['wastewight']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'taskName': taskName,
-      'taskId': taskId,
+      'taskTitle': taskTitle,
+      'taskid': taskid,
       'reportFile': reportFile,
       'driverId': driverId,
-      'dateTime': dateTime
+      'date': date
     };
   }
 }

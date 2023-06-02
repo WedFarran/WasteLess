@@ -66,11 +66,14 @@ class DriverHistoryScreen extends StatelessWidget {
                 reportsMap.forEach((key, value) {
                   reportsList.add(ReportModel(
                       id: key,
-                      dateTime: value['dateTime'],
+                      date: value['date'],
                       driverId: value['driverId'],
                       reportFile: value['reportFile'],
-                      taskId: value['taskId'],
-                      taskName: value['taskName']));
+                      taskid: value['taskid'],
+                      taskTitle: value['taskTitle'],
+                      details: value['details'],
+                      wastewight: value['wastewight'],
+                      wasteype: value['wastetype']));
                 });
 
                 if (reportsMap.isEmpty) {
@@ -81,8 +84,8 @@ class DriverHistoryScreen extends StatelessWidget {
                 reportsMap.forEach(
                   (key, value) {
                     rows.add(DataRow(cells: [
-                      DataCell(Text(value['taskName'])),
-                      DataCell(Text(value['dateTime'])),
+                      DataCell(Text(value['taskTitle'])),
+                      DataCell(Text(value['date'])),
                       DataCell(IconButton(
                         icon: const Icon(Icons.download_rounded),
                         onPressed: () =>

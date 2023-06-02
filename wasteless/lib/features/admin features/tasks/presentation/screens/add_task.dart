@@ -118,42 +118,50 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               )),
           AddOrModifyTaskButtonWidget(
               title: translations(context).save,
-              onTap: () async {
-                final formIsValid = _formKey.currentState!.validate();
-                if (!formIsValid) {}
-
-                if (dueDate.isEmpty || startDate.isEmpty) {
-                  setState(() {
-                    dateError = true;
-                  });
-                }
-                if (driver == null) {
-                  setState(() {
-                    driverSelected = true;
-                  });
-                }
-                if (formIsValid &&
-                    dateError == false &&
-                    driverSelected == false) {
-                  await dbTasks.push().set({
-                    TaskString.START_DATE: startDate,
-                    TaskString.DESCRIPTION:
-                        _descriptionController.text.trim().toString(),
-                    TaskString.DRIVER_ID: driver!.id.toString(),
-                    TaskString.DUE_DATE: dueDate,
-                    TaskString.STATUS: "false",
-                    TaskString.TASK_TITLE:
-                        _titleController.text.trim().toString(),
-                    TaskString.LOCATION:
-                        _locationController.text.trim().toString()
-                  });
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
-                }
+              onTap: () {
+                addTask();
               })
         ]),
       ),
     );
+  }
+
+  bool validateForm() {
+    final formIsValid = _formKey.currentState!.validate();
+    if (!formIsValid) {}
+
+    if (dueDate.isEmpty || startDate.isEmpty) {
+      setState(() {
+        dateError = true;
+      });
+    }
+    if (driver == null) {
+      setState(() {
+        driverSelected = true;
+      });
+    }
+    if (formIsValid && dateError == false && driverSelected == false) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  addTask() async {
+    bool validated = validateForm();
+    if (validated) {
+      await dbTasks.push().set({
+        TaskString.START_DATE: startDate,
+        TaskString.DESCRIPTION: _descriptionController.text.trim().toString(),
+        TaskString.DRIVER_ID: driver!.id.toString(),
+        TaskString.DUE_DATE: dueDate,
+        TaskString.STATUS: false,
+        TaskString.TASK_TITLE: _titleController.text.trim().toString(),
+        TaskString.LOCATION: _locationController.text.trim().toString()
+      });
+
+      Navigator.pop(context);
+    }
   }
 
   _setDueTaskDate() {
