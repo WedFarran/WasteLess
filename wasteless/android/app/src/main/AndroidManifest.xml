@@ -4,6 +4,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <queries>
+      <package android:name="com.google.android.apps.maps" />
+      <intent>
+          <action android:name="android.intent.action.VIEW" />
+          <data android:mimeType="text/plain" />
+      </intent>
+  </queries>
    <application
         android:label="wasteless"
         android:name="${applicationName}"
@@ -35,6 +44,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyAVSFYwmtyPBRcXlXx7LQjd8QgvqwtyTNY"/>
+               android:value="AIzaSyAQTWJhj_pcAowPjOr_4ZUVb03JiozOyCo"/>
     </application>
 </manifest>
