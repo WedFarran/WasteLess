@@ -23,6 +23,7 @@ dependencies:
   get_it: ^7.2.0
   dartz: ^0.10.1
   firebase_core: ^2.7.1
+  flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.2.5
   flutter_bloc: ^8.1.2
   percent_indicator: ^4.2.3
@@ -35,6 +36,8 @@ dependencies:
   firebase_storage: ^11.1.0
   dio: ^5.1.1
   geocoding: ^2.1.0
+  google_maps_webservice: ^0.0.19
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:
