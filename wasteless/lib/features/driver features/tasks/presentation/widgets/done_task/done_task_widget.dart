@@ -3,7 +3,9 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
-
+import 'package:wasteless/features/driver%20features/tasks/presentation/widgets/profile.dart';
+import '../../../service/database_service.dart';
+import '../../screens/driver_task_screen.dart';
 import '../task_card.dart';
 
 class DoneTaskWidget extends StatelessWidget {
@@ -44,7 +46,21 @@ class DoneTaskWidget extends StatelessWidget {
                               isShowBottomSheet: false,
                               checkBoxValue:
                                   snapshot.child('status').value as bool,
-                              onChanged: (val) => false,
+                              onChanged: (val) {
+                                final vlRef = FirebaseDatabase.instance
+                                    .ref()
+                                    .child('task')
+                                    .child(snapshot.key.toString());
+
+                                vlRef.update({"status": false});
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DriverTaskScreen(),
+                                  ),
+                                );
+                              },
                             )
                           : const SizedBox();
                     }),

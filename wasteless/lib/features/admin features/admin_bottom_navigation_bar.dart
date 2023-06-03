@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import 'package:wasteless/features/admin%20features/settings/presentation/screens/admin_settings_screen.dart';
+import 'package:wasteless/features/admin%20features/tasks/presentation/screens/admin_tasks_screen.dart';
 import '../../../../core/utils/assets_path.dart';
 import '../../../../core/utils/responsive.dart';
 import '../../../../core/widgets/bottom_navigation_icon.dart';
@@ -24,7 +25,7 @@ class _AdminWasteNavigationBarState extends State<AdminWasteNavigationBar> {
   List<Widget> screens = const [
     DriversScreen(),
     AdminMapScreen(),
-    DriverTaskScreen(),
+    AdminTasksScreen(),
     AdminSettingsScreen()
   ];
   int selectedIndex = 0;

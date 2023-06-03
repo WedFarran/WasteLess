@@ -27,8 +27,11 @@ class TaskCard extends StatelessWidget {
         child: ListTile(
           title: Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 22,
+              decoration: isShowBottomSheet
+                  ? TextDecoration.none
+                  : TextDecoration.lineThrough,
             ),
           ),
 

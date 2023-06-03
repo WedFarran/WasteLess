@@ -55,5 +55,6 @@
 "modify_task_confirmation":"Are you sure you want to modify the task?",
 "modify":"Modify",
 "select_start_date":"Select start date",
-"select_due_date":"Select due date"
+"select_due_date":"Select due date",
+"general":"General"
 }

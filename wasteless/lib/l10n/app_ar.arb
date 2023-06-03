@@ -55,5 +55,7 @@
 "modify_task_confirmation":"هل أنت متأكد أنك تريد تعديل المهمة؟",
 "modify":"تحديث",
 "select_start_date":"اختار تاريخ بداية المهمة",
-"select_due_date":"اختار تاريخ نهاية المهمة"
+"select_due_date":"اختار تاريخ نهاية المهمة",
+"general":"اخرى"
+
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
+import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_task_screen.dart';
 
 import '../../../../../admin features/driver/data/models/report_model.dart';
 import '../../bloc/task_bloc.dart';
@@ -46,17 +47,32 @@ class ToDoTaskWidget extends StatelessWidget {
                               checkBoxValue:
                                   snapshot.child('status').value as bool,
                               onChanged: (val) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ReportScreen(
-                                        reportModel:
-                                            TaskReportModel.fromSnapshot(
-                                                snapshot)),
-                                  ),
-                                );
-                              },
-                            )
+                                if (snapshot.child('taskTitle').value !=
+                                    'empty bin') {
+                                  //Update status value
+                                  final vlRef = FirebaseDatabase.instance
+                                      .ref()
+                                      .child('task')
+                                      .child(snapshot.key.toString());
+                                  vlRef.update({"status": true});
+                                   Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const DriverTaskScreen(),
+                                    ),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ReportScreen(
+                                          reportModel:
+                                              TaskReportModel.fromSnapshot(
+                                                  snapshot)),
+                                    ),
+                                  );
+                                }
+                              })
                           : const SizedBox();
                     }),
               ),
