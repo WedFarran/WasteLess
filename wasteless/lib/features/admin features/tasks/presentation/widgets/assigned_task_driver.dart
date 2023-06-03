@@ -59,6 +59,7 @@ class _AssignedDriverState extends State<AssignedDriver> {
                           children: [
                             CircleAvatar(
                               backgroundImage: NetworkImage(listDriver.image),
+                              backgroundColor: WHITE,
                             ),
                             SizedBox(width: context.width * 0.03),
                             Text(

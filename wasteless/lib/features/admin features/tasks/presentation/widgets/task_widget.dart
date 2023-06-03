@@ -26,7 +26,7 @@ class TaskWidget extends StatelessWidget {
       child: Container(
         height: context.height * 0.23,
         width: context.width * 0.8,
-        margin: const EdgeInsets.only(top: 30, bottom: 20, right: 30, left: 30),
+        margin: const EdgeInsets.only(top: 10, bottom: 20, right: 30, left: 30),
         padding: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
             color: WHITE,

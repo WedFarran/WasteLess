@@ -40,7 +40,6 @@ class AdminTaskRepoImpl implements AdminTaskRepo {
   Future<Either<Failure, Unit>> addTask(TaskEntity task) async {
     final TaskModel taskModel = TaskModel(
         taskId: task.taskId,
-        binId: task.binId,
         location: task.location,
         status: task.status,
         taskTitle: task.taskTitle,
@@ -78,7 +77,6 @@ class AdminTaskRepoImpl implements AdminTaskRepo {
   Future<Either<Failure, Unit>> modifyTask(TaskEntity task) async {
     final TaskModel taskModel = TaskModel(
         taskId: task.taskId,
-        binId: task.binId,
         location: task.location,
         status: task.status,
         taskTitle: task.taskTitle,

@@ -4,7 +4,6 @@ import '../../domain/entity/task_entity.dart';
 class TaskModel extends TaskEntity {
   const TaskModel(
       {required super.taskId,
-      required super.binId,
       required super.location,
       required super.status,
       required super.taskTitle,
@@ -16,7 +15,6 @@ class TaskModel extends TaskEntity {
   factory TaskModel.fromMap(Map<dynamic, dynamic> map) {
     return TaskModel(
         taskId: map[TaskString.TASK_ID],
-        binId: map[TaskString.BIN_ID],
         location: map[TaskString.LOCATION],
         status: map[TaskString.STATUS],
         taskTitle: map[TaskString.TASK_TITLE],
@@ -29,7 +27,6 @@ class TaskModel extends TaskEntity {
   factory TaskModel.fromJson(Map<dynamic, dynamic> json) {
     return TaskModel(
         taskId: json[TaskString.TASK_ID],
-        binId: json[TaskString.BIN_ID],
         location: json[TaskString.LOCATION],
         status: json[TaskString.STATUS],
         taskTitle: json[TaskString.TASK_TITLE],
@@ -41,7 +38,6 @@ class TaskModel extends TaskEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      TaskString.BIN_ID: binId,
       TaskString.LOCATION: location,
       TaskString.STATUS: status,
       TaskString.TASK_TITLE: taskTitle,

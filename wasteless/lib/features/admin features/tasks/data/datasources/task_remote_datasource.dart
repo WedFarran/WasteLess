@@ -34,7 +34,6 @@ class TaskRemoteImpl implements TaskRemoteDataResource {
         tasksMap.forEach((key, value) {
           tasksList.add(TaskModel(
             taskId: key,
-            binId: value[TaskString.BIN_ID],
             status: value[TaskString.STATUS],
             taskTitle: value[TaskString.TASK_TITLE],
             startDate: value[TaskString.START_DATE],
