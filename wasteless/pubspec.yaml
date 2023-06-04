@@ -38,6 +38,7 @@ dependencies:
   geocoding: ^2.1.0
   google_maps_webservice: ^0.0.19
   url_launcher: ^6.1.11
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:

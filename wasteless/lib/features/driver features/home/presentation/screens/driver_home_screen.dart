@@ -209,6 +209,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
               )),
         ],
       ),
+      child: const Padding(padding: EdgeInsets.all(8)),
     );
   }
 }

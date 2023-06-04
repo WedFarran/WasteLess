@@ -92,70 +92,73 @@ class _AdminTasksScreenState extends State<AdminTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBlueBackground(
-        widget: SingleChildScrollView(
-      child: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            NewTaskButton(
-              onTap: () => Navigator.pushNamed(context, AddTaskScreen.id),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Image.asset(
-                WASTELESS_LOGO,
-                height: context.height * 0.15,
+      widget: SingleChildScrollView(
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              NewTaskButton(
+                onTap: () => Navigator.pushNamed(context, AddTaskScreen.id),
               ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: tasksList.length,
-              itemBuilder: (BuildContext context, int i) {
-                return TaskWidget(
-                  deleteAction: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => WarningDialog(
-                        displayCancleButton: true,
-                        displayYesButton: true,
-                        title: translations(context).delete_task_confirmation,
-                        yesOnTap: () {
-                          try {
-                            ref.child('${tasksList[i].taskId}').remove();
-                          } on FirebaseException catch (e) {
-                            TaskUtils.showSnackBar(e.message);
-                          }
-                          Navigator.of(context).pop();
-                        },
-                        cancleOnTap: () => Navigator.of(context).pop(),
-                      ),
-                    );
-                  },
-                  onTap: () => Navigator.pushNamed(context, ModifyTaskScreen.id,
-                      arguments: {
-                        TaskString.DRIVER_ID: tasksList[i].driverId,
-                        TaskString.TASK_TITLE: tasksList[i].taskTitle,
-                        TaskString.DUE_DATE: tasksList[i].dueDate,
-                        TaskString.START_DATE: tasksList[i].startDate,
-                        TaskString.LOCATION: tasksList[i].location,
-                        TaskString.DESCRIPTION: tasksList[i].description,
-                        TaskString.TASK_ID: tasksList[i].taskId
-                      }),
-                  taskDate: tasksList[i].dueDate,
-                  taskName: tasksList[i].taskTitle,
-                  widget: AssignedDriver(
-                    driver: null,
-                    driverId: tasksList[i].driverId,
-                    onChanged: (value) {},
-                  ),
-                );
-              }),
-        ),
-      ]),
-    ));
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Image.asset(
+                  WASTELESS_LOGO,
+                  height: context.height * 0.15,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: tasksList.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return TaskWidget(
+                    deleteAction: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => WarningDialog(
+                          displayCancleButton: true,
+                          displayYesButton: true,
+                          title: translations(context).delete_task_confirmation,
+                          yesOnTap: () {
+                            try {
+                              ref.child('${tasksList[i].taskId}').remove();
+                            } on FirebaseException catch (e) {
+                              TaskUtils.showSnackBar(e.message);
+                            }
+                            Navigator.of(context).pop();
+                          },
+                          cancleOnTap: () => Navigator.of(context).pop(),
+                        ),
+                      );
+                    },
+                    onTap: () => Navigator.pushNamed(
+                        context, ModifyTaskScreen.id,
+                        arguments: {
+                          TaskString.DRIVER_ID: tasksList[i].driverId,
+                          TaskString.TASK_TITLE: tasksList[i].taskTitle,
+                          TaskString.DUE_DATE: tasksList[i].dueDate,
+                          TaskString.START_DATE: tasksList[i].startDate,
+                          TaskString.LOCATION: tasksList[i].location,
+                          TaskString.DESCRIPTION: tasksList[i].description,
+                          TaskString.TASK_ID: tasksList[i].taskId
+                        }),
+                    taskDate: tasksList[i].dueDate,
+                    taskName: tasksList[i].taskTitle,
+                    widget: AssignedDriver(
+                      driver: null,
+                      driverId: tasksList[i].driverId,
+                      onChanged: (value) {},
+                    ),
+                  );
+                }),
+          ),
+        ]),
+      ),
+      child: const Padding(padding: EdgeInsets.all(8)),
+    );
   }
 }

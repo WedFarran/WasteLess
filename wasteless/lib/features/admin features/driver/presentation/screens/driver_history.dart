@@ -114,6 +114,7 @@ class DriverHistoryScreen extends StatelessWidget {
               }),
         ],
       ),
+      child: Padding(padding: EdgeInsets.all(5)),
     );
   }
 

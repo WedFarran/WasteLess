@@ -8,12 +8,12 @@ import '../../../../core/widgets/bottom_navigation_icon.dart';
 import '../../core/utils/styles.dart';
 import '../../core/widgets/bottom_navigation_bar_widget.dart';
 import '../../core/widgets/web_navigation_bar_icons.dart';
+import '../driver features/tasks/presentation/screens/driver_task_screen.dart';
 import 'driver/presentation/screens/all_drivers_screen.dart';
 import 'map/presentation/screens/admin_map_screen.dart';
 
 class AdminWasteNavigationBar extends StatefulWidget {
   static const String id = 'navigation_bar_screen';
-
   const AdminWasteNavigationBar({super.key});
 
   @override

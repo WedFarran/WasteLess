@@ -66,6 +66,7 @@ class AdminDriverProfileScreen extends StatelessWidget {
               title: translations(context).email, content: driver['email'])
         ],
       ),
+      child: Padding(padding: EdgeInsets.all(5)),
     );
   }
 }
