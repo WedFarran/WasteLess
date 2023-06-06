@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:wasteless/core/common/data/models/driver_models.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import 'package:wasteless/core/utils/media_query.dart';
@@ -10,7 +9,7 @@ import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/scaffold_blue_background.dart';
 import '../../../../../core/widgets/warning_dialog.dart';
-import '../../../settings/presentation/screens/profile_screen.dart';
+import '../../settings/screens/profile_screen.dart';
 import '../widgets/gradient_widget.dart';
 
 class DriverHomeScreen extends StatefulWidget {

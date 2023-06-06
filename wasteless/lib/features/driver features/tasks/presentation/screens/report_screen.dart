@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/core/utils/language.dart';
 import '../../../../admin features/driver/data/models/report_model.dart';
+import '../pdf_file.dart';
 import '../widgets/text_form_field.dart';
 
 enum WasteType { dangerous, general }
@@ -25,6 +26,7 @@ class _ReportScreenState extends State<ReportScreen> {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('report');
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     String wasteType = translations(context).general;
     return SafeArea(
       child: Scaffold(
@@ -34,7 +36,7 @@ class _ReportScreenState extends State<ReportScreen> {
             children: [
               Center(
                 child: Text(
-                  'Bin Report',
+                  translations(context).bin_report,
                   style:
                       TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 ),
@@ -43,7 +45,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 height: 40.h,
               ),
               Text(
-                'Waste type',
+                translations(context).waste_type,
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
               SizedBox(
@@ -63,7 +65,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       });
                     }),
                   ),
-                  const Text('Dangerous'),
+                  Text(translations(context).dangerous),
                   SizedBox(
                     width: 90.w,
                   ),
@@ -77,30 +79,30 @@ class _ReportScreenState extends State<ReportScreen> {
                       });
                     }),
                   ),
-                  const Text('General')
+                  Text(translations(context).general)
                 ],
               ),
               SizedBox(
                 height: 40.h,
               ),
               Text(
-                'Waste wight',
+                translations(context).waste_weight,
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
 
               MyTextFormField(
                 controller: widget.reportModel!.wasteWightController,
-                hintText: 'Waste Wight',
+                hintText: translations(context).waste_weight,
                 maxLines: 1,
               ),
               Text(
-                'Other details',
+                translations(context).other_details,
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
               ),
 
               MyTextFormField(
                 controller: widget.reportModel!.detailsController,
-                hintText: 'details...',
+                hintText: translations(context).other_details,
                 maxLines: 16,
               ),
 
@@ -112,15 +114,17 @@ class _ReportScreenState extends State<ReportScreen> {
                     color: PRIMARY_GREEN,
                     height: 40,
                     child: Text(
-                      "Submit",
+                      translations(context).submit,
                       style: TextStyle(
                           color: WHITE,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp),
                     ),
                     onPressed: () async {
+                      final pdfFile = await PdfApi.generateReportPdf();
+
                       //Navigate to the next page
-                      Navigator.pop(context);
+                      /* Navigator.pop(context);
 
                       final report = widget.reportModel!.toJson(wasteType);
                       //push to the database
@@ -131,7 +135,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           .ref()
                           .child('task')
                           .child(widget.reportModel!.taskId.toString());
-                      vlRef.update({"status": true});
+                      vlRef.update({"status": true});*/
                     }),
               )
             ],

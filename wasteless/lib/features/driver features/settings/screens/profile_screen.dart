@@ -60,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                 information: arguments["email"].toString(),
               ),
               Center(
-                child: QrImage(
+                child: QrImageView(
                   data: arguments["qr"].toString(),
                   backgroundColor: WHITE,
                   size: 150,

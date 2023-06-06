@@ -3,8 +3,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
-import 'package:wasteless/features/driver%20features/tasks/presentation/widgets/profile.dart';
-import '../../../service/database_service.dart';
 import '../../screens/driver_task_screen.dart';
 import '../task_card.dart';
 

@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -10,18 +8,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wasteless/core/utils/media_query.dart';
 import '../../../../../core/common/data/models/bins_models.dart';
 import '../../../../../core/providers/map/filtering_change_notifier.dart';
-import '../../../../../core/tools/map_tools.dart';
 import '../../../../../core/utils/assets_path.dart';
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/widgets/map_widgets/filterin_floating_action_button.dart';
-import '../../location_service.dart';
+import '../location_service.dart';
 import '../widgets/driver_filtering_options_widget.dart';
 import '../widgets/navigation_button_widget.dart';
-import 'package:http/http.dart' as http;
 
 class DriverMapScreen extends StatefulWidget {
   static const String id = 'driver_map_screen';

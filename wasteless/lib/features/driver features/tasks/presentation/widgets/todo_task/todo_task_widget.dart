@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasteless/core/utils/colors.dart';
 import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_task_screen.dart';
-
 import '../../../../../admin features/driver/data/models/report_model.dart';
 import '../../bloc/task_bloc.dart';
 import '../../screens/report_screen.dart';
@@ -55,10 +54,11 @@ class ToDoTaskWidget extends StatelessWidget {
                                       .child('task')
                                       .child(snapshot.key.toString());
                                   vlRef.update({"status": true});
-                                   Navigator.pushReplacement(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const DriverTaskScreen(),
+                                      builder: (context) =>
+                                          const DriverTaskScreen(),
                                     ),
                                   );
                                 } else {

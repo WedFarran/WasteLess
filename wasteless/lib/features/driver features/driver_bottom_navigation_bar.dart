@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wasteless/core/utils/media_query.dart';
-import 'package:wasteless/features/driver%20features/settings/presentation/screens/driver_settings_screen.dart';
 import 'package:wasteless/features/driver%20features/tasks/presentation/screens/driver_task_screen.dart';
 import '../../core/utils/assets_path.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/widgets/bottom_navigation_bar_widget.dart';
 import '../../core/widgets/bottom_navigation_icon.dart';
-import 'home/presentation/screens/driver_home_screen.dart';
-import 'map/presentation/screens/driver_map_screen.dart';
+import 'home/screens/driver_home_screen.dart';
+import 'map/screens/driver_map_screen.dart';
+import 'settings/screens/driver_settings_screen.dart';
 
 class DriverWasteNavigationBar extends StatefulWidget {
   static const String id = 'driver_nabigation_bar_screen';

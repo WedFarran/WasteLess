@@ -11,7 +11,7 @@ import '../../../../../core/widgets/settings_widgets/settings_button.dart';
 import '../../../../../core/widgets/settings_widgets/settings_loading_widget.dart';
 import '../../../../../core/widgets/warning_dialog.dart';
 import '../../../../../main.dart';
-import '../../../../general features/account_type_screen.dart';
+import '../../../general features/account_type_screen.dart';
 import 'profile_screen.dart';
 
 class DriverSettingsScreen extends StatelessWidget {

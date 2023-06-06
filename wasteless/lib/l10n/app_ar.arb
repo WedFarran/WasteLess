@@ -56,6 +56,18 @@
 "modify":"تحديث",
 "select_start_date":"اختار تاريخ بداية المهمة",
 "select_due_date":"اختار تاريخ نهاية المهمة",
-"general":"اخرى"
+"general":"اخرى",
+"bin_report":"تقرير الحاوية",
+"waste_type":"نوع النفايات",
+"dangerous":"خطيرة",
+"general":"عامة",
+"waste_weight":"وزن النفايات",
+"other_details":"تفاصيل اخرى",
+"submit":"حفظ",
+"to_do":"المهام المتبقية"
+
+
+
+
 
 }

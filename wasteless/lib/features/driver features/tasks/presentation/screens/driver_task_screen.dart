@@ -1,9 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../service/database_service.dart';
 import '../bloc/task_bloc.dart';
 import '../widgets/done_task/done_task_widget.dart';

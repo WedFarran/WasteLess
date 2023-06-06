@@ -56,5 +56,13 @@
 "modify":"Modify",
 "select_start_date":"Select start date",
 "select_due_date":"Select due date",
-"general":"General"
+"general":"General",
+"bin_report":"Bin report",
+"waste_type":"Waste type",
+"dangerous":"Dangerous",
+"general":"General",
+"waste_weight":"Waste weight",
+"other_details":"Other details",
+"submit":"Submit",
+"to_do":"ToDo"
 }

@@ -16,7 +16,6 @@ BitmapDescriptor fullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor emptyBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor halfFullBinMarker = BitmapDescriptor.defaultMarker;
 BitmapDescriptor brokeBinMarker = BitmapDescriptor.defaultMarker;
-//TODO: fix the empty pin marker
 setCustomeMarkerIcon() {
   BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, FULL_BIN_PIN)
       .then((icon) => {fullBinMarker = icon});
@@ -125,58 +124,5 @@ getAllGeoCords(
   }
 
   driversSelected ? markersList.addAll(driversMarkers) : null;
-  return markersList;
-}
-
-getBinsGeoCords(
-  List<BinsModel> binsList,
-  BuildContext context,
-  bool fullSelected,
-  bool halfFullSelected,
-  bool emptySelected,
-) {
-  List<Marker> binsMarkers = [];
-  List<Marker> markersList = [];
-
-  binsMarkers = binsList
-      .map((e) => Marker(
-          markerId: MarkerId(e.id),
-          icon: e.status == true
-              ? e.wasteLevel < 0.4
-                  ? emptyBinMarker
-                  : e.wasteLevel >= 0.8
-                      ? fullBinMarker
-                      : halfFullBinMarker
-              : brokeBinMarker,
-          onTap: () async {
-            List<Placemark> placemarks =
-                await placemarkFromCoordinates(e.lat, e.lng);
-            showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40))),
-                backgroundColor: WHITE,
-                context: context,
-                builder: (context) => BinDetailsWidget(
-                    percent: e.wasteLevel,
-                    location: placemarks.reversed.last.street.toString(),
-                    fullnesTime: e.fullnesTime));
-          },
-          position: LatLng(e.lat, e.lng)))
-      .toList();
-
-  if (fullSelected) {
-    markersList
-        .addAll(binsMarkers.where((element) => element.icon == fullBinMarker));
-  }
-  if (halfFullSelected) {
-    markersList.addAll(
-        binsMarkers.where((element) => element.icon == halfFullBinMarker));
-  }
-  if (emptySelected) {
-    markersList
-        .addAll(binsMarkers.where((element) => element.icon == brokeBinMarker));
-  }
-
   return markersList;
 }
